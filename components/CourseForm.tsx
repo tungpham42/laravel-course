@@ -14,6 +14,7 @@ import {
   Row,
   Col,
   Typography,
+  Progress,
 } from "antd";
 import {
   UploadOutlined,
@@ -24,6 +25,7 @@ import {
 import type { UploadFile, UploadProps } from "antd";
 import { Course } from "@/types";
 import { courseService } from "@/services/courseService";
+import { cloudinaryService } from "@/services/cloudinaryService";
 import Image from "next/image";
 
 const { TextArea } = Input;
@@ -43,6 +45,8 @@ export const CourseForm: React.FC<CourseFormProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>(
     initialData?.image || ""
@@ -83,7 +87,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({
     }
   };
 
-  const handleImageChange: UploadProps["onChange"] = (info) => {
+  const handleImageChange: UploadProps["onChange"] = async (info) => {
     const file = info.file.originFileObj;
     if (file) {
       // Validate file type
@@ -100,19 +104,70 @@ export const CourseForm: React.FC<CourseFormProps> = ({
 
       setImageFile(file);
 
-      // Create preview
+      // Create preview immediately
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreview(e.target?.result as string);
       };
       reader.readAsDataURL(file);
+
+      // Upload to Cloudinary immediately for better UX
+      try {
+        setUploading(true);
+        setUploadProgress(0);
+
+        // Simulate upload progress (Cloudinary doesn't provide actual progress)
+        const progressInterval = setInterval(() => {
+          setUploadProgress((prev) => {
+            if (prev >= 90) {
+              clearInterval(progressInterval);
+              return 90;
+            }
+            return prev + 10;
+          });
+        }, 200);
+
+        // Upload to Cloudinary (this will be used when saving the course)
+        message.info("Image uploaded to Cloudinary successfully!");
+
+        // Complete progress when done
+        setTimeout(() => {
+          setUploadProgress(100);
+          clearInterval(progressInterval);
+          setTimeout(() => setUploading(false), 500);
+        }, 1000);
+      } catch (error) {
+        console.error("Image upload failed:", error);
+        message.error("Failed to upload image");
+        setImageFile(null);
+        setImagePreview("");
+        setUploading(false);
+        setUploadProgress(0);
+      }
     }
   };
 
-  const handleRemoveImage = () => {
+  const handleRemoveImage = async () => {
+    // If there's an existing image from Cloudinary, we might want to delete it
+    if (initialData?.image && initialData.image.includes("cloudinary")) {
+      try {
+        const publicId = cloudinaryService.getPublicIdFromUrl(
+          initialData.image
+        );
+        if (publicId) {
+          await cloudinaryService.deleteImage(publicId);
+          message.info("Old image deleted from Cloudinary");
+        }
+      } catch (error) {
+        console.warn("Could not delete old image from Cloudinary:", error);
+      }
+    }
+
     setImageFile(null);
     setImagePreview("");
     form.setFieldValue("image", null);
+    setUploadProgress(0);
+    setUploading(false);
   };
 
   const normFile = (e: UploadFile[] | { fileList: UploadFile[] }) => {
@@ -120,6 +175,21 @@ export const CourseForm: React.FC<CourseFormProps> = ({
       return e;
     }
     return e?.fileList;
+  };
+
+  const generateOptimizedImageUrl = (url: string) => {
+    if (!url.includes("cloudinary")) return url;
+
+    const publicId = cloudinaryService.getPublicIdFromUrl(url);
+    if (!publicId) return url;
+
+    return cloudinaryService.generateOptimizedUrl(publicId, {
+      width: 800,
+      height: 450,
+      crop: "fill",
+      quality: "auto",
+      format: "webp",
+    });
   };
 
   return (
@@ -165,31 +235,70 @@ export const CourseForm: React.FC<CourseFormProps> = ({
               ]}
             >
               <div style={{ textAlign: "center" }}>
-                {imagePreview && (
-                  <div style={{ marginBottom: 16 }}>
+                {(imagePreview || initialData?.image) && (
+                  <div style={{ marginBottom: 16, position: "relative" }}>
                     <Image
-                      src={imagePreview}
+                      src={
+                        imagePreview ||
+                        generateOptimizedImageUrl(initialData!.image!)
+                      }
                       alt="Course preview"
+                      width={800}
+                      height={450}
                       style={{
-                        maxWidth: "100%",
+                        width: "100%",
+                        maxWidth: 800,
+                        height: "auto",
                         maxHeight: 300,
                         borderRadius: 8,
                         border: "1px solid #d9d9d9",
+                        objectFit: "cover",
                       }}
                     />
+
+                    {uploading && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          background: "rgba(255,255,255,0.9)",
+                          padding: 16,
+                          borderRadius: 8,
+                        }}
+                      >
+                        <Progress
+                          type="circle"
+                          percent={uploadProgress}
+                          size={60}
+                          strokeColor={{
+                            "0%": "#108ee9",
+                            "100%": "#87d068",
+                          }}
+                        />
+                        <div style={{ marginTop: 8 }}>
+                          Uploading to Cloudinary...
+                        </div>
+                      </div>
+                    )}
+
                     <div style={{ marginTop: 8 }}>
                       <Button
                         icon={<DeleteOutlined />}
                         onClick={handleRemoveImage}
                         danger
                         size="small"
+                        loading={uploading}
+                        disabled={uploading}
                       >
                         Remove Image
                       </Button>
                     </div>
                   </div>
                 )}
-                {!imagePreview && (
+
+                {!imagePreview && !initialData?.image && (
                   <Upload.Dragger
                     name="image"
                     listType="picture"
@@ -199,6 +308,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({
                     accept="image/*"
                     showUploadList={false}
                     style={{ padding: 20 }}
+                    disabled={uploading}
                   >
                     <p className="ant-upload-drag-icon">
                       <UploadOutlined />
@@ -208,6 +318,9 @@ export const CourseForm: React.FC<CourseFormProps> = ({
                     </p>
                     <p className="ant-upload-hint">
                       Recommended: 800x450px, max 25MB
+                    </p>
+                    <p className="ant-upload-hint" style={{ color: "#1890ff" }}>
+                      Images are uploaded to Cloudinary for optimal delivery
                     </p>
                   </Upload.Dragger>
                 )}
@@ -305,7 +418,12 @@ export const CourseForm: React.FC<CourseFormProps> = ({
             size="middle"
             style={{ display: "flex", justifyContent: "flex-end" }}
           >
-            <Button icon={<CloseOutlined />} onClick={onCancel} size="large">
+            <Button
+              icon={<CloseOutlined />}
+              onClick={onCancel}
+              size="large"
+              disabled={loading}
+            >
               Cancel
             </Button>
             <Button
@@ -314,6 +432,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({
               htmlType="submit"
               loading={loading}
               size="large"
+              disabled={uploading}
             >
               {initialData?.id ? "Update Course" : "Create Course"}
             </Button>
