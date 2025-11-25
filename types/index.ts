@@ -26,7 +26,7 @@ export interface Exercise {
   instructions: string;
   starterCode?: string;
   solution?: string;
-  type: "multiple-choice" | "code" | "theory";
+  type: "multiple-choice" | "code" | "theory" | "practice";
   options?: string[];
   correctAnswer?: string | number;
 }

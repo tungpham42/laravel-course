@@ -134,22 +134,37 @@ export const CourseList: React.FC<CourseListProps> = ({
       ) : (
         <Row gutter={[16, 16]}>
           {courses.map((course) => (
-            <Col key={course.id} xs={24} sm={12} lg={8} xl={6}>
+            <Col key={course.id} xs={24} md={12} lg={8}>
               <Card
                 hoverable
+                style={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                bodyStyle={{
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: 16,
+                }}
                 cover={
-                  <div style={{ height: 200, overflow: "hidden" }}>
-                    <Image
-                      alt={course.title}
-                      src={course.image}
-                      preview={false}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                      fallback="/images/course-placeholder.jpg"
-                    />
+                  <div
+                    style={{
+                      height: 140,
+                      padding: 16,
+                      background: `linear-gradient(45deg, #667eea 0%, #764ba2 100%)`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "white",
+                      fontSize: 20,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {course.title}
                   </div>
                 }
                 actions={[
