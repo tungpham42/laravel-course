@@ -3,6 +3,8 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import { AuthProvider } from "@/context/AuthContext";
 import type { Metadata } from "next";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,6 +29,15 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
   <html lang="vi">
+    <head>
+      <Script
+        id="adsense-script"
+        async
+        strategy="afterInteractive"
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536`}
+        crossOrigin="anonymous"
+      />
+    </head>
     <body>
       <AntdRegistry>
         <AuthProvider>
@@ -41,6 +52,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
           </ConfigProvider>
         </AuthProvider>
       </AntdRegistry>
+      <GoogleAnalytics ga_id="G-HHXZSNQ65X" />
     </body>
   </html>
 );
