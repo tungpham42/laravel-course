@@ -26,6 +26,10 @@ ul {
   list-style: inside;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 /* Markdown content styles */
 .markdown-content {
   line-height: 1.8;
