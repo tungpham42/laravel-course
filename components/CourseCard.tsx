@@ -65,7 +65,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         <Card.Meta
           title={
             <div style={{ marginBottom: 8, fontSize: 16, fontWeight: 600 }}>
-              {course.title}
+              <Link href={`/khoa-hoc/${course.slug}`}>{course.title}</Link>
             </div>
           }
           description={
