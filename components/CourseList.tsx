@@ -136,7 +136,6 @@ export const CourseList: React.FC<CourseListProps> = ({
           {courses.map((course) => (
             <Col key={course.id} xs={24} md={12} lg={8}>
               <Card
-                hoverable
                 style={{
                   height: "100%",
                   display: "flex",

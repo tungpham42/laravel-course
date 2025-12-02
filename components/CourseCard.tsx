@@ -25,7 +25,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
   return (
     <Card
-      hoverable
       style={{
         height: "100%",
         display: "flex",
