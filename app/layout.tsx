@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "Khóa học Lập trình miễn phí",
     images: [
       {
-        url: "/1200x630.jpg",
+        url: "https://hoc.soft.io.vn/1200x630.jpg",
         width: 1200,
         height: 630,
         alt: "Khóa học Lập trình miễn phí",
