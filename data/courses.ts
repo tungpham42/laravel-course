@@ -17809,4 +17809,15182 @@ class _AnimatedLoginScreenState extends State<AnimatedLoginScreen>
       },
     ],
   },
+  {
+    id: "golang-complete",
+    slug: "golang",
+    title: "Golang Toàn tập",
+    description:
+      "Học Golang từ cơ bản đến nâng cao, xây dựng REST API và microservices",
+    image: "/images/golang-course.jpg",
+    duration: "10 tuần",
+    level: "beginner",
+    lessons: [
+      {
+        id: "1",
+        title: "Giới thiệu Golang và Cài đặt",
+        slug: "gioi-thieu-golang",
+        duration: "45 phút",
+        content: `# Giới thiệu Golang
+
+## Go là gì?
+Go (Golang) là ngôn ngữ lập trình được phát triển bởi Google, nổi bật với hiệu suất cao, cú pháp đơn giản và hỗ trợ concurrency mạnh mẽ.
+
+## Ưu điểm của Go
+- **Biên dịch nhanh** và hiệu suất gần với C/C++
+- **Cú pháp đơn giản**, dễ học
+- **Concurrency với Goroutines và Channels**
+- **Garbage Collection** tự động
+- **Static typing** mạnh mẽ
+- **Cross-compilation** dễ dàng
+- **Standard library** phong phú
+
+## Cài đặt Go
+
+### Tải và cài đặt
+\`\`\`bash
+# macOS với Homebrew
+brew install go
+
+# Ubuntu/Debian
+sudo apt update
+sudo apt install golang-go
+
+# Windows: tải installer từ https://go.dev/dl/
+\`\`\`
+
+### Kiểm tra cài đặt
+\`\`\`bash
+go version
+go env
+\`\`\`
+
+## Chương trình đầu tiên
+
+### Tạo project mới
+\`\`\`bash
+mkdir hello-go
+cd hello-go
+go mod init example.com/hello
+\`\`\`
+
+### File main.go
+\`\`\`go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Go!")
+}
+\`\`\`
+
+### Chạy chương trình
+\`\`\`bash
+go run main.go
+go build -o hello main.go
+./hello
+\`\`\`
+
+## Cấu trúc package
+
+\`\`\`
+myproject/
+├── go.mod
+├── go.sum
+├── main.go
+├── internal/
+│   ├── handlers/
+│   ├── models/
+│   └── services/
+└── pkg/
+    └── utils/
+\`\`\`
+
+## Bài tập thực hành
+Trong bài tiếp theo, chúng ta sẽ học về biến, kiểu dữ liệu và control flow!`,
+        exercises: [
+          {
+            id: "1-1",
+            title: "Kiểm tra kiến thức cơ bản",
+            description: "Bài tập trắc nghiệm về Go",
+            instructions: "Chọn câu trả lời đúng:",
+            type: "multiple-choice",
+            options: [
+              "Go là ngôn ngữ thông dịch",
+              "Go hỗ trợ concurrency qua Goroutines",
+              "Go chỉ chạy trên Linux",
+              "Go không có garbage collection",
+            ],
+            correctAnswer: 1,
+          },
+        ],
+      },
+      {
+        id: "2",
+        title: "Biến, Kiểu dữ liệu và Control Flow",
+        slug: "bien-kieu-du-lieu-control-flow",
+        duration: "60 phút",
+        prerequisites: ["1"],
+        content: `# Biến, Kiểu dữ liệu và Control Flow trong Go
+
+## Khai báo biến
+
+### Các cách khai báo
+\`\`\`go
+package main
+
+import "fmt"
+
+func main() {
+    // Cách 1: var với type
+    var name string = "John"
+    var age int = 30
+
+    // Cách 2: var với type inference
+    var city = "Hanoi"
+
+    // Cách 3: short declaration (chỉ trong function)
+    country := "Vietnam"
+
+    // Khai báo nhiều biến
+    var x, y int = 1, 2
+    a, b := 3, 4
+
+    // Zero values
+    var zeroInt int      // 0
+    var zeroString string // ""
+    var zeroBool bool     // false
+
+    fmt.Println(name, age, city, country, x, y, a, b)
+    fmt.Println(zeroInt, zeroString, zeroBool)
+}
+\`\`\`
+
+### Constants
+\`\`\`go
+const Pi = 3.14159
+
+const (
+    StatusOK       = 200
+    StatusNotFound = 404
+)
+
+// iota cho enum
+type Weekday int
+
+const (
+    Sunday Weekday = iota
+    Monday
+    Tuesday
+    Wednesday
+)
+\`\`\`
+
+## Kiểu dữ liệu cơ bản
+
+### Numeric types
+\`\`\`go
+var i int = 42
+var i8 int8 = 127
+var i16 int16 = 32767
+var i32 int32 = 2147483647
+var i64 int64 = 9223372036854775807
+
+var u uint = 42
+var f32 float32 = 3.14
+var f64 float64 = 3.14159265359
+\`\`\`
+
+### String
+\`\`\`go
+s := "Hello"
+// Raw string literal
+raw := \`Multi
+line
+string\`
+
+// String operations
+len(s)                  // 5
+s + ", World!"          // concatenation
+s[0]                    // byte 'H'
+[]rune(s)              // convert to runes
+\`\`\`
+
+### Arrays và Slices
+\`\`\`go
+// Array có fixed size
+var arr [5]int
+arr[0] = 1
+
+// Array literal
+nums := [3]int{1, 2, 3}
+
+// Slice - dynamic size
+slice := []int{1, 2, 3}
+slice = append(slice, 4, 5)
+
+// Make slice
+s := make([]int, 5)      // length 5
+s2 := make([]int, 0, 10) // length 0, capacity 10
+\`\`\`
+
+### Maps
+\`\`\`go
+// Khai báo map
+var m map[string]int
+m = make(map[string]int)
+
+// Map literal
+scores := map[string]int{
+    "Alice": 95,
+    "Bob":   87,
+}
+
+// Thêm, đọc, xóa
+scores["Charlie"] = 92
+score := scores["Alice"]
+delete(scores, "Bob")
+
+// Check existence
+value, ok := scores["David"]
+if !ok {
+    fmt.Println("Not found")
+}
+\`\`\`
+
+### Structs
+\`\`\`go
+type User struct {
+    ID    int
+    Name  string
+    Email string
+}
+
+func main() {
+    u := User{
+        ID:    1,
+        Name:  "John",
+        Email: "john@example.com",
+    }
+    
+    fmt.Println(u.Name)
+    
+    // Pointer to struct
+    p := &u
+    p.Name = "Jane"
+}
+\`\`\`
+
+## Control Flow
+
+### if/else
+\`\`\`go
+if age := 20; age >= 18 {
+    fmt.Println("Adult")
+} else {
+    fmt.Println("Minor")
+}
+\`\`\`
+
+### for loop
+\`\`\`go
+// C-style for
+for i := 0; i < 5; i++ {
+    fmt.Println(i)
+}
+
+// While-style
+i := 0
+for i < 5 {
+    i++
+}
+
+// Infinite loop
+for {
+    // break để thoát
+}
+
+// Range loop
+nums := []int{1, 2, 3}
+for index, value := range nums {
+    fmt.Printf("Index: %d, Value: %d\\n", index, value)
+}
+
+// Range với map
+scores := map[string]int{"Alice": 95}
+for name, score := range scores {
+    fmt.Printf("%s: %d\\n", name, score)
+}
+\`\`\`
+
+### switch
+\`\`\`go
+switch day := "Monday"; day {
+case "Monday", "Tuesday":
+    fmt.Println("Early week")
+case "Friday":
+    fmt.Println("TGIF!")
+default:
+    fmt.Println("Regular day")
+}
+
+// Switch không có condition
+score := 85
+switch {
+case score >= 90:
+    fmt.Println("A")
+case score >= 80:
+    fmt.Println("B")
+default:
+    fmt.Println("C")
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy viết chương trình xử lý dữ liệu với slices và maps!`,
+        exercises: [
+          {
+            id: "2-1",
+            title: "Xử lý slice số nguyên",
+            description: "Viết các hàm xử lý slice",
+            instructions: `Viết các hàm:
+1. Sum(numbers []int) int - tính tổng
+2. Max(numbers []int) int - tìm max
+3. Filter(numbers []int, pred func(int) bool) []int - lọc
+4. Reverse(numbers []int) []int - đảo ngược`,
+            type: "code",
+            starterCode: `package main
+
+func Sum(numbers []int) int {
+    // Viết code ở đây
+    return 0
+}
+
+func Max(numbers []int) int {
+    return 0
+}
+
+func Filter(numbers []int, pred func(int) bool) []int {
+    return nil
+}
+
+func Reverse(numbers []int) []int {
+    return nil
+}`,
+            solution: `package main
+
+func Sum(numbers []int) int {
+    total := 0
+    for _, n := range numbers {
+        total += n
+    }
+    return total
+}
+
+func Max(numbers []int) int {
+    if len(numbers) == 0 {
+        return 0
+    }
+    max := numbers[0]
+    for _, n := range numbers[1:] {
+        if n > max {
+            max = n
+        }
+    }
+    return max
+}
+
+func Filter(numbers []int, pred func(int) bool) []int {
+    result := []int{}
+    for _, n := range numbers {
+        if pred(n) {
+            result = append(result, n)
+        }
+    }
+    return result
+}
+
+func Reverse(numbers []int) []int {
+    result := make([]int, len(numbers))
+    for i, n := range numbers {
+        result[len(numbers)-1-i] = n
+    }
+    return result
+}`,
+          },
+        ],
+      },
+      {
+        id: "3",
+        title: "Functions, Methods và Interfaces",
+        slug: "functions-methods-interfaces",
+        duration: "75 phút",
+        prerequisites: ["2"],
+        content: `# Functions, Methods và Interfaces trong Go
+
+## Functions
+
+### Function cơ bản
+\`\`\`go
+func add(a, b int) int {
+    return a + b
+}
+
+// Multiple return values
+func divide(a, b float64) (float64, error) {
+    if b == 0 {
+        return 0, fmt.Errorf("division by zero")
+    }
+    return a / b, nil
+}
+
+// Named return values
+func split(sum int) (x, y int) {
+    x = sum * 4 / 9
+    y = sum - x
+    return
+}
+\`\`\`
+
+### Variadic functions
+\`\`\`go
+func sum(nums ...int) int {
+    total := 0
+    for _, n := range nums {
+        total += n
+    }
+    return total
+}
+
+sum(1, 2, 3)
+nums := []int{1, 2, 3}
+sum(nums...)
+\`\`\`
+
+### Closures
+\`\`\`go
+func counter() func() int {
+    count := 0
+    return func() int {
+        count++
+        return count
+    }
+}
+
+c := counter()
+c() // 1
+c() // 2
+\`\`\`
+
+### Function types
+\`\`\`go
+type MathFunc func(a, b int) int
+
+func compute(fn MathFunc, a, b int) int {
+    return fn(a, b)
+}
+
+result := compute(func(a, b int) int { return a + b }, 3, 4)
+\`\`\`
+
+## Methods
+
+### Method với value receiver
+\`\`\`go
+type Rectangle struct {
+    Width  float64
+    Height float64
+}
+
+func (r Rectangle) Area() float64 {
+    return r.Width * r.Height
+}
+
+func (r Rectangle) Perimeter() float64 {
+    return 2 * (r.Width + r.Height)
+}
+\`\`\`
+
+### Method với pointer receiver
+\`\`\`go
+func (r *Rectangle) Scale(factor float64) {
+    r.Width *= factor
+    r.Height *= factor
+}
+\`\`\`
+
+### Method trên custom types
+\`\`\`go
+type Celsius float64
+
+func (c Celsius) ToFahrenheit() Fahrenheit {
+    return Fahrenheit(c*9/5 + 32)
+}
+
+type Fahrenheit float64
+\`\`\`
+
+## Interfaces
+
+### Interface cơ bản
+\`\`\`go
+type Shape interface {
+    Area() float64
+    Perimeter() float64
+}
+
+func PrintShapeInfo(s Shape) {
+    fmt.Printf("Area: %.2f, Perimeter: %.2f\\n", s.Area(), s.Perimeter())
+}
+\`\`\`
+
+### Empty interface
+\`\`\`go
+func describe(i interface{}) {
+    fmt.Printf("(%v, %T)\\n", i, i)
+}
+
+describe(42)
+describe("hello")
+describe(true)
+\`\`\`
+
+### Type assertions
+\`\`\`go
+var i interface{} = "hello"
+
+s, ok := i.(string)
+if ok {
+    fmt.Println("String:", s)
+}
+
+// Type switch
+switch v := i.(type) {
+case string:
+    fmt.Println("String:", v)
+case int:
+    fmt.Println("Int:", v)
+default:
+    fmt.Println("Unknown type")
+}
+\`\`\`
+
+### Common interfaces
+\`\`\`go
+// Stringer
+type Stringer interface {
+    String() string
+}
+
+func (u User) String() string {
+    return fmt.Sprintf("%s <%s>", u.Name, u.Email)
+}
+
+// Error
+type error interface {
+    Error() string
+}
+\`\`\`
+
+## Error Handling
+
+### Custom errors
+\`\`\`go
+type ValidationError struct {
+    Field string
+    Msg   string
+}
+
+func (e *ValidationError) Error() string {
+    return fmt.Sprintf("%s: %s", e.Field, e.Msg)
+}
+
+func Validate(user User) error {
+    if user.Email == "" {
+        return &ValidationError{
+            Field: "email",
+            Msg:   "email is required",
+        }
+    }
+    return nil
+}
+\`\`\`
+
+### Error wrapping (Go 1.13+)
+\`\`\`go
+import "errors"
+
+func process() error {
+    err := doSomething()
+    if err != nil {
+        return fmt.Errorf("process failed: %w", err)
+    }
+    return nil
+}
+
+// Check
+if errors.Is(err, ErrNotFound) {
+    // handle not found
+}
+
+var validationErr *ValidationError
+if errors.As(err, &validationErr) {
+    fmt.Println(validationErr.Field)
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo một interface cho hình học và implement các hình khác nhau!`,
+        exercises: [
+          {
+            id: "3-1",
+            title: "Shape interface",
+            description: "Tạo interface Shape và implement các hình",
+            instructions: `Tạo:
+1. Interface Shape với Area() và Perimeter()
+2. Struct Circle implement Shape
+3. Struct Rectangle implement Shape
+4. Function in thông tin của Shape`,
+            type: "code",
+            starterCode: `package main
+
+import "fmt"
+
+type Shape interface {
+    Area() float64
+    Perimeter() float64
+}
+
+// Viết code ở đây`,
+            solution: `package main
+
+import (
+    "fmt"
+    "math"
+)
+
+type Shape interface {
+    Area() float64
+    Perimeter() float64
+}
+
+type Circle struct {
+    Radius float64
+}
+
+func (c Circle) Area() float64 {
+    return math.Pi * c.Radius * c.Radius
+}
+
+func (c Circle) Perimeter() float64 {
+    return 2 * math.Pi * c.Radius
+}
+
+type Rectangle struct {
+    Width, Height float64
+}
+
+func (r Rectangle) Area() float64 {
+    return r.Width * r.Height
+}
+
+func (r Rectangle) Perimeter() float64 {
+    return 2 * (r.Width + r.Height)
+}
+
+func PrintShape(s Shape) {
+    fmt.Printf("Area: %.2f, Perimeter: %.2f\\n", s.Area(), s.Perimeter())
+}
+
+func main() {
+    c := Circle{Radius: 5}
+    r := Rectangle{Width: 4, Height: 6}
+
+    PrintShape(c)
+    PrintShape(r)
+
+    shapes := []Shape{c, r}
+    for _, s := range shapes {
+        PrintShape(s)
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "4",
+        title: "Concurrency: Goroutines và Channels",
+        slug: "concurrency-goroutines-channels",
+        duration: "90 phút",
+        prerequisites: ["3"],
+        content: `# Concurrency trong Go
+
+## Goroutines
+
+### Tạo goroutine
+\`\`\`go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func say(s string) {
+    for i := 0; i < 5; i++ {
+        time.Sleep(100 * time.Millisecond)
+        fmt.Println(s)
+    }
+}
+
+func main() {
+    go say("world")
+    say("hello")
+}
+\`\`\`
+
+### WaitGroup
+\`\`\`go
+import (
+    "sync"
+    "fmt"
+)
+
+func main() {
+    var wg sync.WaitGroup
+
+    for i := 1; i <= 5; i++ {
+        wg.Add(1)
+        go func(id int) {
+            defer wg.Done()
+            fmt.Printf("Worker %d done\\n", id)
+        }(i)
+    }
+
+    wg.Wait()
+    fmt.Println("All workers done")
+}
+\`\`\`
+
+## Channels
+
+### Basic channels
+\`\`\`go
+// Unbuffered channel
+ch := make(chan int)
+
+// Gửi và nhận
+go func() {
+    ch <- 42  // send
+}()
+value := <-ch  // receive
+\`\`\`
+
+### Buffered channels
+\`\`\`go
+ch := make(chan int, 3)
+
+ch <- 1
+ch <- 2
+ch <- 3
+
+fmt.Println(<-ch) // 1
+fmt.Println(<-ch) // 2
+\`\`\`
+
+### Close và range
+\`\`\`go
+ch := make(chan int, 5)
+
+go func() {
+    for i := 0; i < 5; i++ {
+        ch <- i
+    }
+    close(ch)
+}()
+
+for v := range ch {
+    fmt.Println(v)
+}
+
+// Check closed
+v, ok := <-ch
+if !ok {
+    fmt.Println("Channel closed")
+}
+\`\`\`
+
+### Select
+\`\`\`go
+func main() {
+    ch1 := make(chan string)
+    ch2 := make(chan string)
+
+    go func() {
+        time.Sleep(1 * time.Second)
+        ch1 <- "from ch1"
+    }()
+
+    go func() {
+        time.Sleep(2 * time.Second)
+        ch2 <- "from ch2"
+    }()
+
+    for i := 0; i < 2; i++ {
+        select {
+        case msg1 := <-ch1:
+            fmt.Println(msg1)
+        case msg2 := <-ch2:
+            fmt.Println(msg2)
+        case <-time.After(3 * time.Second):
+            fmt.Println("timeout")
+        }
+    }
+}
+\`\`\`
+
+## Sync package
+
+### Mutex
+\`\`\`go
+import "sync"
+
+type Counter struct {
+    mu    sync.Mutex
+    count int
+}
+
+func (c *Counter) Increment() {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    c.count++
+}
+
+func (c *Counter) Value() int {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    return c.count
+}
+\`\`\`
+
+### RWMutex
+\`\`\`go
+type Cache struct {
+    mu    sync.RWMutex
+    items map[string]string
+}
+
+func (c *Cache) Get(key string) string {
+    c.mu.RLock()
+    defer c.mu.RUnlock()
+    return c.items[key]
+}
+
+func (c *Cache) Set(key, value string) {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    c.items[key] = value
+}
+\`\`\`
+
+### Once
+\`\`\`go
+var (
+    instance *Singleton
+    once     sync.Once
+)
+
+func GetInstance() *Singleton {
+    once.Do(func() {
+        instance = &Singleton{}
+    })
+    return instance
+}
+\`\`\`
+
+## Worker Pool Pattern
+\`\`\`go
+func worker(id int, jobs <-chan int, results chan<- int) {
+    for j := range jobs {
+        fmt.Printf("Worker %d processing job %d\\n", id, j)
+        time.Sleep(time.Second)
+        results <- j * 2
+    }
+}
+
+func main() {
+    jobs := make(chan int, 100)
+    results := make(chan int, 100)
+
+    // Start 3 workers
+    for w := 1; w <= 3; w++ {
+        go worker(w, jobs, results)
+    }
+
+    // Send 5 jobs
+    for j := 1; j <= 5; j++ {
+        jobs <- j
+    }
+    close(jobs)
+
+    // Collect results
+    for r := 1; r <= 5; r++ {
+        <-results
+    }
+}
+\`\`\`
+
+## Context package
+\`\`\`go
+import (
+    "context"
+    "time"
+)
+
+func longRunning(ctx context.Context) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("Cancelled:", ctx.Err())
+            return
+        default:
+            // do work
+            time.Sleep(100 * time.Millisecond)
+        }
+    }
+}
+
+func main() {
+    ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+    defer cancel()
+
+    go longRunning(ctx)
+
+    time.Sleep(3 * time.Second)
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo một worker pool xử lý jobs concurrently!`,
+        exercises: [
+          {
+            id: "4-1",
+            title: "Parallel File Processing",
+            description: "Xử lý nhiều files đồng thời",
+            instructions: `Tạo chương trình:
+1. Nhận danh sách files
+2. Xử lý song song với goroutines (giới hạn 5 concurrent)
+3. Sử dụng channels để collect results
+4. Sử dụng WaitGroup để đợi`,
+            type: "code",
+            starterCode: `package main
+
+func processFiles(files []string) []Result {
+    // Viết code ở đây
+    return nil
+}
+
+type Result struct {
+    File string
+    Size int
+    Err  error
+}`,
+            solution: `package main
+
+import (
+    "fmt"
+    "os"
+    "sync"
+)
+
+type Result struct {
+    File string
+    Size int
+    Err  error
+}
+
+func processFiles(files []string) []Result {
+    const workers = 5
+    jobs := make(chan string, len(files))
+    results := make(chan Result, len(files))
+
+    var wg sync.WaitGroup
+
+    // Start workers
+    for i := 0; i < workers; i++ {
+        wg.Add(1)
+        go func() {
+            defer wg.Done()
+            for file := range jobs {
+                info, err := os.Stat(file)
+                if err != nil {
+                    results <- Result{File: file, Err: err}
+                    continue
+                }
+                results <- Result{File: file, Size: int(info.Size())}
+            }
+        }()
+    }
+
+    // Send jobs
+    for _, f := range files {
+        jobs <- f
+    }
+    close(jobs)
+
+    // Wait and close results
+    go func() {
+        wg.Wait()
+        close(results)
+    }()
+
+    // Collect
+    var out []Result
+    for r := range results {
+        out = append(out, r)
+    }
+    return out
+}
+
+func main() {
+    files := []string{"main.go", "go.mod", "README.md"}
+    for _, r := range processFiles(files) {
+        fmt.Printf("%s: %d bytes (err: %v)\\n", r.File, r.Size, r.Err)
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "5",
+        title: "REST API với Gin Framework",
+        slug: "rest-api-gin",
+        duration: "85 phút",
+        prerequisites: ["4"],
+        content: `# REST API với Gin Framework
+
+## Giới thiệu Gin
+Gin là web framework hiệu suất cao cho Go.
+
+## Cài đặt
+\`\`\`bash
+go get -u github.com/gin-gonic/gin
+\`\`\`
+
+## Ứng dụng cơ bản
+\`\`\`go
+package main
+
+import "github.com/gin-gonic/gin"
+
+func main() {
+    r := gin.Default()
+
+    r.GET("/ping", func(c *gin.Context) {
+        c.JSON(200, gin.H{
+            "message": "pong",
+        })
+    })
+
+    r.Run(":8080")
+}
+\`\`\`
+
+## Routing
+
+### HTTP Methods
+\`\`\`go
+r.GET("/users", getUsers)
+r.POST("/users", createUser)
+r.PUT("/users/:id", updateUser)
+r.DELETE("/users/:id", deleteUser)
+r.PATCH("/users/:id", patchUser)
+\`\`\`
+
+### Route groups
+\`\`\`go
+v1 := r.Group("/api/v1")
+{
+    v1.GET("/users", getUsers)
+    v1.POST("/users", createUser)
+}
+
+auth := v1.Group("/admin")
+auth.Use(AuthMiddleware())
+{
+    auth.GET("/stats", getStats)
+}
+\`\`\`
+
+## Request Handling
+
+### Path parameters
+\`\`\`go
+r.GET("/users/:id", func(c *gin.Context) {
+    id := c.Param("id")
+    c.JSON(200, gin.H{"id": id})
+})
+\`\`\`
+
+### Query parameters
+\`\`\`go
+r.GET("/search", func(c *gin.Context) {
+    q := c.Query("q")
+    page := c.DefaultQuery("page", "1")
+    c.JSON(200, gin.H{"q": q, "page": page})
+})
+\`\`\`
+
+### JSON binding
+\`\`\`go
+type CreateUserRequest struct {
+    Name  string \`json:"name" binding:"required"\`
+    Email string \`json:"email" binding:"required,email"\`
+    Age   int    \`json:"age" binding:"gte=0,lte=150"\`
+}
+
+r.POST("/users", func(c *gin.Context) {
+    var req CreateUserRequest
+    if err := c.ShouldBindJSON(&req); err != nil {
+        c.JSON(400, gin.H{"error": err.Error()})
+        return
+    }
+    c.JSON(201, req)
+})
+\`\`\`
+
+## Middleware
+
+### Custom middleware
+\`\`\`go
+func AuthMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        token := c.GetHeader("Authorization")
+        if token == "" {
+            c.AbortWithStatusJSON(401, gin.H{"error": "unauthorized"})
+            return
+        }
+        c.Set("userID", 123)
+        c.Next()
+    }
+}
+\`\`\`
+
+### CORS
+\`\`\`go
+import "github.com/gin-contrib/cors"
+
+r.Use(cors.Default())
+\`\`\`
+
+## Project Structure
+
+\`\`\`
+myapi/
+├── main.go
+├── go.mod
+├── internal/
+│   ├── handlers/
+│   │   └── user.go
+│   ├── models/
+│   │   └── user.go
+│   ├── services/
+│   │   └── user.go
+│   ├── repositories/
+│   │   └── user.go
+│   └── middleware/
+│       └── auth.go
+└── pkg/
+    └── database/
+        └── db.go
+\`\`\`
+
+## Full Example
+
+### Model
+\`\`\`go
+package models
+
+import "time"
+
+type User struct {
+    ID        uint      \`json:"id" gorm:"primaryKey"\`
+    Name      string    \`json:"name" binding:"required"\`
+    Email     string    \`json:"email" binding:"required,email" gorm:"unique"\`
+    CreatedAt time.Time \`json:"created_at"\`
+    UpdatedAt time.Time \`json:"updated_at"\`
+}
+\`\`\`
+
+### Handler
+\`\`\`go
+package handlers
+
+import (
+    "net/http"
+    "github.com/gin-gonic/gin"
+    "myapi/internal/models"
+)
+
+type UserHandler struct {
+    // dependencies
+}
+
+func (h *UserHandler) GetUsers(c *gin.Context) {
+    users := []models.User{}
+    c.JSON(http.StatusOK, users)
+}
+
+func (h *UserHandler) CreateUser(c *gin.Context) {
+    var user models.User
+    if err := c.ShouldBindJSON(&user); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    c.JSON(http.StatusCreated, user)
+}
+\`\`\`
+
+### Main
+\`\`\`go
+package main
+
+import (
+    "github.com/gin-gonic/gin"
+    "myapi/internal/handlers"
+)
+
+func main() {
+    r := gin.Default()
+
+    userHandler := &handlers.UserHandler{}
+
+    api := r.Group("/api/v1")
+    {
+        users := api.Group("/users")
+        {
+            users.GET("", userHandler.GetUsers)
+            users.POST("", userHandler.CreateUser)
+            users.GET("/:id", userHandler.GetUser)
+            users.PUT("/:id", userHandler.UpdateUser)
+            users.DELETE("/:id", userHandler.DeleteUser)
+        }
+    }
+
+    r.Run(":8080")
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo REST API hoàn chỉnh cho quản lý sản phẩm!`,
+        exercises: [
+          {
+            id: "5-1",
+            title: "Product REST API",
+            description: "Tạo REST API với Gin",
+            instructions: `Tạo REST API cho products với:
+- GET /products - list all
+- GET /products/:id - get one
+- POST /products - create
+- PUT /products/:id - update
+- DELETE /products/:id - delete
+Sử dụng in-memory store và validation`,
+            type: "code",
+            starterCode: `package main
+
+import "github.com/gin-gonic/gin"
+
+func main() {
+    r := gin.Default()
+    // Viết routes ở đây
+    r.Run(":8080")
+}`,
+            solution: `package main
+
+import (
+    "net/http"
+    "strconv"
+    "github.com/gin-gonic/gin"
+)
+
+type Product struct {
+    ID    int     \`json:"id"\`
+    Name  string  \`json:"name" binding:"required"\`
+    Price float64 \`json:"price" binding:"required,gt=0"\`
+}
+
+var products = []Product{
+    {ID: 1, Name: "Laptop", Price: 1000},
+    {ID: 2, Name: "Mouse", Price: 20},
+}
+
+func main() {
+    r := gin.Default()
+
+    api := r.Group("/api/v1")
+    {
+        productsGroup := api.Group("/products")
+        {
+            productsGroup.GET("", listProducts)
+            productsGroup.GET("/:id", getProduct)
+            productsGroup.POST("", createProduct)
+            productsGroup.PUT("/:id", updateProduct)
+            productsGroup.DELETE("/:id", deleteProduct)
+        }
+    }
+
+    r.Run(":8080")
+}
+
+func listProducts(c *gin.Context) {
+    c.JSON(http.StatusOK, products)
+}
+
+func getProduct(c *gin.Context) {
+    id, err := strconv.Atoi(c.Param("id"))
+    if err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+        return
+    }
+    for _, p := range products {
+        if p.ID == id {
+            c.JSON(http.StatusOK, p)
+            return
+        }
+    }
+    c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
+}
+
+func createProduct(c *gin.Context) {
+    var p Product
+    if err := c.ShouldBindJSON(&p); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    p.ID = len(products) + 1
+    products = append(products, p)
+    c.JSON(http.StatusCreated, p)
+}
+
+func updateProduct(c *gin.Context) {
+    id, _ := strconv.Atoi(c.Param("id"))
+    var p Product
+    if err := c.ShouldBindJSON(&p); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    for i := range products {
+        if products[i].ID == id {
+            p.ID = id
+            products[i] = p
+            c.JSON(http.StatusOK, p)
+            return
+        }
+    }
+    c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
+}
+
+func deleteProduct(c *gin.Context) {
+    id, _ := strconv.Atoi(c.Param("id"))
+    for i, p := range products {
+        if p.ID == id {
+            products = append(products[:i], products[i+1:]...)
+            c.Status(http.StatusNoContent)
+            return
+        }
+    }
+    c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
+}`,
+          },
+        ],
+      },
+      {
+        id: "6",
+        title: "Database với GORM và Testing",
+        slug: "gorm-testing",
+        duration: "80 phút",
+        prerequisites: ["5"],
+        content: `# Database với GORM và Testing trong Go
+
+## GORM Setup
+
+### Cài đặt
+\`\`\`bash
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/postgres
+go get -u gorm.io/driver/sqlite
+\`\`\`
+
+### Kết nối database
+\`\`\`go
+package database
+
+import (
+    "gorm.io/driver/postgres"
+    "gorm.io/gorm"
+)
+
+func Connect(dsn string) (*gorm.DB, error) {
+    db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+    if err != nil {
+        return nil, err
+    }
+    return db, nil
+}
+\`\`\`
+
+## Models và Migrations
+
+### Model definition
+\`\`\`go
+type User struct {
+    gorm.Model
+    Name     string \`gorm:"not null"\`
+    Email    string \`gorm:"uniqueIndex;not null"\`
+    Age      int
+    Posts    []Post
+}
+
+type Post struct {
+    gorm.Model
+    Title   string \`gorm:"not null"\`
+    Content string
+    UserID  uint
+    User    User
+}
+\`\`\`
+
+### AutoMigrate
+\`\`\`go
+db.AutoMigrate(&User{}, &Post{})
+\`\`\`
+
+## CRUD Operations
+
+### Create
+\`\`\`go
+user := User{Name: "John", Email: "john@example.com", Age: 30}
+result := db.Create(&user)
+fmt.Println(user.ID)
+fmt.Println(result.Error)
+fmt.Println(result.RowsAffected)
+
+// Batch insert
+users := []User{{Name: "A"}, {Name: "B"}}
+db.Create(&users)
+\`\`\`
+
+### Read
+\`\`\`go
+// Get first
+var user User
+db.First(&user)
+db.First(&user, 10) // WHERE id = 10
+db.First(&user, "name = ?", "John")
+
+// Get all
+var users []User
+db.Find(&users)
+
+// Conditions
+db.Where("age > ?", 18).Find(&users)
+db.Where("name LIKE ?", "%oh%").Find(&users)
+db.Where(&User{Name: "John", Age: 30}).Find(&users)
+
+// Order, Limit, Offset
+db.Order("age desc").Limit(10).Offset(0).Find(&users)
+\`\`\`
+
+### Update
+\`\`\`go
+// Update single field
+db.Model(&user).Update("age", 31)
+
+// Update multiple fields
+db.Model(&user).Updates(User{Age: 31, Name: "Jane"})
+db.Model(&user).Updates(map[string]interface{}{"age": 31})
+
+// Update all
+db.Model(&User{}).Where("age < ?", 18).Update("active", false)
+
+// Save (all fields)
+user.Age = 31
+db.Save(&user)
+\`\`\`
+
+### Delete
+\`\`\`go
+db.Delete(&user, 10)
+db.Where("age < ?", 18).Delete(&User{})
+
+// Soft delete (với gorm.Model)
+db.Delete(&user) // sets deleted_at
+
+// Permanent
+db.Unscoped().Delete(&user)
+\`\`\`
+
+## Relations
+
+### Has Many
+\`\`\`go
+var user User
+db.Preload("Posts").First(&user, 1)
+\`\`\`
+
+### Belongs To
+\`\`\`go
+var post Post
+db.Preload("User").First(&post, 1)
+\`\`\`
+
+### Many to Many
+\`\`\`go
+type Student struct {
+    gorm.Model
+    Name    string
+    Courses []Course \`gorm:"many2many:student_courses;"\`
+}
+
+type Course struct {
+    gorm.Model
+    Name     string
+    Students []Student \`gorm:"many2many:student_courses;"\`
+}
+\`\`\`
+
+## Transactions
+\`\`\`go
+err := db.Transaction(func(tx *gorm.DB) error {
+    if err := tx.Create(&User{Name: "A"}).Error; err != nil {
+        return err
+    }
+    if err := tx.Create(&Post{Title: "Post"}).Error; err != nil {
+        return err
+    }
+    return nil
+})
+\`\`\`
+
+## Testing
+
+### Table-driven tests
+\`\`\`go
+func TestAdd(t *testing.T) {
+    tests := []struct {
+        name     string
+        a, b     int
+        expected int
+    }{
+        {"positive", 2, 3, 5},
+        {"negative", -1, 1, 0},
+        {"zero", 0, 0, 0},
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            got := Add(tt.a, tt.b)
+            if got != tt.expected {
+                t.Errorf("Add(%d, %d) = %d; want %d", tt.a, tt.b, got, tt.expected)
+            }
+        })
+    }
+}
+\`\`\`
+
+### Testify
+\`\`\`go
+import (
+    "testing"
+    "github.com/stretchr/testify/assert"
+    "github.com/stretchr/testify/require"
+)
+
+func TestUserService(t *testing.T) {
+    user, err := service.Create("John", "john@example.com")
+    require.NoError(t, err)
+    assert.Equal(t, "John", user.Name)
+    assert.NotZero(t, user.ID)
+}
+\`\`\`
+
+### In-memory database testing
+\`\`\`go
+import "gorm.io/driver/sqlite"
+
+func setupTestDB(t *testing.T) *gorm.DB {
+    db, err := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{})
+    require.NoError(t, err)
+    db.AutoMigrate(&User{})
+    return db
+}
+
+func TestCreateUser(t *testing.T) {
+    db := setupTestDB(t)
+    repo := NewUserRepository(db)
+
+    user, err := repo.Create(User{Name: "John", Email: "j@e.com"})
+    require.NoError(t, err)
+    assert.NotZero(t, user.ID)
+}
+\`\`\`
+
+### Mocking
+\`\`\`go
+type MockUserRepository struct {
+    mock.Mock
+}
+
+func (m *MockUserRepository) FindByID(id uint) (*User, error) {
+    args := m.Called(id)
+    return args.Get(0).(*User), args.Error(1)
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy viết tests cho REST API với GORM!`,
+        exercises: [
+          {
+            id: "6-1",
+            title: "CRUD với GORM và Tests",
+            description: "Implement CRUD operations và viết tests",
+            instructions: `Implement UserRepository với:
+- Create, FindByID, FindAll, Update, Delete
+- Viết unit tests sử dụng in-memory SQLite
+- Test các edge cases`,
+            type: "code",
+            starterCode: `package repository
+
+import "gorm.io/gorm"
+
+type User struct {
+    ID    uint
+    Name  string
+    Email string
+}
+
+type UserRepository struct {
+    db *gorm.DB
+}
+
+func NewUserRepository(db *gorm.DB) *UserRepository {
+    return &UserRepository{db: db}
+}
+
+// Viết các methods ở đây`,
+            solution: `package repository
+
+import "gorm.io/gorm"
+
+type User struct {
+    ID    uint   \`gorm:"primaryKey"\`
+    Name  string \`gorm:"not null"\`
+    Email string \`gorm:"uniqueIndex;not null"\`
+}
+
+type UserRepository struct {
+    db *gorm.DB
+}
+
+func NewUserRepository(db *gorm.DB) *UserRepository {
+    return &UserRepository{db: db}
+}
+
+func (r *UserRepository) Create(u *User) error {
+    return r.db.Create(u).Error
+}
+
+func (r *UserRepository) FindByID(id uint) (*User, error) {
+    var u User
+    if err := r.db.First(&u, id).Error; err != nil {
+        return nil, err
+    }
+    return &u, nil
+}
+
+func (r *UserRepository) FindAll() ([]User, error) {
+    var users []User
+    if err := r.db.Find(&users).Error; err != nil {
+        return nil, err
+    }
+    return users, nil
+}
+
+func (r *UserRepository) Update(u *User) error {
+    return r.db.Save(u).Error
+}
+
+func (r *UserRepository) Delete(id uint) error {
+    return r.db.Delete(&User{}, id).Error
+}
+
+// ============= Tests =============
+// repository/user_test.go
+package repository
+
+import (
+    "testing"
+    "github.com/stretchr/testify/assert"
+    "github.com/stretchr/testify/require"
+    "gorm.io/driver/sqlite"
+    "gorm.io/gorm"
+)
+
+func setupTestDB(t *testing.T) *gorm.DB {
+    db, err := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{})
+    require.NoError(t, err)
+    require.NoError(t, db.AutoMigrate(&User{}))
+    return db
+}
+
+func TestUserRepository_Create(t *testing.T) {
+    db := setupTestDB(t)
+    repo := NewUserRepository(db)
+
+    u := &User{Name: "John", Email: "john@example.com"}
+    err := repo.Create(u)
+
+    require.NoError(t, err)
+    assert.NotZero(t, u.ID)
+}
+
+func TestUserRepository_FindByID(t *testing.T) {
+    db := setupTestDB(t)
+    repo := NewUserRepository(db)
+
+    created := &User{Name: "John", Email: "john@example.com"}
+    require.NoError(t, repo.Create(created))
+
+    found, err := repo.FindByID(created.ID)
+    require.NoError(t, err)
+    assert.Equal(t, created.Name, found.Name)
+    assert.Equal(t, created.Email, found.Email)
+}
+
+func TestUserRepository_FindByID_NotFound(t *testing.T) {
+    db := setupTestDB(t)
+    repo := NewUserRepository(db)
+
+    _, err := repo.FindByID(999)
+    assert.Error(t, err)
+}
+
+func TestUserRepository_Update(t *testing.T) {
+    db := setupTestDB(t)
+    repo := NewUserRepository(db)
+
+    u := &User{Name: "John", Email: "john@example.com"}
+    require.NoError(t, repo.Create(u))
+
+    u.Name = "Jane"
+    require.NoError(t, repo.Update(u))
+
+    found, _ := repo.FindByID(u.ID)
+    assert.Equal(t, "Jane", found.Name)
+}
+
+func TestUserRepository_Delete(t *testing.T) {
+    db := setupTestDB(t)
+    repo := NewUserRepository(db)
+
+    u := &User{Name: "John", Email: "john@example.com"}
+    require.NoError(t, repo.Create(u))
+
+    require.NoError(t, repo.Delete(u.ID))
+
+    _, err := repo.FindByID(u.ID)
+    assert.Error(t, err)
+}`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "java-spring-boot",
+    slug: "java-spring-boot",
+    title: "Java Spring Boot Toàn tập",
+    description:
+      "Xây dựng ứng dụng enterprise với Java Spring Boot, JPA và Microservices",
+    image: "/images/spring-course.jpg",
+    duration: "12 tuần",
+    level: "intermediate",
+    lessons: [
+      {
+        id: "1",
+        title: "Giới thiệu Spring Boot và Setup",
+        slug: "gioi-thieu-spring-boot",
+        duration: "50 phút",
+        content: `# Giới thiệu Spring Boot
+
+## Spring Boot là gì?
+Spring Boot là framework giúp đơn giản hóa việc phát triển ứng dụng Java với Spring, cung cấp auto-configuration, embedded server và production-ready features.
+
+## Ưu điểm
+- **Auto-configuration**: Giảm thiểu cấu hình
+- **Embedded server**: Tomcat, Jetty, Undertow
+- **Starter dependencies**: Quản lý dependencies dễ dàng
+- **Production-ready**: Actuator, metrics, health checks
+- **Hệ sinh thái phong phú**: Spring Data, Spring Security, Spring Cloud
+
+## Cài đặt môi trường
+
+### Yêu cầu
+- JDK 17+ (khuyến nghị JDK 21)
+- Maven hoặc Gradle
+- IDE: IntelliJ IDEA, VS Code
+
+### Tạo project với Spring Initializr
+\`\`\`bash
+# Sử dụng curl
+curl https://start.spring.io/starter.zip \\
+  -d dependencies=web,data-jpa,postgresql,validation,lombok \\
+  -d type=maven-project \\
+  -d language=java \\
+  -d bootVersion=3.2.0 \\
+  -d groupId=com.example \\
+  -d artifactId=demo \\
+  -o demo.zip
+unzip demo.zip
+\`\`\`
+
+## Cấu trúc project
+
+\`\`\`
+demo/
+├── pom.xml
+├── src/
+│   ├── main/
+│   │   ├── java/com/example/demo/
+│   │   │   ├── DemoApplication.java
+│   │   │   ├── controller/
+│   │   │   ├── service/
+│   │   │   ├── repository/
+│   │   │   ├── entity/
+│   │   │   └── dto/
+│   │   └── resources/
+│   │       ├── application.yml
+│   │       └── db/migration/
+│   └── test/
+└── target/
+\`\`\`
+
+## Ứng dụng đầu tiên
+
+### Main class
+\`\`\`java
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
+\`\`\`
+
+### Controller
+\`\`\`java
+package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+public class HelloController {
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello, Spring Boot!";
+    }
+
+    @GetMapping("/hello/{name}")
+    public String helloName(@PathVariable String name) {
+        return "Hello, " + name + "!";
+    }
+}
+\`\`\`
+
+### application.yml
+\`\`\`yaml
+spring:
+  application:
+    name: demo
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.example.demo: DEBUG
+\`\`\`
+
+## Dependency Injection
+
+### Constructor injection (recommended)
+\`\`\`java
+@Service
+public class UserService {
+    private final UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
+}
+\`\`\`
+
+### Các loại annotations
+- \`@Component\`: Generic component
+- \`@Service\`: Business logic
+- \`@Repository\`: Data access
+- \`@Controller\` / \`@RestController\`: Web layer
+- \`@Configuration\`: Configuration class
+
+## Bài tập thực hành
+Hãy tạo ứng dụng Spring Boot đầu tiên với REST endpoints!`,
+        exercises: [
+          {
+            id: "1-1",
+            title: "Kiểm tra kiến thức",
+            description: "Trắc nghiệm về Spring Boot",
+            instructions: "Chọn đáp án đúng:",
+            type: "multiple-choice",
+            options: [
+              "Spring Boot chỉ hỗ trợ Tomcat",
+              "Spring Boot cung cấp auto-configuration",
+              "Spring Boot không hỗ trợ REST API",
+              "Spring Boot cần cấu hình XML bắt buộc",
+            ],
+            correctAnswer: 1,
+          },
+        ],
+      },
+      {
+        id: "2",
+        title: "Spring Data JPA và Entity",
+        slug: "spring-data-jpa-entity",
+        duration: "75 phút",
+        prerequisites: ["1"],
+        content: `# Spring Data JPA và Entity
+
+## Entity Mapping
+
+### Entity cơ bản
+\`\`\`java
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+}
+
+enum UserRole {
+    USER, ADMIN
+}
+\`\`\`
+
+## Relationships
+
+### One-to-Many / Many-to-One
+\`\`\`java
+@Entity
+public class User {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
+}
+
+@Entity
+public class Post {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+}
+\`\`\`
+
+### Many-to-Many
+\`\`\`java
+@Entity
+public class Student {
+    @ManyToMany
+    @JoinTable(
+        name = "student_courses",
+        joinColumns = @JoinColumn(name = "student_id"),
+        inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private Set<Course> courses = new HashSet<>();
+}
+\`\`\`
+
+### One-to-One
+\`\`\`java
+@Entity
+public class User {
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
+}
+
+@Entity
+public class Profile {
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+}
+\`\`\`
+
+## Repositories
+
+### JpaRepository
+\`\`\`java
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByEmail(String email);
+
+    List<User> findByNameContainingIgnoreCase(String name);
+
+    boolean existsByEmail(String email);
+
+    @Query("SELECT u FROM User u WHERE u.role = :role")
+    List<User> findByRole(@Param("role") UserRole role);
+
+    @Query(value = "SELECT * FROM users WHERE created_at > :date", nativeQuery = true)
+    List<User> findRecentUsers(@Param("date") LocalDateTime date);
+
+    @Modifying
+    @Query("UPDATE User u SET u.role = :role WHERE u.id = :id")
+    int updateRole(@Param("id") Long id, @Param("role") UserRole role);
+}
+\`\`\`
+
+### Derived query methods
+\`\`\`java
+// Các keyword phổ biến
+findByFirstName(String firstName)
+findByFirstNameAndLastName(String fn, String ln)
+findByAgeGreaterThan(int age)
+findByAgeBetween(int min, int max)
+findByNameLike(String pattern)
+findByNameContaining(String substring)
+findByNameStartingWith(String prefix)
+findByOrderByCreatedAtDesc()
+findTop10ByOrderByCreatedAtDesc()
+\`\`\`
+
+### Pagination và Sorting
+\`\`\`java
+public interface UserRepository extends JpaRepository<User, Long> {
+    Page<User> findByNameContaining(String name, Pageable pageable);
+}
+
+// Sử dụng
+Pageable pageable = PageRequest.of(0, 10, Sort.by("createdAt").descending());
+Page<User> page = repository.findByNameContaining("John", pageable);
+System.out.println(page.getTotalElements());
+System.out.println(page.getTotalPages());
+\`\`\`
+
+## Service Layer
+
+\`\`\`java
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    @Transactional
+    public UserResponse create(CreateUserRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new BusinessException("Email already exists");
+        }
+
+        User user = User.builder()
+            .name(request.getName())
+            .email(request.getEmail())
+            .password(passwordEncoder.encode(request.getPassword()))
+            .role(UserRole.USER)
+            .build();
+
+        User saved = userRepository.save(user);
+        return UserResponse.from(saved);
+    }
+
+    public UserResponse findById(Long id) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("User not found"));
+        return UserResponse.from(user);
+    }
+
+    public Page<UserResponse> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable).map(UserResponse::from);
+    }
+
+    @Transactional
+    public UserResponse update(Long id, UpdateUserRequest request) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("User not found"));
+        user.setName(request.getName());
+        return UserResponse.from(user);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+}
+\`\`\`
+
+## DTOs
+
+\`\`\`java
+public record CreateUserRequest(
+    @NotBlank String name,
+    @Email @NotBlank String email,
+    @Size(min = 8) String password
+) {}
+
+public record UserResponse(
+    Long id,
+    String name,
+    String email,
+    String role,
+    LocalDateTime createdAt
+) {
+    public static UserResponse from(User user) {
+        return new UserResponse(
+            user.getId(),
+            user.getName(),
+            user.getEmail(),
+            user.getRole().name(),
+            user.getCreatedAt()
+        );
+    }
+}
+\`\`\`
+
+## Configuration
+
+\`\`\`yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo CRUD API cho User với JPA!`,
+        exercises: [
+          {
+            id: "2-1",
+            title: "Product CRUD API",
+            description: "Implement CRUD với JPA",
+            instructions: `Tạo:
+1. Product entity với id, name, description, price, stock
+2. ProductRepository với custom queries
+3. ProductService với CRUD operations
+4. ProductController với REST endpoints
+5. Validation cho requests`,
+            type: "code",
+            starterCode: `// Product entity
+@Entity
+public class Product {
+    // Viết code ở đây
+}
+
+// ProductRepository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+}
+
+// ProductService
+@Service
+public class ProductService {
+}`,
+            solution: `// ============= Product.java =============
+@Entity
+@Table(name = "products")
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@Builder
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 200)
+    private String name;
+
+    @Column(length = 2000)
+    private String description;
+
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    private Integer stock;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+}
+
+// ============= ProductRepository.java =============
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    List<Product> findByNameContainingIgnoreCase(String name);
+
+    @Query("SELECT p FROM Product p WHERE p.stock > 0 AND p.price BETWEEN :min AND :max")
+    List<Product> findAvailableInPriceRange(
+        @Param("min") BigDecimal min,
+        @Param("max") BigDecimal max
+    );
+
+    boolean existsByName(String name);
+}
+
+// ============= DTOs =============
+public record CreateProductRequest(
+    @NotBlank @Size(max = 200) String name,
+    @Size(max = 2000) String description,
+    @NotNull @DecimalMin("0.0") BigDecimal price,
+    @NotNull @Min(0) Integer stock
+) {}
+
+public record UpdateProductRequest(
+    @NotBlank @Size(max = 200) String name,
+    @Size(max = 2000) String description,
+    @NotNull @DecimalMin("0.0") BigDecimal price,
+    @NotNull @Min(0) Integer stock
+) {}
+
+public record ProductResponse(
+    Long id,
+    String name,
+    String description,
+    BigDecimal price,
+    Integer stock,
+    LocalDateTime createdAt
+) {
+    public static ProductResponse from(Product p) {
+        return new ProductResponse(
+            p.getId(), p.getName(), p.getDescription(),
+            p.getPrice(), p.getStock(), p.getCreatedAt()
+        );
+    }
+}
+
+// ============= ProductService.java =============
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class ProductService {
+    private final ProductRepository repository;
+
+    @Transactional
+    public ProductResponse create(CreateProductRequest req) {
+        if (repository.existsByName(req.name())) {
+            throw new BusinessException("Product name already exists");
+        }
+        Product p = Product.builder()
+            .name(req.name())
+            .description(req.description())
+            .price(req.price())
+            .stock(req.stock())
+            .build();
+        return ProductResponse.from(repository.save(p));
+    }
+
+    public ProductResponse findById(Long id) {
+        return repository.findById(id)
+            .map(ProductResponse::from)
+            .orElseThrow(() -> new NotFoundException("Product not found"));
+    }
+
+    public Page<ProductResponse> findAll(Pageable pageable) {
+        return repository.findAll(pageable).map(ProductResponse::from);
+    }
+
+    @Transactional
+    public ProductResponse update(Long id, UpdateProductRequest req) {
+        Product p = repository.findById(id)
+            .orElseThrow(() -> new NotFoundException("Product not found"));
+        p.setName(req.name());
+        p.setDescription(req.description());
+        p.setPrice(req.price());
+        p.setStock(req.stock());
+        return ProductResponse.from(p);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Product not found");
+        }
+        repository.deleteById(id);
+    }
+}
+
+// ============= ProductController.java =============
+@RestController
+@RequestMapping("/api/v1/products")
+@RequiredArgsConstructor
+public class ProductController {
+    private final ProductService service;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProductResponse create(@Valid @RequestBody CreateProductRequest req) {
+        return service.create(req);
+    }
+
+    @GetMapping("/{id}")
+    public ProductResponse findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @GetMapping
+    public Page<ProductResponse> findAll(Pageable pageable) {
+        return service.findAll(pageable);
+    }
+
+    @PutMapping("/{id}")
+    public ProductResponse update(
+        @PathVariable Long id,
+        @Valid @RequestBody UpdateProductRequest req
+    ) {
+        return service.update(id, req);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "3",
+        title: "Spring Security và JWT",
+        slug: "spring-security-jwt",
+        duration: "90 phút",
+        prerequisites: ["2"],
+        content: `# Spring Security và JWT
+
+## Cài đặt
+\`\`\`xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.12.3</version>
+</dependency>
+\`\`\`
+
+## JWT Service
+
+\`\`\`java
+@Service
+public class JwtService {
+
+    @Value("\${jwt.secret}")
+    private String secret;
+
+    @Value("\${jwt.expiration}")
+    private long expiration;
+
+    public String generateToken(UserDetails user) {
+        return Jwts.builder()
+            .subject(user.getUsername())
+            .claim("authorities", user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList())
+            .issuedAt(new Date())
+            .expiration(new Date(System.currentTimeMillis() + expiration))
+            .signWith(getSigningKey())
+            .compact();
+    }
+
+    public String extractUsername(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    public boolean isValid(String token, UserDetails user) {
+        try {
+            Claims claims = getClaims(token);
+            return claims.getSubject().equals(user.getUsername())
+                && claims.getExpiration().after(new Date());
+        } catch (JwtException e) {
+            return false;
+        }
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+            .verifyWith(getSigningKey())
+            .build()
+            .parseSignedClaims(token)
+            .getPayload();
+    }
+
+    private SecretKey getSigningKey() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+    }
+}
+\`\`\`
+
+## JWT Filter
+
+\`\`\`java
+@Component
+@RequiredArgsConstructor
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+
+    @Override
+    protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain
+    ) throws ServletException, IOException {
+
+        String header = request.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String token = header.substring(7);
+        try {
+            String username = jwtService.extractUsername(token);
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails user = userDetailsService.loadUserByUsername(username);
+                if (jwtService.isValid(token, user)) {
+                    UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(
+                            user, null, user.getAuthorities());
+                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
+            }
+        } catch (Exception e) {
+            // invalid token
+        }
+
+        filterChain.doFilter(request, response);
+    }
+}
+\`\`\`
+
+## Security Configuration
+
+\`\`\`java
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+@RequiredArgsConstructor
+public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtFilter;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(AbstractHttpConfigurer::disable)
+            .cors(Customizer.withDefaults())
+            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/public/**").permitAll()
+                .requestMatchers("/actuator/health").permitAll()
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            )
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+        AuthenticationConfiguration config
+    ) throws Exception {
+        return config.getAuthenticationManager();
+    }
+}
+\`\`\`
+
+## Authentication Service
+
+\`\`\`java
+@Service
+@RequiredArgsConstructor
+public class AuthService {
+
+    private final AuthenticationManager authManager;
+    private final UserRepository userRepository;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthResponse register(RegisterRequest request) {
+        if (userRepository.existsByEmail(request.email())) {
+            throw new BusinessException("Email already exists");
+        }
+
+        User user = User.builder()
+            .name(request.name())
+            .email(request.email())
+            .password(passwordEncoder.encode(request.password()))
+            .role(UserRole.USER)
+            .build();
+        userRepository.save(user);
+
+        String token = jwtService.generateToken(toUserDetails(user));
+        return new AuthResponse(token, "Bearer");
+    }
+
+    public AuthResponse login(LoginRequest request) {
+        authManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                request.email(), request.password()));
+
+        User user = userRepository.findByEmail(request.email())
+            .orElseThrow(() -> new NotFoundException("User not found"));
+
+        String token = jwtService.generateToken(toUserDetails(user));
+        return new AuthResponse(token, "Bearer");
+    }
+
+    private UserDetails toUserDetails(User user) {
+        return org.springframework.security.core.userdetails.User
+            .withUsername(user.getEmail())
+            .password(user.getPassword())
+            .authorities("ROLE_" + user.getRole().name())
+            .build();
+    }
+}
+\`\`\`
+
+## Custom UserDetailsService
+
+\`\`\`java
+@Service
+@RequiredArgsConstructor
+public class CustomUserDetailsService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String email) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
+
+        return org.springframework.security.core.userdetails.User
+            .withUsername(user.getEmail())
+            .password(user.getPassword())
+            .authorities("ROLE_" + user.getRole().name())
+            .build();
+    }
+}
+\`\`\`
+
+## Auth Controller
+
+\`\`\`java
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AuthResponse register(@Valid @RequestBody RegisterRequest req) {
+        return authService.register(req);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse login(@Valid @RequestBody LoginRequest req) {
+        return authService.login(req);
+    }
+
+    @GetMapping("/me")
+    public String me(Authentication auth) {
+        return auth.getName();
+    }
+}
+
+record RegisterRequest(
+    @NotBlank String name,
+    @Email @NotBlank String email,
+    @Size(min = 8) String password
+) {}
+
+record LoginRequest(
+    @Email @NotBlank String email,
+    @NotBlank String password
+) {}
+
+record AuthResponse(String token, String type) {}
+\`\`\`
+
+## Method-level Security
+
+\`\`\`java
+@RestController
+@RequestMapping("/api/admin")
+public class AdminController {
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/users")
+    public List<UserResponse> users() {
+        return List.of();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR')")
+    @DeleteMapping("/posts/{id}")
+    public void deletePost(@PathVariable Long id) {
+        // ...
+    }
+}
+\`\`\`
+
+## application.yml
+
+\`\`\`yaml
+jwt:
+  secret: \${JWT_SECRET:your-256-bit-secret-key-base64-encoded-here}
+  expiration: 86400000  # 24 hours in ms
+\`\`\`
+
+## Bài tập thực hành
+Hãy implement JWT authentication hoàn chỉnh!`,
+        exercises: [
+          {
+            id: "3-1",
+            title: "JWT Auth System",
+            description: "Implement authentication với JWT và roles",
+            instructions: `Implement:
+1. Register / Login endpoints
+2. JWT generation và validation
+3. Role-based access control
+4. Refresh token mechanism
+5. Logout functionality`,
+            type: "code",
+            starterCode: `// Implement JWT auth system
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+}`,
+            solution: `// ============= RefreshToken entity =============
+@Entity
+@Table(name = "refresh_tokens")
+@Getter @Setter
+public class RefreshToken {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String token;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    @Column(nullable = false)
+    private LocalDateTime expiresAt;
+
+    public boolean isExpired() {
+        return expiresAt.isBefore(LocalDateTime.now());
+    }
+}
+
+// ============= RefreshTokenRepository =============
+public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {
+    Optional<RefreshToken> findByToken(String token);
+
+    @Modifying
+    @Query("DELETE FROM RefreshToken rt WHERE rt.user.id = :userId")
+    void deleteByUserId(@Param("userId") Long userId);
+}
+
+// ============= Enhanced JwtService =============
+@Service
+public class JwtService {
+
+    @Value("\${jwt.secret}")
+    private String secret;
+
+    @Value("\${jwt.access-token-expiration:900000}")  // 15 min
+    private long accessExpiration;
+
+    @Value("\${jwt.refresh-token-expiration:604800000}")  // 7 days
+    private long refreshExpiration;
+
+    public String generateAccessToken(UserDetails user) {
+        return buildToken(user, accessExpiration);
+    }
+
+    public String generateRefreshToken(UserDetails user) {
+        return buildToken(user, refreshExpiration);
+    }
+
+    private String buildToken(UserDetails user, long exp) {
+        return Jwts.builder()
+            .subject(user.getUsername())
+            .claim("authorities", user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority).toList())
+            .issuedAt(new Date())
+            .expiration(new Date(System.currentTimeMillis() + exp))
+            .signWith(getSigningKey())
+            .compact();
+    }
+
+    public String extractUsername(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    public boolean isValid(String token, UserDetails user) {
+        try {
+            Claims c = getClaims(token);
+            return c.getSubject().equals(user.getUsername())
+                && c.getExpiration().after(new Date());
+        } catch (JwtException e) {
+            return false;
+        }
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser().verifyWith(getSigningKey()).build()
+            .parseSignedClaims(token).getPayload();
+    }
+
+    private SecretKey getSigningKey() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+    }
+
+    public long getRefreshExpiration() {
+        return refreshExpiration;
+    }
+}
+
+// ============= AuthService =============
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class AuthService {
+
+    private final AuthenticationManager authManager;
+    private final UserRepository userRepository;
+    private final RefreshTokenRepository refreshRepo;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthResponse register(RegisterRequest req) {
+        if (userRepository.existsByEmail(req.email())) {
+            throw new BusinessException("Email already exists");
+        }
+        User user = User.builder()
+            .name(req.name())
+            .email(req.email())
+            .password(passwordEncoder.encode(req.password()))
+            .role(UserRole.USER)
+            .build();
+        userRepository.save(user);
+        return generateTokens(user);
+    }
+
+    public AuthResponse login(LoginRequest req) {
+        authManager.authenticate(new UsernamePasswordAuthenticationToken(
+            req.email(), req.password()));
+        User user = userRepository.findByEmail(req.email())
+            .orElseThrow(() -> new NotFoundException("User not found"));
+        return generateTokens(user);
+    }
+
+    public AuthResponse refresh(String refreshToken) {
+        RefreshToken stored = refreshRepo.findByToken(refreshToken)
+            .orElseThrow(() -> new BusinessException("Invalid refresh token"));
+
+        if (stored.isExpired()) {
+            refreshRepo.delete(stored);
+            throw new BusinessException("Refresh token expired");
+        }
+
+        User user = stored.getUser();
+        String newAccess = jwtService.generateAccessToken(toUserDetails(user));
+        return new AuthResponse(newAccess, refreshToken, "Bearer");
+    }
+
+    public void logout(Long userId) {
+        refreshRepo.deleteByUserId(userId);
+    }
+
+    private AuthResponse generateTokens(User user) {
+        UserDetails details = toUserDetails(user);
+        String access = jwtService.generateAccessToken(details);
+        String refresh = jwtService.generateRefreshToken(details);
+
+        refreshRepo.deleteByUserId(user.getId());
+        RefreshToken rt = new RefreshToken();
+        rt.setToken(refresh);
+        rt.setUser(user);
+        rt.setExpiresAt(LocalDateTime.now()
+            .plusSeconds(jwtService.getRefreshExpiration() / 1000));
+        refreshRepo.save(rt);
+
+        return new AuthResponse(access, refresh, "Bearer");
+    }
+
+    private UserDetails toUserDetails(User user) {
+        return org.springframework.security.core.userdetails.User
+            .withUsername(user.getEmail())
+            .password(user.getPassword())
+            .authorities("ROLE_" + user.getRole().name())
+            .build();
+    }
+}
+
+// ============= AuthController =============
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AuthResponse register(@Valid @RequestBody RegisterRequest req) {
+        return authService.register(req);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse login(@Valid @RequestBody LoginRequest req) {
+        return authService.login(req);
+    }
+
+    @PostMapping("/refresh")
+    public AuthResponse refresh(@Valid @RequestBody RefreshRequest req) {
+        return authService.refresh(req.refreshToken());
+    }
+
+    @PostMapping("/logout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void logout(Authentication auth) {
+        // Need to fetch user by email
+        // authService.logout(userId);
+    }
+}
+
+record RefreshRequest(@NotBlank String refreshToken) {}
+record AuthResponse(String accessToken, String refreshToken, String type) {}`,
+          },
+        ],
+      },
+      {
+        id: "4",
+        title: "Exception Handling và Validation",
+        slug: "exception-handling-validation",
+        duration: "60 phút",
+        prerequisites: ["3"],
+        content: `# Exception Handling và Validation
+
+## Global Exception Handler
+
+\`\`\`java
+@RestControllerAdvice
+@Slf4j
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleNotFound(NotFoundException ex, HttpServletRequest req) {
+        return new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.NOT_FOUND.value(),
+            "Not Found",
+            ex.getMessage(),
+            req.getRequestURI(),
+            null
+        );
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBusiness(BusinessException ex, HttpServletRequest req) {
+        return new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.BAD_REQUEST.value(),
+            "Bad Request",
+            ex.getMessage(),
+            req.getRequestURI(),
+            null
+        );
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleValidation(
+        MethodArgumentNotValidException ex,
+        HttpServletRequest req
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(err ->
+            errors.put(err.getField(), err.getDefaultMessage()));
+
+        return new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.BAD_REQUEST.value(),
+            "Validation Failed",
+            "Invalid input",
+            req.getRequestURI(),
+            errors
+        );
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse handleAccessDenied(AccessDeniedException ex, HttpServletRequest req) {
+        return new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.FORBIDDEN.value(),
+            "Forbidden",
+            "Access denied",
+            req.getRequestURI(),
+            null
+        );
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleGeneric(Exception ex, HttpServletRequest req) {
+        log.error("Unhandled exception", ex);
+        return new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            "Internal Server Error",
+            "An unexpected error occurred",
+            req.getRequestURI(),
+            null
+        );
+    }
+}
+
+public record ErrorResponse(
+    LocalDateTime timestamp,
+    int status,
+    String error,
+    String message,
+    String path,
+    Map<String, String> details
+) {}
+\`\`\`
+
+## Custom Exceptions
+
+\`\`\`java
+public class BusinessException extends RuntimeException {
+    public BusinessException(String message) {
+        super(message);
+    }
+}
+
+public class NotFoundException extends RuntimeException {
+    public NotFoundException(String message) {
+        super(message);
+    }
+}
+\`\`\`
+
+## Validation
+
+### Request validation
+\`\`\`java
+public record CreateUserRequest(
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    String name,
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    String email,
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters")
+    @Pattern(
+        regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d).*$",
+        message = "Password must contain uppercase, lowercase and digit"
+    )
+    String password,
+
+    @NotNull
+    @Min(value = 18, message = "Must be at least 18")
+    @Max(value = 120, message = "Age must be reasonable")
+    Integer age
+) {}
+\`\`\`
+
+### Custom validators
+\`\`\`java
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = UniqueEmailValidator.class)
+public @interface UniqueEmail {
+    String message() default "Email already exists";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+}
+
+@Component
+@RequiredArgsConstructor
+public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
+    private final UserRepository userRepository;
+
+    @Override
+    public boolean isValid(String email, ConstraintValidatorContext ctx) {
+        if (email == null) return true;
+        return !userRepository.existsByEmail(email);
+    }
+}
+
+// Sử dụng
+public record RegisterRequest(
+    @NotBlank String name,
+    @Email @UniqueEmail String email,
+    @Size(min = 8) String password
+) {}
+\`\`\`
+
+### Validation groups
+\`\`\`java
+public interface CreateGroup {}
+public interface UpdateGroup {}
+
+public record UserRequest(
+    @Null(groups = CreateGroup.class)
+    @NotNull(groups = UpdateGroup.class)
+    Long id,
+
+    @NotBlank(groups = {CreateGroup.class, UpdateGroup.class})
+    String name
+) {}
+
+// Controller
+@PostMapping
+public void create(@Validated(CreateGroup.class) @RequestBody UserRequest req) {}
+
+@PutMapping
+public void update(@Validated(UpdateGroup.class) @RequestBody UserRequest req) {}
+\`\`\`
+
+## Problem Details (RFC 7807)
+
+\`\`\`java
+@RestControllerAdvice
+public class ProblemDetailsHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(NotFoundException.class)
+    public ProblemDetail handleNotFound(NotFoundException ex) {
+        ProblemDetail pd = ProblemDetail.forStatusAndDetail(
+            HttpStatus.NOT_FOUND, ex.getMessage());
+        pd.setTitle("Resource Not Found");
+        pd.setType(URI.create("https://example.com/errors/not-found"));
+        return pd;
+    }
+}
+\`\`\`
+
+## Logging Best Practices
+
+\`\`\`java
+@Slf4j
+@Service
+public class UserService {
+
+    public UserResponse findById(Long id) {
+        log.debug("Finding user by id: {}", id);
+        return userRepository.findById(id)
+            .map(UserResponse::from)
+            .orElseThrow(() -> {
+                log.warn("User not found: {}", id);
+                return new NotFoundException("User not found");
+            });
+    }
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy implement error handling toàn diện cho API!`,
+        exercises: [
+          {
+            id: "4-1",
+            title: "Complete Error Handling",
+            description: "Implement error handling và validation",
+            instructions: `Tạo:
+1. Custom exceptions
+2. Global exception handler
+3. Validation cho requests
+4. Custom validator cho unique fields
+5. Structured error responses`,
+            type: "code",
+            starterCode: `// Implement error handling
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+}`,
+            solution: `// ============= Exceptions =============
+public abstract class AppException extends RuntimeException {
+    private final HttpStatus status;
+    private final String code;
+
+    protected AppException(String message, HttpStatus status, String code) {
+        super(message);
+        this.status = status;
+        this.code = code;
+    }
+
+    public HttpStatus getStatus() { return status; }
+    public String getCode() { return code; }
+}
+
+public class NotFoundException extends AppException {
+    public NotFoundException(String resource, Object id) {
+        super(resource + " not found: " + id, HttpStatus.NOT_FOUND, "NOT_FOUND");
+    }
+}
+
+public class BusinessException extends AppException {
+    public BusinessException(String message) {
+        super(message, HttpStatus.BAD_REQUEST, "BUSINESS_ERROR");
+    }
+}
+
+public class ConflictException extends AppException {
+    public ConflictException(String message) {
+        super(message, HttpStatus.CONFLICT, "CONFLICT");
+    }
+}
+
+// ============= Error Response =============
+public record ErrorResponse(
+    LocalDateTime timestamp,
+    int status,
+    String code,
+    String message,
+    String path,
+    Map<String, String> details
+) {
+    public static ErrorResponse of(HttpStatus status, String code, String msg,
+                                    String path, Map<String, String> details) {
+        return new ErrorResponse(LocalDateTime.now(), status.value(), code,
+            msg, path, details);
+    }
+}
+
+// ============= Global Handler =============
+@RestControllerAdvice
+@Slf4j
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<ErrorResponse> handleApp(
+        AppException ex, HttpServletRequest req
+    ) {
+        log.warn("App exception: {} - {}", ex.getCode(), ex.getMessage());
+        return ResponseEntity.status(ex.getStatus())
+            .body(ErrorResponse.of(ex.getStatus(), ex.getCode(),
+                ex.getMessage(), req.getRequestURI(), null));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidation(
+        MethodArgumentNotValidException ex, HttpServletRequest req
+    ) {
+        Map<String, String> details = new HashMap<>();
+        ex.getBindingResult().getFieldErrors()
+            .forEach(e -> details.put(e.getField(), e.getDefaultMessage()));
+
+        return ResponseEntity.badRequest()
+            .body(ErrorResponse.of(HttpStatus.BAD_REQUEST, "VALIDATION_ERROR",
+                "Validation failed", req.getRequestURI(), details));
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraint(
+        ConstraintViolationException ex, HttpServletRequest req
+    ) {
+        Map<String, String> details = new HashMap<>();
+        ex.getConstraintViolations().forEach(v ->
+            details.put(v.getPropertyPath().toString(), v.getMessage()));
+
+        return ResponseEntity.badRequest()
+            .body(ErrorResponse.of(HttpStatus.BAD_REQUEST, "CONSTRAINT_VIOLATION",
+                "Constraint violation", req.getRequestURI(), details));
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleAccessDenied(
+        AccessDeniedException ex, HttpServletRequest req
+    ) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+            .body(ErrorResponse.of(HttpStatus.FORBIDDEN, "ACCESS_DENIED",
+                "Access denied", req.getRequestURI(), null));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleAll(
+        Exception ex, HttpServletRequest req
+    ) {
+        log.error("Unhandled exception", ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_ERROR",
+                "An unexpected error occurred", req.getRequestURI(), null));
+    }
+}
+
+// ============= Custom Validator =============
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = UniqueEmailValidator.class)
+public @interface UniqueEmail {
+    String message() default "Email already exists";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+}
+
+@Component
+@RequiredArgsConstructor
+public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
+    private final UserRepository userRepository;
+
+    @Override
+    public boolean isValid(String email, ConstraintValidatorContext ctx) {
+        if (email == null || email.isBlank()) return true;
+        return !userRepository.existsByEmail(email);
+    }
+}
+
+// ============= Requests =============
+public record CreateUserRequest(
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100)
+    String name,
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @UniqueEmail
+    String email,
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters")
+    String password
+) {}`,
+          },
+        ],
+      },
+      {
+        id: "5",
+        title: "Testing trong Spring Boot",
+        slug: "testing-spring-boot",
+        duration: "75 phút",
+        prerequisites: ["4"],
+        content: `# Testing trong Spring Boot
+
+## Test Dependencies
+
+\`\`\`xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>test</scope>
+</dependency>
+\`\`\`
+
+## Unit Tests
+
+### Service test với Mockito
+\`\`\`java
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @InjectMocks
+    private UserService userService;
+
+    @Test
+    void createUser_shouldReturnCreatedUser() {
+        // Given
+        var request = new CreateUserRequest("John", "john@example.com", "password");
+        var user = User.builder()
+            .id(1L)
+            .name("John")
+            .email("john@example.com")
+            .build();
+
+        when(userRepository.existsByEmail(anyString())).thenReturn(false);
+        when(passwordEncoder.encode(anyString())).thenReturn("encoded");
+        when(userRepository.save(any(User.class))).thenReturn(user);
+
+        // When
+        UserResponse response = userService.create(request);
+
+        // Then
+        assertThat(response.id()).isEqualTo(1L);
+        assertThat(response.name()).isEqualTo("John");
+        verify(userRepository).save(any(User.class));
+    }
+
+    @Test
+    void createUser_withExistingEmail_shouldThrow() {
+        when(userRepository.existsByEmail(anyString())).thenReturn(true);
+
+        assertThatThrownBy(() -> userService.create(
+            new CreateUserRequest("John", "john@example.com", "password")
+        ))
+        .isInstanceOf(ConflictException.class)
+        .hasMessageContaining("Email already exists");
+
+        verify(userRepository, never()).save(any());
+    }
+}
+\`\`\`
+
+## Controller Tests với MockMvc
+
+\`\`\`java
+@WebMvcTest(UserController.class)
+class UserControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private UserService userService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Test
+    void createUser_shouldReturnCreated() throws Exception {
+        var request = new CreateUserRequest("John", "john@example.com", "password");
+        var response = new UserResponse(1L, "John", "john@example.com", "USER", LocalDateTime.now());
+
+        when(userService.create(any())).thenReturn(response);
+
+        mockMvc.perform(post("/api/v1/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.id").value(1))
+            .andExpect(jsonPath("$.name").value("John"))
+            .andExpect(jsonPath("$.email").value("john@example.com"));
+    }
+
+    @Test
+    void createUser_withInvalidEmail_shouldReturn400() throws Exception {
+        var request = new CreateUserRequest("John", "invalid-email", "password");
+
+        mockMvc.perform(post("/api/v1/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.details.email").exists());
+    }
+
+    @Test
+    void getUser_whenNotExists_shouldReturn404() throws Exception {
+        when(userService.findById(999L))
+            .thenThrow(new NotFoundException("User", 999L));
+
+        mockMvc.perform(get("/api/v1/users/999"))
+            .andExpect(status().isNotFound());
+    }
+}
+\`\`\`
+
+## Integration Tests
+
+### Full context test với Testcontainers
+\`\`\`java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+@Transactional
+class UserIntegrationTest {
+
+    @Container
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
+        .withDatabaseName("testdb")
+        .withUsername("test")
+        .withPassword("test");
+
+    @DynamicPropertySource
+    static void props(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
+    }
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    void createAndFetchUser() {
+        var request = new CreateUserRequest("John", "john@example.com", "password123");
+        var createResponse = restTemplate.postForEntity(
+            "/api/v1/users", request, UserResponse.class);
+
+        assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(createResponse.getBody().name()).isEqualTo("John");
+
+        Long id = createResponse.getBody().id();
+        var getResponse = restTemplate.getForEntity(
+            "/api/v1/users/" + id, UserResponse.class);
+
+        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(getResponse.getBody().email()).isEqualTo("john@example.com");
+    }
+}
+\`\`\`
+
+## Test Data Builders
+
+\`\`\`java
+public class UserTestBuilder {
+    private String name = "Test User";
+    private String email = "test@example.com";
+    private UserRole role = UserRole.USER;
+
+    public UserTestBuilder withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public UserTestBuilder withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public User build() {
+        return User.builder()
+            .name(name)
+            .email(email)
+            .role(role)
+            .password("encoded")
+            .build();
+    }
+}
+\`\`\`
+
+## Testing Security
+
+\`\`\`java
+@WebMvcTest(UserController.class)
+@Import(SecurityConfig.class)
+class SecuredControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private JwtService jwtService;
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void adminEndpoint_shouldAllowAdmin() throws Exception {
+        mockMvc.perform(get("/api/admin/users"))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void adminEndpoint_shouldDenyUser() throws Exception {
+        mockMvc.perform(get("/api/admin/users"))
+            .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void securedEndpoint_withoutAuth_shouldReturn401() throws Exception {
+        mockMvc.perform(get("/api/v1/users"))
+            .andExpect(status().isUnauthorized());
+    }
+}
+\`\`\`
+
+## Test Configuration
+
+\`\`\`java
+@TestConfiguration
+public class TestConfig {
+
+    @Bean
+    @Primary
+    public PasswordEncoder testPasswordEncoder() {
+        return new BCryptPasswordEncoder(4);
+    }
+}
+\`\`\`
+
+## application-test.yml
+
+\`\`\`yaml
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    root: WARN
+    com.example: DEBUG
+\`\`\`
+
+## Bài tập thực hành
+Hãy viết tests toàn diện cho User API!`,
+        exercises: [
+          {
+            id: "5-1",
+            title: "Comprehensive Test Suite",
+            description: "Viết tests cho User API",
+            instructions: `Viết:
+1. Unit tests cho service layer với mocks
+2. Controller tests với MockMvc
+3. Integration test với Testcontainers
+4. Security tests với @WithMockUser`,
+            type: "code",
+            starterCode: `@SpringBootTest
+class UserApiTest {
+    // Viết tests ở đây
+}`,
+            solution: `// ============= Unit Test =============
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+
+    @Mock
+    private UserRepository userRepository;
+    @Mock
+    private PasswordEncoder passwordEncoder;
+    @InjectMocks
+    private UserService userService;
+
+    @Test
+    void create_withNewEmail_success() {
+        var req = new CreateUserRequest("John", "john@example.com", "password123");
+        var saved = User.builder().id(1L).name("John")
+            .email("john@example.com").role(UserRole.USER).build();
+
+        when(userRepository.existsByEmail("john@example.com")).thenReturn(false);
+        when(passwordEncoder.encode("password123")).thenReturn("encoded");
+        when(userRepository.save(any(User.class))).thenReturn(saved);
+
+        var result = userService.create(req);
+
+        assertThat(result.id()).isEqualTo(1L);
+        assertThat(result.email()).isEqualTo("john@example.com");
+        verify(userRepository).save(any(User.class));
+    }
+
+    @Test
+    void create_withDuplicateEmail_throwsConflict() {
+        var req = new CreateUserRequest("John", "john@example.com", "password123");
+        when(userRepository.existsByEmail("john@example.com")).thenReturn(true);
+
+        assertThatThrownBy(() -> userService.create(req))
+            .isInstanceOf(ConflictException.class)
+            .hasMessageContaining("Email already exists");
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
+    void findById_notFound_throws() {
+        when(userRepository.findById(999L)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> userService.findById(999L))
+            .isInstanceOf(NotFoundException.class);
+    }
+
+    @Test
+    void findById_found_returnsResponse() {
+        var user = User.builder().id(1L).name("John")
+            .email("john@example.com").role(UserRole.USER).build();
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+
+        var result = userService.findById(1L);
+
+        assertThat(result.name()).isEqualTo("John");
+    }
+}
+
+// ============= Controller Test =============
+@WebMvcTest(controllers = UserController.class)
+@Import(GlobalExceptionHandler.class)
+class UserControllerTest {
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @MockBean
+    UserService userService;
+
+    @Test
+    void create_validRequest_returns201() throws Exception {
+        var req = new CreateUserRequest("John", "john@example.com", "password123");
+        var resp = new UserResponse(1L, "John", "john@example.com", "USER", LocalDateTime.now());
+
+        when(userService.create(any())).thenReturn(resp);
+
+        mockMvc.perform(post("/api/v1/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(req)))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.id").value(1))
+            .andExpect(jsonPath("$.email").value("john@example.com"));
+    }
+
+    @Test
+    void create_invalidEmail_returns400() throws Exception {
+        var req = new CreateUserRequest("John", "invalid", "password123");
+
+        mockMvc.perform(post("/api/v1/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(req)))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.details.email").exists());
+    }
+
+    @Test
+    void get_notFound_returns404() throws Exception {
+        when(userService.findById(999L))
+            .thenThrow(new NotFoundException("User", 999L));
+
+        mockMvc.perform(get("/api/v1/users/999"))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.code").value("NOT_FOUND"));
+    }
+}
+
+// ============= Integration Test =============
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class UserIntegrationTest {
+
+    @Container
+    static PostgreSQLContainer<?> postgres =
+        new PostgreSQLContainer<>("postgres:15-alpine")
+            .withDatabaseName("testdb")
+            .withUsername("test")
+            .withPassword("test");
+
+    @DynamicPropertySource
+    static void config(DynamicPropertyRegistry r) {
+        r.add("spring.datasource.url", postgres::getJdbcUrl);
+        r.add("spring.datasource.username", postgres::getUsername);
+        r.add("spring.datasource.password", postgres::getPassword);
+        r.add("spring.jpa.hibernate.ddl-auto", () -> "create-drop");
+    }
+
+    @Autowired
+    TestRestTemplate restTemplate;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @AfterEach
+    void cleanup() {
+        userRepository.deleteAll();
+    }
+
+    @Test
+    void fullUserFlow() {
+        var req = new CreateUserRequest("John", "john@example.com", "password123");
+
+        var created = restTemplate.postForEntity(
+            "/api/v1/users", req, UserResponse.class);
+
+        assertThat(created.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        var id = created.getBody().id();
+
+        var fetched = restTemplate.getForEntity(
+            "/api/v1/users/" + id, UserResponse.class);
+
+        assertThat(fetched.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(fetched.getBody().email()).isEqualTo("john@example.com");
+
+        assertThat(userRepository.findById(id)).isPresent();
+    }
+}
+
+// ============= Security Test =============
+@WebMvcTest(AdminController.class)
+@Import({SecurityConfig.class, GlobalExceptionHandler.class})
+class AdminControllerSecurityTest {
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockBean
+    JwtService jwtService;
+
+    @MockBean
+    CustomUserDetailsService userDetailsService;
+
+    @Test
+    void adminEndpoint_noAuth_returns401() throws Exception {
+        mockMvc.perform(get("/api/admin/users"))
+            .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void adminEndpoint_userRole_returns403() throws Exception {
+        mockMvc.perform(get("/api/admin/users"))
+            .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void adminEndpoint_adminRole_returns200() throws Exception {
+        mockMvc.perform(get("/api/admin/users"))
+            .andExpect(status().isOk());
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "6",
+        title: "Microservices với Spring Cloud",
+        slug: "microservices-spring-cloud",
+        duration: "90 phút",
+        prerequisites: ["5"],
+        content: `# Microservices với Spring Cloud
+
+## Microservices Architecture
+
+### Ưu điểm
+- **Independent deployment**: Mỗi service deploy riêng
+- **Technology diversity**: Có thể dùng tech stack khác nhau
+- **Scalability**: Scale từng service độc lập
+- **Fault isolation**: Lỗi 1 service không ảnh hưởng toàn hệ thống
+
+### Nhược điểm
+- **Complexity**: Phức tạp hơn monolith
+- **Network latency**: Giao tiếp qua network
+- **Distributed transactions**: Khó đảm bảo consistency
+- **Testing**: Khó test integration
+
+## Service Discovery với Eureka
+
+### Eureka Server
+\`\`\`java
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+\`\`\`
+
+\`\`\`yaml
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+\`\`\`
+
+### Eureka Client
+\`\`\`java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class UserServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(UserServiceApplication.class, args);
+    }
+}
+\`\`\`
+
+\`\`\`yaml
+spring:
+  application:
+    name: user-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+\`\`\`
+
+## API Gateway
+
+### Spring Cloud Gateway
+\`\`\`java
+@SpringBootApplication
+public class GatewayApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(GatewayApplication.class, args);
+    }
+}
+\`\`\`
+
+\`\`\`yaml
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+          filters:
+            - StripPrefix=1
+\`\`\`
+
+### Custom Filter
+\`\`\`java
+@Component
+public class AuthGatewayFilter implements GlobalFilter, Ordered {
+
+    private final JwtService jwtService;
+
+    public AuthGatewayFilter(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        String path = exchange.getRequest().getPath().value();
+
+        if (path.startsWith("/api/auth/")) {
+            return chain.filter(exchange);
+        }
+
+        String authHeader = exchange.getRequest().getHeaders()
+            .getFirst(HttpHeaders.AUTHORIZATION);
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return exchange.getResponse().setComplete();
+        }
+
+        try {
+            String token = authHeader.substring(7);
+            String username = jwtService.extractUsername(token);
+            exchange.getRequest().mutate()
+                .header("X-Auth-User", username)
+                .build();
+        } catch (Exception e) {
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return exchange.getResponse().setComplete();
+        }
+
+        return chain.filter(exchange);
+    }
+
+    @Override
+    public int getOrder() {
+        return -1;
+    }
+}
+\`\`\`
+
+## Inter-Service Communication
+
+### OpenFeign Client
+\`\`\`java
+@FeignClient(name = "user-service", path = "/api/users")
+public interface UserClient {
+
+    @GetMapping("/{id}")
+    UserResponse getUser(@PathVariable Long id);
+
+    @PostMapping
+    UserResponse createUser(@RequestBody CreateUserRequest request);
+}
+\`\`\`
+
+### Feign với fallback
+\`\`\`java
+@FeignClient(
+    name = "user-service",
+    fallbackFactory = UserClientFallback.class
+)
+public interface UserClient {
+    @GetMapping("/{id}")
+    UserResponse getUser(@PathVariable Long id);
+}
+
+@Component
+public class UserClientFallback implements FallbackFactory<UserClient> {
+    @Override
+    public UserClient create(Throwable cause) {
+        return id -> {
+            log.warn("Fallback for getUser({}): {}", id, cause.getMessage());
+            return new UserResponse(id, "Unknown", null, null, null);
+        };
+    }
+}
+\`\`\`
+
+## Circuit Breaker với Resilience4j
+
+\`\`\`xml
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-spring-boot3</artifactId>
+</dependency>
+\`\`\`
+
+\`\`\`java
+@Service
+@RequiredArgsConstructor
+public class OrderService {
+
+    private final UserClient userClient;
+
+    @CircuitBreaker(name = "userService", fallbackMethod = "fallback")
+    @Retry(name = "userService")
+    @TimeLimiter(name = "userService")
+    public CompletableFuture<OrderResponse> createOrder(Long userId, OrderRequest req) {
+        return CompletableFuture.supplyAsync(() -> {
+            UserResponse user = userClient.getUser(userId);
+            // process order
+            return new OrderResponse(user.id(), req);
+        });
+    }
+
+    private CompletableFuture<OrderResponse> fallback(
+        Long userId, OrderRequest req, Throwable t
+    ) {
+        log.error("Circuit breaker fallback", t);
+        return CompletableFuture.failedFuture(
+            new BusinessException("User service unavailable"));
+    }
+}
+\`\`\`
+
+### Configuration
+\`\`\`yaml
+resilience4j:
+  circuitbreaker:
+    instances:
+      userService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+  retry:
+    instances:
+      userService:
+        maxAttempts: 3
+        waitDuration: 1s
+  timelimiter:
+    instances:
+      userService:
+        timeoutDuration: 3s
+\`\`\`
+
+## Distributed Tracing
+
+### Micrometer Tracing + Zipkin
+\`\`\`xml
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-tracing-bridge-brave</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.zipkin.reporter2</groupId>
+    <artifactId>zipkin-reporter-brave</artifactId>
+</dependency>
+\`\`\`
+
+\`\`\`yaml
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+\`\`\`
+
+## Configuration Server
+
+### Config Server
+\`\`\`java
+@SpringBootApplication
+@EnableConfigServer
+public class ConfigServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServerApplication.class, args);
+    }
+}
+\`\`\`
+
+\`\`\`yaml
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/myorg/config-repo
+          default-label: main
+\`\`\`
+
+## Message Queue với Kafka
+
+### Producer
+\`\`\`java
+@Service
+@RequiredArgsConstructor
+public class OrderEventPublisher {
+
+    private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
+
+    public void publishOrderCreated(OrderEvent event) {
+        kafkaTemplate.send("order-events", event.orderId(), event)
+            .whenComplete((result, ex) -> {
+                if (ex != null) {
+                    log.error("Failed to publish event", ex);
+                }
+            });
+    }
+}
+\`\`\`
+
+### Consumer
+\`\`\`java
+@Service
+@Slf4j
+public class OrderEventConsumer {
+
+    @KafkaListener(topics = "order-events", groupId = "notification-service")
+    public void handleOrderCreated(OrderEvent event) {
+        log.info("Received order event: {}", event);
+        // send notification
+    }
+}
+\`\`\`
+
+## Docker Compose cho microservices
+
+\`\`\`yaml
+version: '3.8'
+services:
+  eureka:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+
+  config-server:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka
+
+  user-service:
+    build: ./user-service
+    depends_on:
+      - eureka
+      - postgres
+
+  order-service:
+    build: ./order-service
+    depends_on:
+      - eureka
+      - postgres
+      - kafka
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: microservices
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    ports:
+      - "9411:9411"
+\`\`\`
+
+## Bài tập thực hành
+Hãy xây dựng microservices architecture hoàn chỉnh!`,
+        exercises: [
+          {
+            id: "6-1",
+            title: "E-commerce Microservices",
+            description: "Thiết kế microservices cho e-commerce",
+            instructions: `Thiết kế và implement:
+1. Service discovery với Eureka
+2. API Gateway với auth filter
+3. User service, Product service, Order service
+4. Inter-service communication với Feign
+5. Circuit breaker và fallback
+6. Event-driven với Kafka`,
+            type: "code",
+            starterCode: `// E-commerce microservices architecture
+// Implement các services cần thiết`,
+            solution: `// ============= Eureka Server =============
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {}
+
+// ============= API Gateway =============
+@SpringBootApplication
+public class GatewayApplication {}
+
+@Component
+class AuthFilter implements GlobalFilter, Ordered {
+    private final JwtService jwtService;
+
+    AuthFilter(JwtService jwtService) { this.jwtService = jwtService; }
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange ex, GatewayFilterChain chain) {
+        String path = ex.getRequest().getPath().value();
+        if (path.startsWith("/api/auth/") || path.startsWith("/actuator/")) {
+            return chain.filter(ex);
+        }
+        String auth = ex.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        if (auth == null || !auth.startsWith("Bearer ")) {
+            ex.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return ex.getResponse().setComplete();
+        }
+        try {
+            String user = jwtService.extractUsername(auth.substring(7));
+            return chain.filter(ex.mutate().request(
+                ex.getRequest().mutate().header("X-User", user).build()
+            ).build());
+        } catch (Exception e) {
+            ex.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return ex.getResponse().setComplete();
+        }
+    }
+
+    @Override
+    public int getOrder() { return -1; }
+}
+
+// ============= User Service =============
+@Entity
+class User {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String name;
+    @Column(unique = true) String email;
+    String password;
+    @Enumerated(EnumType.STRING) UserRole role;
+}
+
+@RestController
+@RequestMapping("/api/users")
+class UserController {
+    private final UserService service;
+
+    UserController(UserService service) { this.service = service; }
+
+    @GetMapping("/{id}")
+    UserResponse get(@PathVariable Long id) { return service.findById(id); }
+}
+
+// ============= Product Service =============
+@Entity
+class Product {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String name;
+    BigDecimal price;
+    Integer stock;
+}
+
+@RestController
+@RequestMapping("/api/products")
+class ProductController {
+    @GetMapping("/{id}")
+    ProductResponse get(@PathVariable Long id) { return null; }
+
+    @PutMapping("/{id}/stock")
+    void updateStock(@PathVariable Long id, @RequestBody StockUpdateRequest req) {}
+}
+
+// ============= Order Service =============
+@Entity
+@Table(name = "orders")
+class Order {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    Long userId;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    List<OrderItem> items = new ArrayList<>();
+    BigDecimal total;
+    @Enumerated(EnumType.STRING) OrderStatus status;
+    LocalDateTime createdAt;
+}
+
+@Entity
+class OrderItem {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    Long productId;
+    Integer quantity;
+    BigDecimal price;
+}
+
+@FeignClient(name = "user-service", path = "/api/users")
+interface UserClient {
+    @GetMapping("/{id}")
+    UserResponse getUser(@PathVariable Long id);
+}
+
+@FeignClient(name = "product-service", path = "/api/products")
+interface ProductClient {
+    @GetMapping("/{id}")
+    ProductResponse getProduct(@PathVariable Long id);
+
+    @PutMapping("/{id}/stock")
+    void updateStock(@PathVariable Long id, @RequestBody StockUpdateRequest req);
+}
+
+@Service
+@RequiredArgsConstructor
+class OrderService {
+    private final OrderRepository orderRepo;
+    private final UserClient userClient;
+    private final ProductClient productClient;
+    private final OrderEventPublisher eventPublisher;
+
+    @CircuitBreaker(name = "createOrder", fallbackMethod = "createOrderFallback")
+    @Transactional
+    public OrderResponse createOrder(Long userId, CreateOrderRequest req) {
+        // validate user
+        UserResponse user = userClient.getUser(userId);
+
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setStatus(OrderStatus.PENDING);
+
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (var itemReq : req.items()) {
+            ProductResponse product = productClient.getProduct(itemReq.productId());
+
+            if (product.stock() < itemReq.quantity()) {
+                throw new BusinessException("Insufficient stock: " + product.name());
+            }
+
+            OrderItem item = new OrderItem();
+            item.setProductId(product.id());
+            item.setQuantity(itemReq.quantity());
+            item.setPrice(product.price());
+            order.getItems().add(item);
+
+            total = total.add(product.price().multiply(
+                BigDecimal.valueOf(itemReq.quantity())));
+
+            // reserve stock
+            productClient.updateStock(product.id(),
+                new StockUpdateRequest(-itemReq.quantity()));
+        }
+
+        order.setTotal(total);
+        order.setCreatedAt(LocalDateTime.now());
+        Order saved = orderRepo.save(order);
+
+        eventPublisher.publishOrderCreated(OrderEvent.from(saved));
+
+        return OrderResponse.from(saved);
+    }
+
+    OrderResponse createOrderFallback(Long userId, CreateOrderRequest req, Throwable t) {
+        throw new BusinessException("Order creation failed: " + t.getMessage());
+    }
+}
+
+// ============= Kafka Events =============
+@Service
+@RequiredArgsConstructor
+class OrderEventPublisher {
+    private final KafkaTemplate<String, OrderEvent> kafka;
+
+    public void publishOrderCreated(OrderEvent event) {
+        kafka.send("order-events", event.orderId().toString(), event);
+    }
+}
+
+@Service
+@Slf4j
+class NotificationConsumer {
+
+    @KafkaListener(topics = "order-events", groupId = "notification-service")
+    public void onOrderCreated(OrderEvent event) {
+        log.info("Order created: {}", event);
+        // send email/SMS
+    }
+}
+
+record OrderEvent(Long orderId, Long userId, BigDecimal total, LocalDateTime createdAt) {
+    static OrderEvent from(Order o) {
+        return new OrderEvent(o.getId(), o.getUserId(), o.getTotal(), o.getCreatedAt());
+    }
+}`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "symfony-framework",
+    slug: "symfony",
+    title: "Symfony Framework Toàn tập",
+    description:
+      "Xây dựng ứng dụng web chuyên nghiệp với Symfony, Doctrine và API Platform",
+    image: "/images/symfony-course.jpg",
+    duration: "10 tuần",
+    level: "intermediate",
+    lessons: [
+      {
+        id: "1",
+        title: "Giới thiệu Symfony và Setup",
+        slug: "gioi-thieu-symfony",
+        duration: "50 phút",
+        content: `# Giới thiệu Symfony
+
+## Symfony là gì?
+Symfony là framework PHP mạnh mẽ, linh hoạt, được sử dụng bởi nhiều dự án lớn như Drupal, Laravel (components), Magento.
+
+## Ưu điểm
+- **Reusable components**: Hơn 50 components độc lập
+- **Flex**: Quản lý dependencies linh hoạt
+- **Doctrine ORM**: Tích hợp sẵn
+- **Console commands**: CLI mạnh mẽ
+- **Testing**: PHPUnit tích hợp
+- **Long-term support**: LTS versions
+
+## Cài đặt
+
+### Yêu cầu
+- PHP 8.2+
+- Composer
+- Symfony CLI (khuyến nghị)
+
+### Cài đặt Symfony CLI
+\`\`\`bash
+# macOS
+brew install symfony-cli/tap/symfony-cli
+
+# Linux
+curl -sS https://get.symfony.com/cli/installer | bash
+
+# Windows: tải từ https://symfony.com/download
+\`\`\`
+
+### Tạo project mới
+\`\`\`bash
+symfony new myapp --webapp
+cd myapp
+symfony serve -d
+\`\`\`
+
+## Cấu trúc project
+
+\`\`\`
+myapp/
+├── bin/
+│   └── console
+├── config/
+│   ├── packages/
+│   ├── routes.yaml
+│   └── services.yaml
+├── migrations/
+├── public/
+│   └── index.php
+├── src/
+│   ├── Controller/
+│   ├── Entity/
+│   ├── Repository/
+│   ├── Service/
+│   ├── Form/
+│   ├── Security/
+│   └── Kernel.php
+├── templates/
+├── tests/
+├── translations/
+├── var/
+├── vendor/
+├── .env
+├── composer.json
+└── symfony.lock
+\`\`\`
+
+## Controller đầu tiên
+
+\`\`\`php
+<?php
+
+namespace App\\Controller;
+
+use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;
+use Symfony\\Component\\HttpFoundation\\Response;
+use Symfony\\Component\\Routing\\Attribute\\Route;
+
+class HelloController extends AbstractController
+{
+    #[Route('/hello', name: 'app_hello')]
+    public function index(): Response
+    {
+        return new Response('<h1>Hello, Symfony!</h1>');
+    }
+
+    #[Route('/hello/{name}', name: 'app_hello_name')]
+    public function greet(string $name): Response
+    {
+        return $this->render('hello/greet.html.twig', [
+            'name' => $name,
+        ]);
+    }
+
+    #[Route('/api/hello', name: 'api_hello', methods: ['GET'])]
+    public function apiHello(): JsonResponse
+    {
+        return $this->json([
+            'message' => 'Hello from Symfony API',
+            'timestamp' => time(),
+        ]);
+    }
+}
+\`\`\`
+
+## Twig Template
+
+\`\`\`twig
+{# templates/hello/greet.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ name }}{% endblock %}
+
+{% block body %}
+    <h1>Hello, {{ name }}!</h1>
+    <p>Welcome to Symfony</p>
+{% endblock %}
+\`\`\`
+
+## Console Commands
+
+\`\`\`bash
+# Xem tất cả commands
+php bin/console list
+
+# Debug routes
+php bin/console debug:router
+
+# Clear cache
+php bin/console cache:clear
+
+# Generate entity
+php bin/console make:entity
+
+# Generate controller
+php bin/console make:controller
+
+# Database
+php bin/console doctrine:database:create
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+\`\`\`
+
+## Environment Variables
+
+\`\`\`env
+# .env
+APP_ENV=dev
+APP_SECRET=your-secret-key
+DATABASE_URL="postgresql://user:pass@127.0.0.1:5432/myapp?serverVersion=15&charset=utf8"
+MAILER_DSN=smtp://localhost:1025
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo controller và routes đầu tiên!`,
+        exercises: [
+          {
+            id: "1-1",
+            title: "Controller cơ bản",
+            description: "Tạo controller với nhiều routes",
+            instructions: `Tạo ProductController với:
+- GET /products - list
+- GET /products/{id} - show one
+- GET /api/products - JSON list
+- GET /api/products/{id} - JSON one`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Controller;
+
+use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;
+use Symfony\\Component\\Routing\\Attribute\\Route;
+
+class ProductController extends AbstractController
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+
+namespace App\\Controller;
+
+use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;
+use Symfony\\Component\\HttpFoundation\\JsonResponse;
+use Symfony\\Component\\HttpFoundation\\Response;
+use Symfony\\Component\\Routing\\Attribute\\Route;
+
+#[Route('/products')]
+class ProductController extends AbstractController
+{
+    private array $products = [
+        ['id' => 1, 'name' => 'Laptop', 'price' => 1000],
+        ['id' => 2, 'name' => 'Mouse', 'price' => 20],
+        ['id' => 3, 'name' => 'Keyboard', 'price' => 50],
+    ];
+
+    #[Route('', name: 'product_list', methods: ['GET'])]
+    public function list(): Response
+    {
+        return $this->render('product/list.html.twig', [
+            'products' => $this->products,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'product_show', methods: ['GET'], requirements: ['id' => '\\d+'])]
+    public function show(int $id): Response
+    {
+        $product = null;
+        foreach ($this->products as $p) {
+            if ($p['id'] === $id) {
+                $product = $p;
+                break;
+            }
+        }
+
+        if (!$product) {
+            throw $this->createNotFoundException("Product $id not found");
+        }
+
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
+    #[Route('/api', name: 'api_product_list', methods: ['GET'])]
+    public function apiList(): JsonResponse
+    {
+        return $this->json([
+            'data' => $this->products,
+            'count' => count($this->products),
+        ]);
+    }
+
+    #[Route('/api/{id}', name: 'api_product_show', methods: ['GET'], requirements: ['id' => '\\d+'])]
+    public function apiShow(int $id): JsonResponse
+    {
+        foreach ($this->products as $p) {
+            if ($p['id'] === $id) {
+                return $this->json($p);
+            }
+        }
+
+        return $this->json(['error' => 'Not found'], 404);
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "2",
+        title: "Doctrine ORM và Entities",
+        slug: "doctrine-orm-entities",
+        duration: "75 phút",
+        prerequisites: ["1"],
+        content: `# Doctrine ORM và Entities
+
+## Entity với Attributes
+
+\`\`\`php
+<?php
+
+namespace App\\Entity;
+
+use App\\Repository\\UserRepository;
+use Doctrine\\Common\\Collections\\ArrayCollection;
+use Doctrine\\Common\\Collections\\Collection;
+use Doctrine\\ORM\\Mapping as ORM;
+use Symfony\\Component\\Security\\Core\\User\\UserInterface;
+use Symfony\\Component\\Validator\\Constraints as Assert;
+
+#[ORM\\Entity(repositoryClass: UserRepository::class)]
+#[ORM\\Table(name: 'users')]
+#[ORM\\HasLifecycleCallbacks]
+class User implements UserInterface
+{
+    #[ORM\\Id]
+    #[ORM\\GeneratedValue]
+    #[ORM\\Column]
+    private ?int $id = null;
+
+    #[ORM\\Column(length: 100)]
+    #[Assert\\NotBlank]
+    #[Assert\\Length(min: 2, max: 100)]
+    private string $name;
+
+    #[ORM\\Column(length: 180, unique: true)]
+    #[Assert\\NotBlank]
+    #[Assert\\Email]
+    private string $email;
+
+    #[ORM\\Column]
+    private array $roles = [];
+
+    #[ORM\\Column]
+    private string $password;
+
+    #[ORM\\OneToMany(mappedBy: 'author', targetEntity: Post::class, cascade: ['persist', 'remove'])]
+    private Collection $posts;
+
+    #[ORM\\Column(type: 'datetime_immutable')]
+    private \\DateTimeImmutable $createdAt;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+        $this->createdAt = new \\DateTimeImmutable();
+    }
+
+    #[ORM\\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->createdAt = new \\DateTimeImmutable();
+    }
+
+    // Getters và Setters...
+
+    public function getId(): ?int { return $this->id; }
+    public function getName(): string { return $this->name; }
+    public function setName(string $name): static { $this->name = $name; return $this; }
+    public function getEmail(): string { return $this->email; }
+    public function setEmail(string $email): static { $this->email = $email; return $this; }
+    public function getUserIdentifier(): string { return $this->email; }
+    public function getRoles(): array { return array_unique([...$this->roles, 'ROLE_USER']); }
+    public function getPassword(): string { return $this->password; }
+    public function setPassword(string $p): static { $this->password = $p; return $this; }
+    public function eraseCredentials(): void {}
+}
+\`\`\`
+
+## Relations
+
+### ManyToOne / OneToMany
+\`\`\`php
+#[ORM\\Entity]
+class Post
+{
+    #[ORM\\ManyToOne(inversedBy: 'posts')]
+    #[ORM\\JoinColumn(nullable: false)]
+    private User $author;
+
+    // ...
+}
+\`\`\`
+
+### ManyToMany
+\`\`\`php
+#[ORM\\Entity]
+class Post
+{
+    #[ORM\\ManyToMany(targetEntity: Tag::class, inversedBy: 'posts')]
+    #[ORM\\JoinTable(name: 'post_tags')]
+    private Collection $tags;
+}
+\`\`\`
+
+## Repository
+
+\`\`\`php
+<?php
+
+namespace App\\Repository;
+
+use App\\Entity\\User;
+use Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository;
+use Doctrine\\Persistence\\ManagerRegistry;
+
+class UserRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, User::class);
+    }
+
+    public function findByEmail(string $email): ?User
+    {
+        return $this->findOneBy(['email' => $email]);
+    }
+
+    /** @return User[] */
+    public function findActiveUsers(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.active = :active')
+            ->setParameter('active', true)
+            ->orderBy('u.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function search(string $term): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.name LIKE :term OR u.email LIKE :term')
+            ->setParameter('term', "%$term%")
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+}
+\`\`\`
+
+## Migrations
+
+\`\`\`bash
+# Generate migration
+php bin/console make:migration
+
+# Run migrations
+php bin/console doctrine:migrations:migrate
+
+# Check status
+php bin/console doctrine:migrations:status
+
+# Rollback
+php bin/console doctrine:migrations:migrate prev
+\`\`\`
+
+### Migration file example
+\`\`\`php
+final class Version20240101120000 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return 'Create users table';
+    }
+
+    public function up(Schema $schema): void
+    {
+        $this->addSql('CREATE TABLE users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            email VARCHAR(180) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP NOT NULL
+        )');
+    }
+
+    public function down(Schema $schema): void
+    {
+        $this->addSql('DROP TABLE users');
+    }
+}
+\`\`\`
+
+## Fixtures (Test data)
+
+\`\`\`php
+<?php
+
+namespace App\\DataFixtures;
+
+use App\\Entity\\User;
+use Doctrine\\Bundle\\FixturesBundle\\Fixtures;
+use Doctrine\\Persistence\\ObjectManager;
+use Symfony\\Component\\PasswordHasher\\Hasher\\UserPasswordHasherInterface;
+
+class AppFixtures extends Fixtures
+{
+    public function __construct(
+        private UserPasswordHasherInterface $hasher
+    ) {}
+
+    public function load(ObjectManager $manager): void
+    {
+        for ($i = 1; $i <= 10; $i++) {
+            $user = new User();
+            $user->setName("User $i");
+            $user->setEmail("user$i@example.com");
+            $user->setPassword($this->hasher->hashPassword($user, 'password'));
+            $manager->persist($user);
+        }
+
+        $manager->flush();
+    }
+}
+\`\`\`
+
+\`\`\`bash
+php bin/console doctrine:fixtures:load
+\`\`\`
+
+## Service sử dụng Repository
+
+\`\`\`php
+<?php
+
+namespace App\\Service;
+
+use App\\Entity\\User;
+use App\\Repository\\UserRepository;
+use Doctrine\\ORM\\EntityManagerInterface;
+use Symfony\\Component\\PasswordHasher\\Hasher\\UserPasswordHasherInterface;
+
+class UserService
+{
+    public function __construct(
+        private UserRepository $repository,
+        private EntityManagerInterface $em,
+        private UserPasswordHasherInterface $hasher
+    ) {}
+
+    public function create(string $name, string $email, string $password): User
+    {
+        if ($this->repository->findByEmail($email)) {
+            throw new \\DomainException('Email already exists');
+        }
+
+        $user = new User();
+        $user->setName($name);
+        $user->setEmail($email);
+        $user->setPassword($this->hasher->hashPassword($user, $password));
+
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return $user;
+    }
+
+    public function update(int $id, array $data): User
+    {
+        $user = $this->repository->find($id)
+            ?? throw new \\DomainException('User not found');
+
+        if (isset($data['name'])) $user->setName($data['name']);
+        if (isset($data['email'])) $user->setEmail($data['email']);
+
+        $this->em->flush();
+
+        return $user;
+    }
+
+    public function delete(int $id): void
+    {
+        $user = $this->repository->find($id)
+            ?? throw new \\DomainException('User not found');
+
+        $this->em->remove($user);
+        $this->em->flush();
+    }
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo entity Product với CRUD operations!`,
+        exercises: [
+          {
+            id: "2-1",
+            title: "Product Entity với CRUD",
+            description: "Tạo entity và service cho Product",
+            instructions: `Tạo:
+1. Product entity với id, name, price, stock, createdAt
+2. ProductRepository với custom queries
+3. ProductService với CRUD
+4. Migration và fixtures`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Entity;
+
+use Doctrine\\ORM\\Mapping as ORM;
+
+#[ORM\\Entity]
+class Product
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+// ============= Entity =============
+namespace App\\Entity;
+
+use App\\Repository\\ProductRepository;
+use Doctrine\\ORM\\Mapping as ORM;
+use Symfony\\Component\\Validator\\Constraints as Assert;
+
+#[ORM\\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\\HasLifecycleCallbacks]
+class Product
+{
+    #[ORM\\Id]
+    #[ORM\\GeneratedValue]
+    #[ORM\\Column]
+    private ?int $id = null;
+
+    #[ORM\\Column(length: 200)]
+    #[Assert\\NotBlank]
+    #[Assert\\Length(max: 200)]
+    private string $name;
+
+    #[ORM\\Column(type: 'decimal', precision: 12, scale: 2)]
+    #[Assert\\Positive]
+    private string $price;
+
+    #[ORM\\Column]
+    #[Assert\\PositiveOrZero]
+    private int $stock = 0;
+
+    #[ORM\\Column(type: 'datetime_immutable')]
+    private \\DateTimeImmutable $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \\DateTimeImmutable();
+    }
+
+    #[ORM\\PreUpdate]
+    public function onPreUpdate(): void {}
+
+    public function getId(): ?int { return $this->id; }
+    public function getName(): string { return $this->name; }
+    public function setName(string $n): static { $this->name = $n; return $this; }
+    public function getPrice(): string { return $this->price; }
+    public function setPrice(string $p): static { $this->price = $p; return $this; }
+    public function getStock(): int { return $this->stock; }
+    public function setStock(int $s): static { $this->stock = $s; return $this; }
+    public function getCreatedAt(): \\DateTimeImmutable { return $this->createdAt; }
+}
+
+// ============= Repository =============
+namespace App\\Repository;
+
+use App\\Entity\\Product;
+use Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository;
+use Doctrine\\Persistence\\ManagerRegistry;
+
+class ProductRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Product::class);
+    }
+
+    public function findInStock(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.stock > 0')
+            ->orderBy('p.name')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function search(string $term): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.name LIKE :term')
+            ->setParameter('term', "%$term%")
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findExpensive(float $minPrice): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.price >= :min')
+            ->setParameter('min', $minPrice)
+            ->getQuery()
+            ->getResult();
+    }
+}
+
+// ============= Service =============
+namespace App\\Service;
+
+use App\\Entity\\Product;
+use App\\Repository\\ProductRepository;
+use Doctrine\\ORM\\EntityManagerInterface;
+
+class ProductService
+{
+    public function __construct(
+        private ProductRepository $repository,
+        private EntityManagerInterface $em
+    ) {}
+
+    public function create(string $name, string $price, int $stock): Product
+    {
+        $product = new Product();
+        $product->setName($name)
+            ->setPrice($price)
+            ->setStock($stock);
+
+        $this->em->persist($product);
+        $this->em->flush();
+
+        return $product;
+    }
+
+    public function find(int $id): Product
+    {
+        return $this->repository->find($id)
+            ?? throw new \\DomainException("Product $id not found");
+    }
+
+    public function all(): array
+    {
+        return $this->repository->findAll();
+    }
+
+    public function update(int $id, array $data): Product
+    {
+        $product = $this->find($id);
+
+        if (isset($data['name'])) $product->setName($data['name']);
+        if (isset($data['price'])) $product->setPrice($data['price']);
+        if (isset($data['stock'])) $product->setStock($data['stock']);
+
+        $this->em->flush();
+        return $product;
+    }
+
+    public function delete(int $id): void
+    {
+        $this->em->remove($this->find($id));
+        $this->em->flush();
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "3",
+        title: "Forms, Validation và Security",
+        slug: "forms-validation-security",
+        duration: "80 phút",
+        prerequisites: ["2"],
+        content: `# Forms, Validation và Security trong Symfony
+
+## Form Types
+
+\`\`\`php
+<?php
+
+namespace App\\Form;
+
+use App\\Entity\\User;
+use Symfony\\Component\\Form\\AbstractType;
+use Symfony\\Component\\Form\\FormBuilderInterface;
+use Symfony\\Component\\OptionsResolver\\OptionsResolver;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\PasswordType;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType;
+use Symfony\\Component\\Validator\\Constraints\\Length;
+
+class UserType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name', TextType::class, [
+                'label' => 'Full Name',
+                'attr' => ['placeholder' => 'Enter your name'],
+                'constraints' => [
+                    new Length(['min' => 2, 'max' => 100]),
+                ],
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email Address',
+            ])
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options' => ['label' => 'Password'],
+                'second_options' => ['label' => 'Confirm Password'],
+                'invalid_message' => 'The passwords must match.',
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
+    }
+}
+\`\`\`
+
+## Form trong Controller
+
+\`\`\`php
+#[Route('/register', name: 'app_register')]
+public function register(
+    Request $request,
+    UserService $userService
+): Response {
+    $user = new User();
+    $form = $this->createForm(UserType::class, $user);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $userService->create($user);
+
+        $this->addFlash('success', 'Registration successful!');
+        return $this->redirectToRoute('app_login');
+    }
+
+    return $this->render('user/register.html.twig', [
+        'form' => $form,
+    ]);
+}
+\`\`\`
+
+## Template cho Form
+
+\`\`\`twig
+{# templates/user/register.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Register</h1>
+
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.password) }}
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+\`\`\`
+
+## Custom Validator
+
+\`\`\`php
+<?php
+
+namespace App\\Validator;
+
+use Symfony\\Component\\Validator\\Constraint;
+
+#[\Attribute]
+class UniqueEmail extends Constraint
+{
+    public string $message = 'This email is already registered: {{ email }}';
+
+    public function validatedBy(): string
+    {
+        return UniqueEmailValidator::class;
+    }
+
+    public function getTargets(): string
+    {
+        return self::CLASS_CONSTRAINT;
+    }
+}
+\`\`\`
+
+\`\`\`php
+<?php
+
+namespace App\\Validator;
+
+use App\\Repository\\UserRepository;
+use Symfony\\Component\\Validator\\Constraint;
+use Symfony\\Component\\Validator\\ConstraintValidator;
+
+class UniqueEmailValidator extends ConstraintValidator
+{
+    public function __construct(
+        private UserRepository $repository
+    ) {}
+
+    public function validate(mixed $value, Constraint $constraint): void
+    {
+        if (!$value instanceof User) return;
+
+        if ($this->repository->findByEmail($value->getEmail())) {
+            $this->context->buildViolation($constraint->message)
+                ->setParameter('{{ email }}', $value->getEmail())
+                ->atPath('email')
+                ->addViolation();
+        }
+    }
+}
+\`\`\`
+
+## Security Configuration
+
+### config/packages/security.yaml
+\`\`\`yaml
+security:
+    password_hashers:
+        App\\Entity\\User:
+            algorithm: bcrypt
+            cost: 12
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\\Entity\\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        api:
+            pattern: ^/api
+            stateless: true
+            jwt: ~
+
+        main:
+            lazy: true
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+                default_target_path: app_dashboard
+            logout:
+                path: app_logout
+                target: app_home
+
+    access_control:
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/api, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: ROLE_USER }
+\`\`\`
+
+## Custom Security Voter
+
+\`\`\`php
+<?php
+
+namespace App\\Security\\Voter;
+
+use App\\Entity\\Post;
+use App\\Entity\\User;
+use Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter;
+use Symfony\\Component\\Security\\Core\\Security;
+
+class PostVoter extends Voter
+{
+    public const VIEW = 'POST_VIEW';
+    public const EDIT = 'POST_EDIT';
+    public const DELETE = 'POST_DELETE';
+
+    protected function supports(string $attribute, mixed $subject): bool
+    {
+        return in_array($attribute, [self::VIEW, self::EDIT, self::DELETE])
+            && $subject instanceof Post;
+    }
+
+    protected function voteOnAttribute(
+        string $attribute,
+        mixed $subject,
+        TokenInterface $token
+    ): bool {
+        $user = $token->getUser();
+
+        if (!$user instanceof User) return false;
+
+        /** @var Post $post */
+        $post = $subject;
+
+        return match ($attribute) {
+            self::VIEW => true,
+            self::EDIT, self::DELETE => $this->isOwner($user, $post),
+            default => false,
+        };
+    }
+
+    private function isOwner(User $user, Post $post): bool
+    {
+        return $user === $post->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles());
+    }
+}
+\`\`\`
+
+## Login Controller
+
+\`\`\`php
+#[Route('/login', name: 'app_login')]
+class SecurityController extends AbstractController
+{
+    #[Route('', name: 'login', methods: ['GET', 'POST'])]
+    public function login(AuthenticationUtils $authUtils): Response
+    {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        $error = $authUtils->getLastAuthenticationError();
+        $lastUsername = $authUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
+    }
+
+    #[Route('/logout', name: 'logout', methods: ['GET'])]
+    public function logout(): void
+    {
+        throw new \\LogicException('This method can be blank');
+    }
+}
+\`\`\`
+
+## Template Login
+
+\`\`\`twig
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div>You are logged in as {{ app.user.userIdentifier }}</div>
+        {% endif %}
+
+        <h1>Please sign in</h1>
+        <label for="username">Email</label>
+        <input type="email" value="{{ last_username }}" name="_username" id="username" required autofocus>
+
+        <label for="password">Password</label>
+        <input type="password" name="_password" id="password" required>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <button type="submit">Sign in</button>
+    </form>
+{% endblock %}
+\`\`\`
+
+## Bài tập thực hành
+Hãy implement registration và login hoàn chỉnh!`,
+        exercises: [
+          {
+            id: "3-1",
+            title: "User Registration & Login",
+            description: "Implement authentication system",
+            instructions: `Tạo:
+1. Registration form với validation
+2. Login form
+3. Security configuration
+4. Custom voter cho Post authorization`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Form;
+
+use Symfony\\Component\\Form\\AbstractType;
+
+class RegistrationFormType extends AbstractType
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+// ============= RegistrationFormType =============
+namespace App\\Form;
+
+use App\\Entity\\User;
+use Symfony\\Component\\Form\\AbstractType;
+use Symfony\\Component\\Form\\FormBuilderInterface;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\PasswordType;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType;
+use Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType;
+use Symfony\\Component\\OptionsResolver\\OptionsResolver;
+use Symfony\\Component\\Validator\\Constraints\\Length;
+use Symfony\\Component\\Validator\\Constraints\\NotBlank;
+use Symfony\\Component\\Validator\\Constraints\\Regex;
+
+class RegistrationFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name', TextType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Please enter your name']),
+                    new Length(['min' => 2, 'max' => 100]),
+                ],
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                ],
+            ])
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'mapped' => false,
+                'first_options' => ['label' => 'Password'],
+                'second_options' => ['label' => 'Confirm Password'],
+                'invalid_message' => 'Passwords must match',
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 8]),
+                    new Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$/',
+                        'message' => 'Password must contain uppercase, lowercase, and digit',
+                    ]),
+                ],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue(['message' => 'You must agree to terms']),
+                ],
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults(['data_class' => User::class]);
+    }
+}
+
+// ============= RegisterController =============
+namespace App\\Controller;
+
+use App\\Entity\\User;
+use App\\Form\\RegistrationFormType;
+use App\\Service\\UserService;
+use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;
+use Symfony\\Component\\HttpFoundation\\Request;
+use Symfony\\Component\\HttpFoundation\\Response;
+use Symfony\\Component\\Routing\\Attribute\\Route;
+
+class RegisterController extends AbstractController
+{
+    #[Route('/register', name: 'app_register', methods: ['GET', 'POST'])]
+    public function register(Request $request, UserService $userService): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userService->createFromRegistration(
+                $user,
+                $form->get('plainPassword')->getData()
+            );
+
+            $this->addFlash('success', 'Registration successful!');
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('security/register.html.twig', [
+            'form' => $form,
+        ]);
+    }
+}
+
+// ============= UserService createFromRegistration =============
+namespace App\\Service;
+
+use App\\Entity\\User;
+
+class UserService
+{
+    // ... existing code
+
+    public function createFromRegistration(User $user, string $plainPassword): User
+    {
+        if ($this->repository->findByEmail($user->getEmail())) {
+            throw new \\DomainException('Email already exists');
+        }
+
+        $user->setPassword($this->hasher->hashPassword($user, $plainPassword));
+
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return $user;
+    }
+}
+
+// ============= Security.yaml =============
+# security:
+#   password_hashers:
+#     App\\Entity\\User: { algorithm: bcrypt, cost: 12 }
+#   providers:
+#     app_user_provider:
+#       entity: { class: App\\Entity\\User, property: email }
+#   firewalls:
+#     main:
+#       lazy: true
+#       provider: app_user_provider
+#       form_login:
+#         login_path: app_login
+#         check_path: app_login
+#         enable_csrf: true
+#       logout:
+#         path: app_logout
+#         target: app_home
+#   access_control:
+#     - { path: ^/register, roles: PUBLIC_ACCESS }
+#     - { path: ^/login, roles: PUBLIC_ACCESS }
+#     - { path: ^/, roles: ROLE_USER }
+
+// ============= PostVoter =============
+namespace App\\Security\\Voter;
+
+use App\\Entity\\Post;
+use App\\Entity\\User;
+use Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter;
+use Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface;
+
+class PostVoter extends Voter
+{
+    protected function supports(string $attribute, mixed $subject): bool
+    {
+        return in_array($attribute, ['EDIT', 'DELETE'])
+            && $subject instanceof Post;
+    }
+
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    {
+        $user = $token->getUser();
+        if (!$user instanceof User) return false;
+
+        /** @var Post $post */
+        $post = $subject;
+
+        return $user === $post->getAuthor()
+            || in_array('ROLE_ADMIN', $user->getRoles());
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "4",
+        title: "API Platform",
+        slug: "api-platform",
+        duration: "70 phút",
+        prerequisites: ["3"],
+        content: `# API Platform
+
+## Giới thiệu
+API Platform giúp tạo REST API nhanh chóng với ít code.
+
+## Cài đặt
+\`\`\`bash
+composer require api
+\`\`\`
+
+## Entity với API Resource
+
+\`\`\`php
+<?php
+
+namespace App\\Entity;
+
+use ApiPlatform\\Metadata\\ApiResource;
+use ApiPlatform\\Metadata\\Delete;
+use ApiPlatform\\Metadata\\Get;
+use ApiPlatform\\Metadata\\GetCollection;
+use ApiPlatform\\Metadata\\Post;
+use ApiPlatform\\Metadata\\Put;
+use Doctrine\\ORM\\Mapping as ORM;
+use Symfony\\Component\\Serializer\\Annotation\\Groups;
+use Symfony\\Component\\Validator\\Constraints as Assert;
+
+#[ORM\\Entity]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(security: "is_granted('ROLE_USER')"),
+        new Put(security: "is_granted('ROLE_USER') and object.getAuthor() == user"),
+        new Delete(security: "is_granted('ROLE_ADMIN')"),
+    ],
+    normalizationContext: ['groups' => ['product:read']],
+    denormalizationContext: ['groups' => ['product:write']],
+    paginationItemsPerPage: 20,
+)]
+class Product
+{
+    #[ORM\\Id]
+    #[ORM\\GeneratedValue]
+    #[ORM\\Column]
+    #[Groups(['product:read'])]
+    private ?int $id = null;
+
+    #[ORM\\Column(length: 200)]
+    #[Assert\\NotBlank]
+    #[Groups(['product:read', 'product:write'])]
+    private string $name;
+
+    #[ORM\\Column(type: 'text', nullable: true)]
+    #[Groups(['product:read', 'product:write'])]
+    private ?string $description = null;
+
+    #[ORM\\Column(type: 'decimal', precision: 12, scale: 2)]
+    #[Assert\\Positive]
+    #[Groups(['product:read', 'product:write'])]
+    private string $price;
+
+    #[ORM\\Column]
+    #[Assert\\PositiveOrZero]
+    #[Groups(['product:read', 'product:write'])]
+    private int $stock = 0;
+
+    #[ORM\\Column(type: 'datetime_immutable')]
+    #[Groups(['product:read'])]
+    private \\DateTimeImmutable $createdAt;
+
+    #[ORM\\ManyToOne(inversedBy: 'products')]
+    #[Groups(['product:read', 'product:write'])]
+    private ?Category $category = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \\DateTimeImmutable();
+    }
+
+    // Getters/Setters...
+}
+\`\`\`
+
+## Auto-generated endpoints
+
+Khi bạn tạo ApiResource, các endpoints sau sẽ tự động có:
+- \`GET /api/products\` - list with pagination
+- \`GET /api/products/{id}\` - get one
+- \`POST /api/products\` - create
+- \`PUT /api/products/{id}\` - update
+- \`PATCH /api/products/{id}\` - partial update
+- \`DELETE /api/products/{id}\` - delete
+
+## Filtering và Sorting
+
+\`\`\`php
+use ApiPlatform\\Doctrine\\Orm\\Filter\\SearchFilter;
+use ApiPlatform\\Doctrine\\Orm\\Filter\\OrderFilter;
+use ApiPlatform\\Metadata\\ApiFilter;
+
+#[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: [
+    'name' => 'partial',
+    'category.id' => 'exact',
+    'price' => 'exact',
+])]
+#[ApiFilter(OrderFilter::class, properties: ['createdAt', 'price'])]
+class Product
+{
+    // ...
+}
+\`\`\`
+
+### Query examples
+\`\`\`
+GET /api/products?name=laptop
+GET /api/products?category.id=5
+GET /api/products?order[price]=desc
+GET /api/products?page=2
+\`\`\`
+
+## Custom Operations
+
+\`\`\`php
+#[ApiResource]
+class Product
+{
+    #[Get(
+        uriTemplate: '/products/{id}/related',
+        controller: RelatedProductsController::class
+    )]
+    public function related(): array
+    {
+        return [];
+    }
+}
+\`\`\`
+
+## Serialization Groups
+
+\`\`\`php
+#[ApiResource(
+    normalizationContext: ['groups' => ['product:read']],
+    denormalizationContext: ['groups' => ['product:write']],
+)]
+class Product
+{
+    #[Groups(['product:read'])]
+    private ?int $id = null;
+
+    #[Groups(['product:read', 'product:write'])]
+    private string $name;
+}
+\`\`\`
+
+## DTOs
+
+\`\`\`php
+use ApiPlatform\\Metadata\\ApiResource;
+
+#[ApiResource(
+    stateOptions: new Options(
+        itemUriTemplate: '/products/{id}',
+        collectionUriTemplate: '/products',
+    )
+)]
+class ProductInput
+{
+    public string $name;
+    public string $price;
+}
+\`\`\`
+
+## Security
+
+\`\`\`php
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(
+            security: "is_granted('ROLE_USER')",
+            securityMessage: "Only authenticated users can create products"
+        ),
+        new Put(
+            security: "is_granted('EDIT', object)",
+            securityMessage: "You can only edit your own products"
+        ),
+        new Delete(
+            security: "is_granted('ROLE_ADMIN')",
+            securityMessage: "Only admins can delete products"
+        ),
+    ],
+)]
+class Product {}
+\`\`\`
+
+## JWT Integration
+
+\`\`\`bash
+composer require lexik/jwt-authentication-bundle
+\`\`\`
+
+### Generate keys
+\`\`\`bash
+php bin/console lexik:jwt:generate-keypair
+\`\`\`
+
+### Config
+\`\`\`yaml
+# config/packages/lexik_jwt_authentication.yaml
+lexik_jwt_authentication:
+    secret_key: '%env(resolve:JWT_SECRET_KEY)%'
+    public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
+    pass_phrase: '%env(JWT_PASSPHRASE)%'
+    token_ttl: 3600
+\`\`\`
+
+### security.yaml
+\`\`\`yaml
+security:
+    firewalls:
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/api
+            stateless: true
+            jwt: ~
+\`\`\`
+
+### routes
+\`\`\`yaml
+api_login_check:
+    path: /api/login_check
+\`\`\`
+
+## Testing
+
+\`\`\`bash
+# Test API with curl
+curl -X GET http://localhost:8000/api/products
+
+curl -X POST http://localhost:8000/api/products \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \\
+  -d '{"name":"New Product","price":"99.99","stock":10}'
+\`\`\`
+
+## OpenAPI Docs
+Mặc định API Platform tạo Swagger UI tại \`/api/docs\`.
+
+## Bài tập thực hành
+Hãy expose entity Product qua API Platform!`,
+        exercises: [
+          {
+            id: "4-1",
+            title: "Product REST API với API Platform",
+            description: "Expose Product qua REST API",
+            instructions: `Tạo:
+1. ApiResource cho Product entity
+2. Filters cho search và sort
+3. Custom operations
+4. Serialization groups
+5. JWT protection`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Entity;
+
+use ApiPlatform\\Metadata\\ApiResource;
+use Doctrine\\ORM\\Mapping as ORM;
+
+#[ORM\\Entity]
+#[ApiResource]
+class Product
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+
+namespace App\\Entity;
+
+use ApiPlatform\\Doctrine\\Orm\\Filter\\OrderFilter;
+use ApiPlatform\\Doctrine\\Orm\\Filter\\SearchFilter;
+use ApiPlatform\\Metadata\\ApiFilter;
+use ApiPlatform\\Metadata\\ApiResource;
+use ApiPlatform\\Metadata\\Delete;
+use ApiPlatform\\Metadata\\Get;
+use ApiPlatform\\Metadata\\GetCollection;
+use ApiPlatform\\Metadata\\Post;
+use ApiPlatform\\Metadata\\Put;
+use Doctrine\\ORM\\Mapping as ORM;
+use Symfony\\Component\\Serializer\\Annotation\\Groups;
+use Symfony\\Component\\Validator\\Constraints as Assert;
+
+#[ORM\\Entity]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(security: "is_granted('ROLE_USER')"),
+        new Put(security: "is_granted('ROLE_USER')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')"),
+    ],
+    normalizationContext: ['groups' => ['product:read']],
+    denormalizationContext: ['groups' => ['product:write']],
+    paginationItemsPerPage: 20,
+    paginationMaximumItemsPerPage: 100,
+)]
+#[ApiFilter(SearchFilter::class, properties: [
+    'name' => 'partial',
+    'category.id' => 'exact',
+])]
+#[ApiFilter(OrderFilter::class, properties: ['createdAt', 'price', 'name'])]
+class Product
+{
+    #[ORM\\Id]
+    #[ORM\\GeneratedValue]
+    #[ORM\\Column]
+    #[Groups(['product:read'])]
+    private ?int $id = null;
+
+    #[ORM\\Column(length: 200)]
+    #[Assert\\NotBlank]
+    #[Assert\\Length(max: 200)]
+    #[Groups(['product:read', 'product:write'])]
+    private string $name;
+
+    #[ORM\\Column(type: 'text', nullable: true)]
+    #[Groups(['product:read', 'product:write'])]
+    private ?string $description = null;
+
+    #[ORM\\Column(type: 'decimal', precision: 12, scale: 2)]
+    #[Assert\\Positive]
+    #[Groups(['product:read', 'product:write'])]
+    private string $price;
+
+    #[ORM\\Column]
+    #[Assert\\PositiveOrZero]
+    #[Groups(['product:read', 'product:write'])]
+    private int $stock = 0;
+
+    #[ORM\\Column(type: 'datetime_immutable')]
+    #[Groups(['product:read'])]
+    private \\DateTimeImmutable $createdAt;
+
+    #[ORM\\ManyToOne(inversedBy: 'products')]
+    #[Groups(['product:read', 'product:write'])]
+    private ?Category $category = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \\DateTimeImmutable();
+    }
+
+    public function getId(): ?int { return $this->id; }
+    public function getName(): string { return $this->name; }
+    public function setName(string $n): static { $this->name = $n; return $this; }
+    public function getDescription(): ?string { return $this->description; }
+    public function setDescription(?string $d): static { $this->description = $d; return $this; }
+    public function getPrice(): string { return $this->price; }
+    public function setPrice(string $p): static { $this->price = $p; return $this; }
+    public function getStock(): int { return $this->stock; }
+    public function setStock(int $s): static { $this->stock = $s; return $this; }
+    public function getCreatedAt(): \\DateTimeImmutable { return $this->createdAt; }
+    public function getCategory(): ?Category { return $this->category; }
+    public function setCategory(?Category $c): static { $this->category = $c; return $this; }
+}
+
+// ============= Custom Operation Controller =============
+namespace App\\Controller\\Api;
+
+use App\\Entity\\Product;
+use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;
+use Symfony\\Component\\HttpFoundation\\Response;
+
+class ProductRelatedController extends AbstractController
+{
+    public function __invoke(Product $data): Response
+    {
+        // $data is the Product automatically resolved by API Platform
+        $related = [
+            ['id' => 1, 'name' => 'Related Product 1'],
+            ['id' => 2, 'name' => 'Related Product 2'],
+        ];
+
+        return $this->json($related);
+    }
+}
+
+// ============= config/api_platform.yaml =============
+# api_platform:
+#   mapping:
+#     paths: ['%kernel.project_dir%/src/Entity']
+#   patch_formats:
+#     json: ['application/merge-patch+json']
+#   swagger:
+#     versions: [3]
+
+// ============= Usage examples =============
+// GET /api/products
+// GET /api/products?page=2&itemsPerPage=10
+// GET /api/products?name=laptop
+// GET /api/products?order[price]=desc
+// POST /api/products (with JWT)
+// PUT /api/products/1 (with JWT)
+// DELETE /api/products/1 (with ROLE_ADMIN)
+// GET /api/products/1/related (custom operation)`,
+          },
+        ],
+      },
+      {
+        id: "5",
+        title: "Testing trong Symfony",
+        slug: "testing-symfony",
+        duration: "60 phút",
+        prerequisites: ["4"],
+        content: `# Testing trong Symfony
+
+## Setup
+
+\`\`\`bash
+composer require --dev symfony/test-pack
+\`\`\`
+
+## Unit Tests
+
+\`\`\`php
+<?php
+
+namespace App\\Tests\\Service;
+
+use App\\Entity\\User;
+use App\\Repository\\UserRepository;
+use App\\Service\\UserService;
+use Doctrine\\ORM\\EntityManagerInterface;
+use PHPUnit\\Framework\\TestCase;
+use Symfony\\Component\\PasswordHasher\\Hasher\\UserPasswordHasherInterface;
+
+class UserServiceTest extends TestCase
+{
+    private UserService $service;
+    private UserRepository $repository;
+    private EntityManagerInterface $em;
+    private UserPasswordHasherInterface $hasher;
+
+    protected function setUp(): void
+    {
+        $this->repository = $this->createMock(UserRepository::class);
+        $this->em = $this->createMock(EntityManagerInterface::class);
+        $this->hasher = $this->createMock(UserPasswordHasherInterface::class);
+
+        $this->service = new UserService(
+            $this->repository,
+            $this->em,
+            $this->hasher
+        );
+    }
+
+    public function testCreateSuccess(): void
+    {
+        $this->repository
+            ->method('findByEmail')
+            ->willReturn(null);
+
+        $this->hasher
+            ->method('hashPassword')
+            ->willReturn('hashed');
+
+        $this->em
+            ->expects($this->once())
+            ->method('persist');
+        $this->em
+            ->expects($this->once())
+            ->method('flush');
+
+        $user = $this->service->create('John', 'john@example.com', 'pass');
+
+        $this->assertSame('John', $user->getName());
+        $this->assertSame('john@example.com', $user->getEmail());
+    }
+
+    public function testCreateDuplicateThrows(): void
+    {
+        $existing = new User();
+        $this->repository
+            ->method('findByEmail')
+            ->willReturn($existing);
+
+        $this->expectException(\\DomainException::class);
+
+        $this->service->create('John', 'john@example.com', 'pass');
+    }
+}
+\`\`\`
+
+## Functional Tests
+
+\`\`\`php
+<?php
+
+namespace App\\Tests\\Controller;
+
+use App\\Entity\\User;
+use Doctrine\\ORM\\EntityManagerInterface;
+use Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase;
+use Symfony\\Component\\BrowserKit\\AbstractBrowser;
+
+class UserControllerTest extends WebTestCase
+{
+    private ?AbstractBrowser $client = null;
+
+    protected function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
+    public function testIndexRequiresAuth(): void
+    {
+        $this->client->request('GET', '/users');
+
+        $this->assertResponseRedirects('/login');
+    }
+
+    public function testIndexWithAuth(): void
+    {
+        $user = $this->createUser('john@example.com');
+        $this->client->loginUser($user);
+
+        $this->client->request('GET', '/users');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Users');
+    }
+
+    public function testCreateUser(): void
+    {
+        $this->client->request('GET', '/register');
+        $this->assertResponseIsSuccessful();
+
+        $this->client->submitForm('Register', [
+            'registration_form[name]' => 'John Doe',
+            'registration_form[email]' => 'john@example.com',
+            'registration_form[plainPassword][first]' => 'Password123',
+            'registration_form[plainPassword][second]' => 'Password123',
+            'registration_form[agreeTerms]' => true,
+        ]);
+
+        $this->assertResponseRedirects('/login');
+        $this->client->followRedirect();
+
+        $em = static::getContainer()->get(EntityManagerInterface::class);
+        $user = $em->getRepository(User::class)
+            ->findOneBy(['email' => 'john@example.com']);
+        $this->assertNotNull($user);
+    }
+
+    private function createUser(string $email): User
+    {
+        $em = static::getContainer()->get(EntityManagerInterface::class);
+        $user = new User();
+        $user->setName('Test');
+        $user->setEmail($email);
+        $user->setPassword('hashed');
+        $em->persist($user);
+        $em->flush();
+        return $user;
+    }
+}
+\`\`\`
+
+## API Tests
+
+\`\`\`php
+public function testCreateProductAPI(): void
+{
+    $this->client->jsonRequest('POST', '/api/products', [
+        'name' => 'Laptop',
+        'price' => '1000.00',
+        'stock' => 10,
+    ]);
+
+    $this->assertResponseStatusCodeSame(201);
+    $this->assertJsonContains(['name' => 'Laptop']);
+
+    $data = json_decode($this->client->getResponse()->getContent(), true);
+    $this->assertArrayHasKey('id', $data);
+}
+\`\`\`
+
+## Fixtures trong tests
+
+\`\`\`php
+use App\\DataFixtures\\UserFixtures;
+use Liip\\TestFixturesBundle\\Test\\FixturesTrait;
+
+class UserFunctionalTest extends WebTestCase
+{
+    use FixturesTrait;
+
+    public function testWithFixtures(): void
+    {
+        $this->loadFixtures([UserFixtures::class]);
+        // ...
+    }
+}
+\`\`\`
+
+## Test cho Form Validation
+
+\`\`\`php
+public function testRegisterWithInvalidEmail(): void
+{
+    $this->client->request('GET', '/register');
+
+    $this->client->submitForm('Register', [
+        'registration_form[name]' => 'J',
+        'registration_form[email]' => 'invalid-email',
+        'registration_form[plainPassword][first]' => '123',
+        'registration_form[plainPassword][second]' => '456',
+    ]);
+
+    $this->assertSelectorExists('.form-error-message');
+    $this->assertSelectorTextContains('body', 'Passwords must match');
+}
+\`\`\`
+
+## Test Database
+
+### .env.test
+\`\`\`env
+DATABASE_URL="sqlite:///%kernel.project_dir%/var/test.db"
+\`\`\`
+
+### Config
+\`\`\`yaml
+# config/packages/test/doctrine.yaml
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+\`\`\`
+
+## Chạy tests
+
+\`\`\`bash
+# Chạy tất cả
+php bin/phpunit
+
+# Chạy 1 file
+php bin/phpunit tests/Service/UserServiceTest.php
+
+# Filter
+php bin/phpunit --filter testCreateSuccess
+
+# Coverage
+php bin/phpunit --coverage-html var/coverage
+\`\`\`
+
+## Bài tập thực hành
+Hãy viết tests cho API Product!`,
+        exercises: [
+          {
+            id: "5-1",
+            title: "Test Suite cho Product API",
+            description: "Viết unit và functional tests",
+            instructions: `Viết:
+1. Unit test cho ProductService
+2. Functional test cho ProductController
+3. API test cho create/update/delete
+4. Test authentication required`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Tests;
+
+use PHPUnit\\Framework\\TestCase;
+
+class ProductTest extends TestCase
+{
+    // Viết tests ở đây
+}`,
+            solution: `<?php
+// ============= Unit Test =============
+namespace App\\Tests\\Service;
+
+use App\\Entity\\Product;
+use App\\Repository\\ProductRepository;
+use App\\Service\\ProductService;
+use Doctrine\\ORM\\EntityManagerInterface;
+use PHPUnit\\Framework\\TestCase;
+
+class ProductServiceTest extends TestCase
+{
+    private ProductService $service;
+    private ProductRepository $repository;
+    private EntityManagerInterface $em;
+
+    protected function setUp(): void
+    {
+        $this->repository = $this->createMock(ProductRepository::class);
+        $this->em = $this->createMock(EntityManagerInterface::class);
+        $this->service = new ProductService($this->repository, $this->em);
+    }
+
+    public function testCreate(): void
+    {
+        $this->em->expects($this->once())->method('persist');
+        $this->em->expects($this->once())->method('flush');
+
+        $p = $this->service->create('Laptop', '1000.00', 10);
+
+        $this->assertSame('Laptop', $p->getName());
+        $this->assertSame('1000.00', $p->getPrice());
+        $this->assertSame(10, $p->getStock());
+    }
+
+    public function testFindNotFound(): void
+    {
+        $this->repository->method('find')->willReturn(null);
+        $this->expectException(\\DomainException::class);
+        $this->service->find(999);
+    }
+
+    public function testUpdate(): void
+    {
+        $p = new Product();
+        $p->setName('Old');
+
+        $this->repository->method('find')->willReturn($p);
+        $this->em->expects($this->once())->method('flush');
+
+        $updated = $this->service->update(1, ['name' => 'New']);
+
+        $this->assertSame('New', $updated->getName());
+    }
+
+    public function testDelete(): void
+    {
+        $p = new Product();
+        $this->repository->method('find')->willReturn($p);
+        $this->em->expects($this->once())->method('remove')->with($p);
+        $this->em->expects($this->once())->method('flush');
+
+        $this->service->delete(1);
+    }
+}
+
+// ============= Functional Test =============
+namespace App\\Tests\\Controller;
+
+use App\\Entity\\Product;
+use App\\Entity\\User;
+use Doctrine\\ORM\\EntityManagerInterface;
+use Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase;
+
+class ProductControllerTest extends WebTestCase
+{
+    public function testListRequiresAuth(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/products');
+        $this->assertResponseRedirects('/login');
+    }
+
+    public function testListSuccess(): void
+    {
+        $client = static::createClient();
+        $user = $this->createUser();
+        $client->loginUser($user);
+
+        $client->request('GET', '/products');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists('h1');
+    }
+
+    public function testCreateProduct(): void
+    {
+        $client = static::createClient();
+        $client->loginUser($this->createUser());
+
+        $client->request('GET', '/products/new');
+        $this->assertResponseIsSuccessful();
+
+        $client->submitForm('Save', [
+            'product[name]' => 'Laptop',
+            'product[price]' => '1000.00',
+            'product[stock]' => 10,
+        ]);
+
+        $this->assertResponseRedirects();
+    }
+
+    public function testCreateProductInvalidData(): void
+    {
+        $client = static::createClient();
+        $client->loginUser($this->createUser());
+
+        $client->request('GET', '/products/new');
+        $client->submitForm('Save', [
+            'product[name]' => '',
+            'product[price]' => '-100',
+            'product[stock]' => -1,
+        ]);
+
+        $this->assertSelectorExists('.form-error-message');
+    }
+
+    private function createUser(): User
+    {
+        $em = static::getContainer()->get(EntityManagerInterface::class);
+        $u = new User();
+        $u->setName('Test');
+        $u->setEmail('test'.uniqid().'@example.com');
+        $u->setPassword('hashed');
+        $em->persist($u);
+        $em->flush();
+        return $u;
+    }
+}
+
+// ============= API Test =============
+namespace App\\Tests\\Api;
+
+use App\\Entity\\Product;
+use Doctrine\\ORM\\EntityManagerInterface;
+use Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase;
+
+class ProductApiTest extends WebTestCase
+{
+    public function testGetProducts(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/api/products');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+    }
+
+    public function testCreateProductRequiresAuth(): void
+    {
+        $client = static::createClient();
+        $client->jsonRequest('POST', '/api/products', [
+            'name' => 'Laptop',
+            'price' => '1000.00',
+        ]);
+
+        $this->assertResponseStatusCodeSame(401);
+    }
+
+    public function testCreateProductWithAuth(): void
+    {
+        $client = static::createClient();
+        $user = $this->createUser();
+        $client->loginUser($user);
+
+        $client->jsonRequest('POST', '/api/products', [
+            'name' => 'Laptop',
+            'price' => '1000.00',
+            'stock' => 10,
+        ]);
+
+        $this->assertResponseStatusCodeSame(201);
+        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertSame('Laptop', $data['name']);
+    }
+
+    private function createUser(): \\App\\Entity\\User
+    {
+        $em = static::getContainer()->get(EntityManagerInterface::class);
+        $u = new \\App\\Entity\\User();
+        $u->setName('Test');
+        $u->setEmail('api'.uniqid().'@test.com');
+        $u->setPassword('hashed');
+        $em->persist($u);
+        $em->flush();
+        return $u;
+    }
+}`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "codeigniter-framework",
+    slug: "codeigniter",
+    title: "CodeIgniter 4 Framework",
+    description: "Xây dựng web application nhanh với CodeIgniter 4, MVC và ORM",
+    image: "/images/codeigniter-course.jpg",
+    duration: "8 tuần",
+    level: "beginner",
+    lessons: [
+      {
+        id: "1",
+        title: "Giới thiệu CodeIgniter 4 và Setup",
+        slug: "gioi-thieu-codeigniter",
+        duration: "45 phút",
+        content: `# Giới thiệu CodeIgniter 4
+
+## CodeIgniter là gì?
+CodeIgniter là framework PHP nhẹ, nhanh, dễ học, được nhiều developer Việt Nam sử dụng.
+
+## Ưu điểm
+- **Nhẹ và nhanh**: Ít overhead
+- **Dễ học**: Documentation rõ ràng
+- **MVC pattern**: Quen thuộc với nhiều developer
+- **Không cần Composer bắt buộc**: Có thể download zip
+- **Built-in security**: CSRF, XSS protection
+- **ORM đơn giản**: Query Builder
+
+## Cài đặt
+
+### Yêu cầu
+- PHP 8.1+
+- Extensions: intl, mbstring, json, mysqlnd (hoặc pdo)
+
+### Cài đặt với Composer
+\`\`\`bash
+composer create-project codeigniter4/appstarter myapp
+cd myapp
+\`\`\`
+
+### Cấu hình
+\`\`\`bash
+# Copy env file
+cp env .env
+
+# Generate encryption key
+php spark key:generate
+\`\`\`
+
+### Chạy development server
+\`\`\`bash
+php spark serve
+# Mở http://localhost:8080
+\`\`\`
+
+## Cấu trúc project
+
+\`\`\`
+myapp/
+├── app/
+│   ├── Config/
+│   ├── Controllers/
+│   ├── Database/
+│   │   ├── Migrations/
+│   │   └── Seeds/
+│   ├── Filters/
+│   ├── Models/
+│   ├── Views/
+│   ├── Helpers/
+│   └── Libraries/
+├── public/
+│   ├── index.php
+│   └── .htaccess
+├── system/
+├── tests/
+├── vendor/
+├── writable/
+├── .env
+├── composer.json
+└── spark
+\`\`\`
+
+## Controller đầu tiên
+
+\`\`\`php
+<?php
+
+namespace App\\Controllers;
+
+use CodeIgniter\\Controller;
+
+class Blog extends BaseController
+{
+    public function index(): string
+    {
+        $data = [
+            'title' => 'My Blog',
+            'posts' => [
+                ['id' => 1, 'title' => 'First post', 'content' => 'Hello world'],
+                ['id' => 2, 'title' => 'Second post', 'content' => 'Another one'],
+            ],
+        ];
+        return view('blog/index', $data);
+    }
+
+    public function view(int $id): string
+    {
+        return "Post ID: $id";
+    }
+
+    public function api(): \\CodeIgniter\\HTTP\\ResponseInterface
+    {
+        return $this->response->setJSON([
+            'status' => 'ok',
+            'data' => ['message' => 'Hello from API'],
+        ]);
+    }
+}
+\`\`\`
+
+## Routing
+
+\`\`\`php
+<?php
+// app/Config/Routes.php
+
+$routes->get('/', 'Home::index');
+$routes->get('blog', 'Blog::index');
+$routes->get('blog/(:num)', 'Blog::view/$1');
+
+$routes->group('api/v1', ['namespace' => 'App\\Controllers\\Api'], function ($routes) {
+    $routes->get('posts', 'PostController::index');
+    $routes->get('posts/(:num)', 'PostController::show/$1');
+    $routes->post('posts', 'PostController::create');
+    $routes->put('posts/(:num)', 'PostController::update/$1');
+    $routes->delete('posts/(:num)', 'PostController::delete/$1');
+});
+\`\`\`
+
+## Views với Template
+
+\`\`\`php
+<!-- app/Views/blog/index.php -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?= esc($title) ?></title>
+</head>
+<body>
+    <h1><?= esc($title) ?></h1>
+    <ul>
+        <?php foreach ($posts as $post): ?>
+            <li>
+                <a href="/blog/<?= $post['id'] ?>"><?= esc($post['title']) ?></a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</body>
+</html>
+\`\`\`
+
+## Base Controller với Helpers
+
+\`\`\`php
+<?php
+
+namespace App\\Controllers;
+
+use CodeIgniter\\Controller;
+
+abstract class BaseController extends Controller
+{
+    protected $helpers = ['form', 'url', 'text'];
+    protected array $data = [];
+
+    public function initController(
+        \\CodeIgniter\\HTTP\\RequestInterface $request,
+        \\CodeIgniter\\HTTP\\ResponseInterface $response,
+        \\Psr\\Log\\LoggerInterface $logger
+    ): void {
+        parent::initController($request, $response, $logger);
+        $this->data['title'] = 'My App';
+    }
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo controller và views đầu tiên!`,
+        exercises: [
+          {
+            id: "1-1",
+            title: "Product Controller",
+            description: "Tạo CRUD controller cơ bản",
+            instructions: `Tạo ProductController với:
+- index: list products
+- show: single product
+- new: form tạo
+- create: xử lý POST
+- edit: form sửa
+- update: xử lý PUT
+- delete: xóa`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Controllers;
+
+use CodeIgniter\\Controller;
+
+class Product extends BaseController
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+
+namespace App\\Controllers;
+
+use CodeIgniter\\Controller;
+
+class Product extends BaseController
+{
+    private array $products = [
+        1 => ['id' => 1, 'name' => 'Laptop', 'price' => 1000, 'stock' => 10],
+        2 => ['id' => 2, 'name' => 'Mouse', 'price' => 20, 'stock' => 100],
+        3 => ['id' => 3, 'name' => 'Keyboard', 'price' => 50, 'stock' => 50],
+    ];
+
+    public function index(): string
+    {
+        return view('products/index', [
+            'title' => 'Products',
+            'products' => $this->products,
+        ]);
+    }
+
+    public function show(int $id): string
+    {
+        if (!isset($this->products[$id])) {
+            throw \\CodeIgniter\\Exceptions\\PageNotFoundException::forPageNotFound();
+        }
+
+        return view('products/show', [
+            'title' => $this->products[$id]['name'],
+            'product' => $this->products[$id],
+        ]);
+    }
+
+    public function new(): string
+    {
+        return view('products/form', ['title' => 'New Product']);
+    }
+
+    public function create(): \\CodeIgniter\\HTTP\\ResponseInterface
+    {
+        $rules = [
+            'name' => 'required|min_length[2]|max_length[200]',
+            'price' => 'required|numeric|greater_than[0]',
+            'stock' => 'required|integer|greater_than_equal_to[0]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        // Save logic
+        session()->setFlashdata('success', 'Product created');
+        return redirect()->to('/products');
+    }
+
+    public function edit(int $id): string
+    {
+        if (!isset($this->products[$id])) {
+            throw \\CodeIgniter\\Exceptions\\PageNotFoundException::forPageNotFound();
+        }
+
+        return view('products/form', [
+            'title' => 'Edit Product',
+            'product' => $this->products[$id],
+        ]);
+    }
+
+    public function update(int $id): \\CodeIgniter\\HTTP\\ResponseInterface
+    {
+        $rules = [
+            'name' => 'required|min_length[2]',
+            'price' => 'required|numeric|greater_than[0]',
+            'stock' => 'required|integer|greater_than_equal_to[0]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        // Update logic
+        session()->setFlashdata('success', 'Product updated');
+        return redirect()->to('/products');
+    }
+
+    public function delete(int $id): \\CodeIgniter\\HTTP\\ResponseInterface
+    {
+        // Delete logic
+        session()->setFlashdata('success', 'Product deleted');
+        return redirect()->to('/products');
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "2",
+        title: "Models, Migrations và Query Builder",
+        slug: "models-migrations-query-builder",
+        duration: "70 phút",
+        prerequisites: ["1"],
+        content: `# Models, Migrations và Query Builder
+
+## Database Configuration
+
+\`\`\`env
+# .env
+database.default.hostname = localhost
+database.default.database = myapp
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+\`\`\`
+
+## Migrations
+
+### Tạo migration
+\`\`\`bash
+php spark make:migration CreateUsersTable
+\`\`\`
+
+### Migration file
+\`\`\`php
+<?php
+
+namespace App\\Database\\Migrations;
+
+use CodeIgniter\\Database\\Migration;
+
+class CreateUsersTable extends Migration
+{
+    public function up()
+    {
+        $this->forge->addField([
+            'id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ],
+            'name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
+            ],
+            'email' => [
+                'type' => 'VARCHAR',
+                'constraint' => 180,
+            ],
+            'password' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+        ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey('email');
+        $this->forge->createTable('users');
+    }
+
+    public function down()
+    {
+        $this->forge->dropTable('users');
+    }
+}
+\`\`\`
+
+### Chạy migrations
+\`\`\`bash
+php spark migrate
+php spark migrate:rollback
+php spark migrate:status
+\`\`\`
+
+## Models
+
+### Model cơ bản
+\`\`\`php
+<?php
+
+namespace App\\Models;
+
+use CodeIgniter\\Model;
+
+class UserModel extends Model
+{
+    protected $table         = 'users';
+    protected $primaryKey    = 'id';
+    protected $returnType    = 'array';
+    protected $useTimestamps = true;
+    protected $allowedFields = ['name', 'email', 'password'];
+
+    protected $validationRules = [
+        'name' => 'required|min_length[2]|max_length[100]',
+        'email' => 'required|valid_email|is_unique[users.email,id,{id}]',
+        'password' => 'required|min_length[8]',
+    ];
+
+    protected $validationMessages = [
+        'email' => [
+            'is_unique' => 'Email already registered',
+        ],
+    ];
+
+    public function findByEmail(string $email): ?array
+    {
+        return $this->where('email', $email)->first();
+    }
+
+    public function search(string $term): array
+    {
+        return $this->like('name', $term)
+            ->orLike('email', $term)
+            ->findAll();
+    }
+}
+\`\`\`
+
+### Entity Model
+\`\`\`php
+<?php
+
+namespace App\\Models;
+
+use CodeIgniter\\Entity\\Entity;
+
+class User extends Entity
+{
+    protected $casts = [
+        'id' => 'integer',
+        'created_at' => 'datetime',
+    ];
+
+    protected $hidden = ['password'];
+
+    protected $datamap = [
+        'fullName' => 'name',
+    ];
+
+    public function setPassword(string $password): self
+    {
+        $this->attributes['password'] = password_hash($password, PASSWORD_DEFAULT);
+        return $this;
+    }
+}
+\`\`\`
+
+## Query Builder
+
+### CRUD với Model
+\`\`\`php
+// Insert
+$model->insert(['name' => 'John', 'email' => 'john@example.com']);
+$id = $model->getInsertID();
+
+// Insert batch
+$model->insertBatch([
+    ['name' => 'Alice', 'email' => 'alice@example.com'],
+    ['name' => 'Bob', 'email' => 'bob@example.com'],
+]);
+
+// Find
+$user = $model->find(1);
+$users = $model->findAll();
+$users = $model->where('active', 1)->orderBy('name')->findAll(10, 0);
+$user = $model->where('email', 'john@example.com')->first();
+
+// Update
+$model->update(1, ['name' => 'Jane']);
+$model->where('active', 0)->set('status', 'inactive')->update();
+
+// Delete
+$model->delete(1);
+$model->where('active', 0)->delete();
+
+// Soft delete
+class PostModel extends Model
+{
+    protected $useSoftDeletes = true;
+    protected $deletedField    = 'deleted_at';
+}
+\`\`\`
+
+### Query Builder API
+\`\`\`php
+$db = \\Config\\Database::connect();
+
+// Basic query
+$users = $db->table('users')
+    ->where('active', 1)
+    ->orderBy('name', 'ASC')
+    ->limit(10)
+    ->get()
+    ->getResultArray();
+
+// Joins
+$posts = $db->table('posts')
+    ->select('posts.*, users.name as author_name')
+    ->join('users', 'users.id = posts.user_id')
+    ->where('posts.published', 1)
+    ->get()
+    ->getResult();
+
+// Aggregations
+$count = $db->table('users')->countAll();
+$sum = $db->table('orders')->selectSum('total')->get()->getRow();
+
+// Raw queries
+$db->query('SELECT * FROM users WHERE id = ?', [1]);
+$db->query('SELECT * FROM users WHERE id = :id:', ['id' => 1]);
+\`\`\`
+
+## Seeds
+
+\`\`\`php
+<?php
+
+namespace App\\Database\\Seeds;
+
+use CodeIgniter\\Database\\Seeder;
+
+class UserSeeder extends Seeder
+{
+    public function run()
+    {
+        $data = [
+            [
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => password_hash('password', PASSWORD_DEFAULT),
+            ],
+        ];
+
+        $this->db->table('users')->insertBatch($data);
+    }
+}
+\`\`\`
+
+\`\`\`bash
+php spark db:seed UserSeeder
+\`\`\`
+
+## Pagination
+
+\`\`\`php
+<?php
+
+namespace App\\Controllers;
+
+class Blog extends BaseController
+{
+    public function index(): string
+    {
+        $model = new \\App\\Models\\PostModel();
+        $data = [
+            'posts' => $model->paginate(10),
+            'pager' => $model->pager,
+        ];
+        return view('blog/index', $data);
+    }
+}
+\`\`\`
+
+\`\`\`php
+// View
+<?= $pager->links() ?>
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo model Product với đầy đủ CRUD!`,
+        exercises: [
+          {
+            id: "2-1",
+            title: "Product Model với CRUD",
+            description: "Implement Product với Query Builder",
+            instructions: `Tạo:
+1. Migration cho products table
+2. ProductModel với validation
+3. ProductService
+4. Seed data`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Models;
+
+use CodeIgniter\\Model;
+
+class ProductModel extends Model
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+// ============= Migration =============
+namespace App\\Database\\Migrations;
+
+use CodeIgniter\\Database\\Migration;
+
+class CreateProductsTable extends Migration
+{
+    public function up()
+    {
+        $this->forge->addField([
+            'id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'name' => ['type' => 'VARCHAR', 'constraint' => 200],
+            'description' => ['type' => 'TEXT', 'null' => true],
+            'price' => ['type' => 'DECIMAL', 'constraint' => '12,2'],
+            'stock' => ['type' => 'INT', 'constraint' => 11, 'default' => 0],
+            'created_at' => ['type' => 'DATETIME', 'null' => true],
+            'updated_at' => ['type' => 'DATETIME', 'null' => true],
+        ]);
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('products');
+    }
+
+    public function down()
+    {
+        $this->forge->dropTable('products');
+    }
+}
+
+// ============= Model =============
+namespace App\\Models;
+
+use CodeIgniter\\Model;
+
+class ProductModel extends Model
+{
+    protected $table         = 'products';
+    protected $primaryKey    = 'id';
+    protected $returnType    = 'array';
+    protected $useTimestamps = true;
+    protected $allowedFields = ['name', 'description', 'price', 'stock'];
+
+    protected $validationRules = [
+        'name' => 'required|min_length[2]|max_length[200]',
+        'price' => 'required|numeric|greater_than[0]',
+        'stock' => 'required|integer|greater_than_equal_to[0]',
+    ];
+
+    public function findInStock(): array
+    {
+        return $this->where('stock >', 0)->orderBy('name')->findAll();
+    }
+
+    public function search(string $term): array
+    {
+        return $this->groupStart()
+            ->like('name', $term)
+            ->orLike('description', $term)
+            ->groupEnd()
+            ->findAll();
+    }
+
+    public function updateStock(int $id, int $delta): bool
+    {
+        $product = $this->find($id);
+        if (!$product) return false;
+
+        $newStock = max(0, $product['stock'] + $delta);
+        return $this->update($id, ['stock' => $newStock]);
+    }
+}
+
+// ============= Service =============
+namespace App\\Services;
+
+use App\\Models\\ProductModel;
+
+class ProductService
+{
+    public function __construct(
+        private ProductModel $model = new ProductModel()
+    ) {}
+
+    public function create(array $data): int|false
+    {
+        if (!$this->model->validate($data)) {
+            return false;
+        }
+        return $this->model->insert($data);
+    }
+
+    public function update(int $id, array $data): bool
+    {
+        if (!$this->model->validate($data)) {
+            return false;
+        }
+        return $this->model->update($id, $data);
+    }
+
+    public function delete(int $id): bool
+    {
+        return $this->model->delete($id);
+    }
+
+    public function getErrors(): array
+    {
+        return $this->model->errors();
+    }
+}
+
+// ============= Seed =============
+namespace App\\Database\\Seeds;
+
+use CodeIgniter\\Database\\Seeder;
+
+class ProductSeeder extends Seeder
+{
+    public function run()
+    {
+        $data = [
+            ['name' => 'Laptop', 'price' => 1000.00, 'stock' => 10],
+            ['name' => 'Mouse', 'price' => 20.00, 'stock' => 100],
+            ['name' => 'Keyboard', 'price' => 50.00, 'stock' => 50],
+        ];
+
+        $this->db->table('products')->insertBatch($data);
+    }
+}`,
+          },
+        ],
+      },
+      {
+        id: "3",
+        title: "Validation, Security và Sessions",
+        slug: "validation-security-sessions",
+        duration: "65 phút",
+        prerequisites: ["2"],
+        content: `# Validation, Security và Sessions
+
+## Validation
+
+### Controller validation
+\`\`\`php
+public function store()
+{
+    $rules = [
+        'name' => [
+            'label' => 'Product Name',
+            'rules' => 'required|min_length[2]|max_length[200]',
+            'errors' => [
+                'required' => 'Vui lòng nhập tên sản phẩm',
+                'min_length' => 'Tên phải có ít nhất 2 ký tự',
+            ],
+        ],
+        'email' => 'required|valid_email|is_unique[users.email]',
+        'price' => 'required|numeric|greater_than[0]',
+        'image' => [
+            'rules' => 'uploaded[image]|max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]',
+        ],
+    ];
+
+    if (!$this->validate($rules)) {
+        return redirect()->back()->withInput()
+            ->with('errors', $this->validator->getErrors());
+    }
+
+    // Valid data
+    $data = $this->validator->getValidated();
+    // ...
+}
+\`\`\`
+
+### Custom validation rules
+\`\`\`php
+// app/Validation/MyRules.php
+namespace App\\Validation;
+
+class MyRules
+{
+    public function even(string $value): bool
+    {
+        return ((int) $value) % 2 === 0;
+    }
+
+    public function phone(string $value): bool
+    {
+        return preg_match('/^[0-9]{10,11}$/', $value) === 1;
+    }
+}
+
+// Sử dụng
+$rules = [
+    'quantity' => 'required|even',
+    'phone' => 'required|phone',
+];
+\`\`\`
+
+## Security
+
+### CSRF Protection
+\`\`\`php
+// Tự động khi dùng form helper
+<?= form_open('products/create') ?>
+    <?= csrf_field() ?>
+    <input type="text" name="name">
+    <button type="submit">Save</button>
+<?= form_close() ?>
+\`\`\`
+
+### XSS Protection
+\`\`\`php
+// Escape output
+<?= esc($data) ?>
+<?= esc($data, 'html') ?>
+
+// Trong controller
+$data = $this->request->getPost('comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+\`\`\`
+
+### Password Hashing
+\`\`\`php
+$hash = password_hash($password, PASSWORD_DEFAULT);
+password_verify($input, $hash);
+\`\`\`
+
+### SQL Injection Prevention
+\`\`\`php
+// Query Builder (an toàn)
+$db->table('users')->where('email', $email)->get();
+
+// Query bindings
+$db->query('SELECT * FROM users WHERE email = ?', [$email]);
+$db->query('SELECT * FROM users WHERE email = :email:', ['email' => $email]);
+\`\`\`
+
+## Filters
+
+### Tạo Filter
+\`\`\`bash
+php spark make:filter AuthFilter
+\`\`\`
+
+### AuthFilter
+\`\`\`php
+<?php
+
+namespace App\\Filters;
+
+use CodeIgniter\\Filters\\FilterInterface;
+use CodeIgniter\\HTTP\\RequestInterface;
+use CodeIgniter\\HTTP\\ResponseInterface;
+
+class AuthFilter implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        if (!session()->get('user_id')) {
+            return redirect()->to('/login');
+        }
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+        // ...
+    }
+}
+\`\`\`
+
+### Register filter trong Routes
+\`\`\`php
+$routes->group('admin', ['filter' => 'auth'], function ($routes) {
+    $routes->get('dashboard', 'Admin\\Dashboard::index');
+    $routes->get('users', 'Admin\\Users::index');
+});
+\`\`\`
+
+### Config Filters
+\`\`\`php
+// app/Config/Filters.php
+public array $aliases = [
+    'csrf' => \\CodeIgniter\\Filters\\CSRF::class,
+    'auth' => \\App\\Filters\\AuthFilter::class,
+    'admin' => \\App\\Filters\\AdminFilter::class,
+];
+
+public array $globals = [
+    'before' => [
+        'csrf' => ['except' => ['api/*']],
+    ],
+];
+\`\`\`
+
+## Sessions
+
+### Sử dụng Session
+\`\`\`php
+$session = session();
+
+// Set
+$session->set('user_id', 123);
+$session->set([
+    'name' => 'John',
+    'role' => 'admin',
+]);
+
+// Get
+$userId = $session->get('user_id');
+$name = $session->get('name') ?? 'Guest';
+
+// Check
+if ($session->has('user_id')) { }
+
+// Remove
+$session->remove('user_id');
+
+// Destroy all
+$session->destroy();
+
+// Flash data (1 lần)
+$session->setFlashdata('success', 'Saved!');
+// Trong view
+<?php if (session()->has('success')): ?>
+    <div class="alert"><?= session('success') ?></div>
+<?php endif; ?>
+\`\`\`
+
+## Login System
+
+\`\`\`php
+<?php
+
+namespace App\\Controllers;
+
+class Auth extends BaseController
+{
+    public function login()
+    {
+        return view('auth/login');
+    }
+
+    public function attemptLogin()
+    {
+        $rules = [
+            'email' => 'required|valid_email',
+            'password' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+
+        $model = new \\App\\Models\\UserModel();
+        $user = $model->where('email', $email)->first();
+
+        if (!$user || !password_verify($password, $user['password'])) {
+            return redirect()->back()->withInput()
+                ->with('error', 'Invalid credentials');
+        }
+
+        session()->set([
+            'user_id' => $user['id'],
+            'user_name' => $user['name'],
+            'is_logged_in' => true,
+        ]);
+
+        return redirect()->to('/dashboard');
+    }
+
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/login');
+    }
+}
+\`\`\`
+
+## CORS cho API
+
+\`\`\`php
+<?php
+
+namespace App\\Filters;
+
+use CodeIgniter\\Filters\\FilterInterface;
+use CodeIgniter\\HTTP\\RequestInterface;
+use CodeIgniter\\HTTP\\ResponseInterface;
+
+class CorsFilter implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+
+        if ($request->getMethod() === 'options') {
+            exit(0);
+        }
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+    }
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy implement login system với session!`,
+        exercises: [
+          {
+            id: "3-1",
+            title: "Authentication System",
+            description: "Implement login/logout với filter",
+            instructions: `Tạo:
+1. Login form và controller
+2. Register với validation
+3. AuthFilter để bảo vệ routes
+4. Session management
+5. Logout functionality`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Controllers;
+
+class Auth extends BaseController
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+// ============= AuthController =============
+namespace App\\Controllers;
+
+use App\\Models\\UserModel;
+
+class Auth extends BaseController
+{
+    public function loginForm()
+    {
+        if (session()->get('user_id')) {
+            return redirect()->to('/dashboard');
+        }
+        return view('auth/login');
+    }
+
+    public function registerForm()
+    {
+        if (session()->get('user_id')) {
+            return redirect()->to('/dashboard');
+        }
+        return view('auth/register');
+    }
+
+    public function register()
+    {
+        $rules = [
+            'name' => 'required|min_length[2]|max_length[100]',
+            'email' => 'required|valid_email|is_unique[users.email]',
+            'password' => 'required|min_length[8]|matches[password_confirm]',
+            'password_confirm' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $model = new UserModel();
+        $model->insert([
+            'name' => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'password' => password_hash(
+                $this->request->getPost('password'),
+                PASSWORD_DEFAULT
+            ),
+        ]);
+
+        session()->setFlashdata('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
+        return redirect()->to('/login');
+    }
+
+    public function login()
+    {
+        $rules = [
+            'email' => 'required|valid_email',
+            'password' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $model = new UserModel();
+        $user = $model->where('email', $this->request->getPost('email'))->first();
+
+        if (!$user || !password_verify($this->request->getPost('password'), $user['password'])) {
+            return redirect()->back()->withInput()
+                ->with('error', 'Email hoặc mật khẩu không đúng');
+        }
+
+        session()->set([
+            'user_id' => $user['id'],
+            'user_name' => $user['name'],
+            'user_email' => $user['email'],
+        ]);
+
+        return redirect()->to('/dashboard');
+    }
+
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/login');
+    }
+}
+
+// ============= AuthFilter =============
+namespace App\\Filters;
+
+use CodeIgniter\\Filters\\FilterInterface;
+use CodeIgniter\\HTTP\\RequestInterface;
+use CodeIgniter\\HTTP\\ResponseInterface;
+
+class AuthFilter implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        if (!session()->get('user_id')) {
+            return redirect()->to('/login');
+        }
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+    }
+}
+
+class GuestFilter implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        if (session()->get('user_id')) {
+            return redirect()->to('/dashboard');
+        }
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+    }
+}
+
+// ============= Routes =============
+// $routes->get('/login', 'Auth::loginForm', ['filter' => 'guest']);
+// $routes->post('/login', 'Auth::login', ['filter' => 'guest']);
+// $routes->get('/register', 'Auth::registerForm', ['filter' => 'guest']);
+// $routes->post('/register', 'Auth::register', ['filter' => 'guest']);
+// $routes->get('/logout', 'Auth::logout', ['filter' => 'auth']);
+// $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
+//     $routes->get('/', 'Dashboard::index');
+// });
+
+// ============= Views =============
+/* app/Views/auth/login.php
+<!DOCTYPE html>
+<html>
+<head><title>Đăng nhập</title></head>
+<body>
+    <h1>Đăng nhập</h1>
+
+    <?php if (session()->has('error')): ?>
+        <div class="alert alert-danger"><?= session('error') ?></div>
+    <?php endif; ?>
+
+    <?= form_open('/login') ?>
+        <?= csrf_field() ?>
+        <div>
+            <label>Email</label>
+            <input type="email" name="email" value="<?= old('email') ?>" required>
+        </div>
+        <div>
+            <label>Mật khẩu</label>
+            <input type="password" name="password" required>
+        </div>
+        <button type="submit">Đăng nhập</button>
+    <?= form_close() ?>
+
+    <p>Chưa có tài khoản? <a href="/register">Đăng ký</a></p>
+</body>
+</html>
+*/`,
+          },
+        ],
+      },
+      {
+        id: "4",
+        title: "REST API với CodeIgniter",
+        slug: "rest-api-codeigniter",
+        duration: "70 phút",
+        prerequisites: ["3"],
+        content: `# REST API với CodeIgniter 4
+
+## API Structure
+
+\`\`\`
+app/Controllers/Api/
+├── BaseApiController.php
+├── AuthController.php
+├── PostController.php
+└── ProductController.php
+\`\`\`
+
+## Base API Controller
+
+\`\`\`php
+<?php
+
+namespace App\\Controllers\\Api;
+
+use CodeIgniter\\Controller;
+use CodeIgniter\\HTTP\\ResponseInterface;
+
+abstract class BaseApiController extends Controller
+{
+    protected $format = 'json';
+
+    protected function success($data = null, string $message = 'OK', int $code = 200): ResponseInterface
+    {
+        return $this->response->setStatusCode($code)->setJSON([
+            'success' => true,
+            'message' => $message,
+            'data' => $data,
+        ]);
+    }
+
+    protected function error(string $message, int $code = 400, array $errors = []): ResponseInterface
+    {
+        return $this->response->setStatusCode($code)->setJSON([
+            'success' => false,
+            'message' => $message,
+            'errors' => $errors,
+        ]);
+    }
+
+    protected function paginated(array $items, object $pager): ResponseInterface
+    {
+        return $this->success([
+            'items' => $items,
+            'pagination' => [
+                'current_page' => $pager->getCurrentPage(),
+                'total_pages' => $pager->getPageCount(),
+                'per_page' => $pager->getPerPage(),
+                'total_items' => $pager->getTotal(),
+            ],
+        ]);
+    }
+}
+\`\`\`
+
+## Resource Controller
+
+\`\`\`php
+<?php
+
+namespace App\\Controllers\\Api;
+
+use App\\Models\\ProductModel;
+
+class ProductController extends BaseApiController
+{
+    private ProductModel $model;
+
+    public function __construct()
+    {
+        $this->model = new ProductModel();
+    }
+
+    public function index(): ResponseInterface
+    {
+        $search = $this->request->getGet('q');
+        $sort   = $this->request->getGet('sort') ?? 'id';
+        $order  = $this->request->getGet('order') ?? 'ASC';
+        $page   = (int) ($this->request->getGet('page') ?? 1);
+
+        if (!in_array($sort, ['id', 'name', 'price', 'created_at'])) {
+            $sort = 'id';
+        }
+        if (!in_array(strtoupper($order), ['ASC', 'DESC'])) {
+            $order = 'ASC';
+        }
+
+        if ($search) {
+            $this->model->groupStart()
+                ->like('name', $search)
+                ->orLike('description', $search)
+                ->groupEnd();
+        }
+
+        $products = $this->model->orderBy($sort, $order)->paginate(20, 'default', $page);
+
+        return $this->paginated($products, $this->model->pager);
+    }
+
+    public function show($id = null): ResponseInterface
+    {
+        $product = $this->model->find((int) $id);
+
+        if (!$product) {
+            return $this->error('Product not found', 404);
+        }
+
+        return $this->success($product);
+    }
+
+    public function create(): ResponseInterface
+    {
+        $data = $this->request->getJSON(true);
+
+        if (!$this->model->validate($data)) {
+            return $this->error('Validation failed', 422, $this->model->errors());
+        }
+
+        $id = $this->model->insert($data);
+        $product = $this->model->find($id);
+
+        return $this->success($product, 'Product created', 201);
+    }
+
+    public function update($id = null): ResponseInterface
+    {
+        $product = $this->model->find((int) $id);
+        if (!$product) {
+            return $this->error('Product not found', 404);
+        }
+
+        $data = $this->request->getJSON(true);
+
+        if (!$this->model->validate($data)) {
+            return $this->error('Validation failed', 422, $this->model->errors());
+        }
+
+        $this->model->update((int) $id, $data);
+
+        return $this->success($this->model->find($id), 'Product updated');
+    }
+
+    public function delete($id = null): ResponseInterface
+    {
+        $product = $this->model->find((int) $id);
+        if (!$product) {
+            return $this->error('Product not found', 404);
+        }
+
+        $this->model->delete((int) $id);
+        return $this->success(null, 'Product deleted');
+    }
+}
+\`\`\`
+
+## JWT Authentication
+
+### Cài đặt
+\`\`\`bash
+composer require firebase/php-jwt
+\`\`\`
+
+### JWT Service
+\`\`\`php
+<?php
+
+namespace App\\Libraries;
+
+use Firebase\\JWT\\JWT;
+use Firebase\\JWT\\Key;
+
+class JwtService
+{
+    private string $secret;
+    private int $ttl;
+    private string $algo;
+
+    public function __construct()
+    {
+        $this->secret = env('JWT_SECRET', 'your-secret-key');
+        $this->ttl    = (int) env('JWT_TTL', 3600);
+        $this->algo   = 'HS256';
+    }
+
+    public function generate(array $payload): string
+    {
+        $issuedAt = time();
+        $expire = $issuedAt + $this->ttl;
+
+        $data = array_merge($payload, [
+            'iat' => $issuedAt,
+            'exp' => $expire,
+        ]);
+
+        return JWT::encode($data, $this->secret, $this->algo);
+    }
+
+    public function decode(string $token): ?array
+    {
+        try {
+            $decoded = JWT::decode($token, new Key($this->secret, $this->algo));
+            return (array) $decoded;
+        } catch (\\Exception $e) {
+            return null;
+        }
+    }
+
+    public function getBearerToken(): ?string
+    {
+        $header = service('request')->getHeaderLine('Authorization');
+        if (preg_match('/Bearer\\s(\\S+)/', $header, $matches)) {
+            return $matches[1];
+        }
+        return null;
+    }
+}
+\`\`\`
+
+### Auth Controller
+\`\`\`php
+<?php
+
+namespace App\\Controllers\\Api;
+
+use App\\Libraries\\JwtService;
+use App\\Models\\UserModel;
+
+class AuthController extends BaseApiController
+{
+    public function login(): ResponseInterface
+    {
+        $data = $this->request->getJSON(true);
+
+        if (empty($data['email']) || empty($data['password'])) {
+            return $this->error('Email and password required', 422);
+        }
+
+        $model = new UserModel();
+        $user = $model->where('email', $data['email'])->first();
+
+        if (!$user || !password_verify($data['password'], $user['password'])) {
+            return $this->error('Invalid credentials', 401);
+        }
+
+        $jwt = new JwtService();
+        $token = $jwt->generate([
+            'sub' => $user['id'],
+            'email' => $user['email'],
+        ]);
+
+        return $this->success([
+            'token' => $token,
+            'type' => 'Bearer',
+            'expires_in' => 3600,
+            'user' => [
+                'id' => $user['id'],
+                'name' => $user['name'],
+                'email' => $user['email'],
+            ],
+        ], 'Login successful');
+    }
+
+    public function me(): ResponseInterface
+    {
+        $user = $this->request->user ?? null;
+        return $this->success($user);
+    }
+
+    public function register(): ResponseInterface
+    {
+        $data = $this->request->getJSON(true);
+
+        $rules = [
+            'name' => 'required|min_length[2]|max_length[100]',
+            'email' => 'required|valid_email|is_unique[users.email]',
+            'password' => 'required|min_length[8]',
+        ];
+
+        $validation = \\Config\\Services::validation();
+        $validation->setRules($rules);
+
+        if (!$validation->run($data)) {
+            return $this->error('Validation failed', 422, $validation->getErrors());
+        }
+
+        $model = new UserModel();
+        $id = $model->insert([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+        ]);
+
+        $jwt = new JwtService();
+        $token = $jwt->generate(['sub' => $id, 'email' => $data['email']]);
+
+        return $this->success(['token' => $token], 'Registration successful', 201);
+    }
+}
+\`\`\`
+
+### JWT Filter
+\`\`\`php
+<?php
+
+namespace App\\Filters;
+
+use App\\Libraries\\JwtService;
+use CodeIgniter\\Filters\\FilterInterface;
+use CodeIgniter\\HTTP\\RequestInterface;
+use CodeIgniter\\HTTP\\ResponseInterface;
+
+class JwtFilter implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        $jwt = new JwtService();
+        $token = $jwt->getBearerToken();
+
+        if (!$token) {
+            return service('response')
+                ->setStatusCode(401)
+                ->setJSON(['success' => false, 'message' => 'Token required']);
+        }
+
+        $payload = $jwt->decode($token);
+        if (!$payload) {
+            return service('response')
+                ->setStatusCode(401)
+                ->setJSON(['success' => false, 'message' => 'Invalid or expired token']);
+        }
+
+        // Make user available to controller
+        $request->user = $payload;
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+    }
+}
+\`\`\`
+
+## Routes
+
+\`\`\`php
+$routes->group('api/v1', ['namespace' => 'App\\Controllers\\Api'], function ($routes) {
+    // Public
+    $routes->post('auth/login', 'AuthController::login');
+    $routes->post('auth/register', 'AuthController::register');
+
+    // Protected
+    $routes->group('', ['filter' => 'jwt'], function ($routes) {
+        $routes->get('auth/me', 'AuthController::me');
+
+        $routes->get('products', 'ProductController::index');
+        $routes->get('products/(:num)', 'ProductController::show/$1');
+        $routes->post('products', 'ProductController::create');
+        $routes->put('products/(:num)', 'ProductController::update/$1');
+        $routes->delete('products/(:num)', 'ProductController::delete/$1');
+    });
+});
+\`\`\`
+
+## API Response Format
+
+\`\`\`json
+{
+    "success": true,
+    "message": "OK",
+    "data": {
+        "id": 1,
+        "name": "Laptop",
+        "price": "1000.00"
+    }
+}
+\`\`\`
+
+## Testing với cURL
+
+\`\`\`bash
+# Login
+curl -X POST http://localhost:8080/api/v1/auth/login \\
+  -H "Content-Type: application/json" \\
+  -d '{"email":"user@example.com","password":"password"}'
+
+# Get products with token
+curl -X GET http://localhost:8080/api/v1/products \\
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+
+# Create product
+curl -X POST http://localhost:8080/api/v1/products \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_TOKEN" \\
+  -d '{"name":"New Product","price":99.99,"stock":10}'
+\`\`\`
+
+## Bài tập thực hành
+Hãy build REST API hoàn chỉnh với JWT!`,
+        exercises: [
+          {
+            id: "4-1",
+            title: "REST API với JWT",
+            description: "Build complete REST API",
+            instructions: `Tạo:
+1. BaseApiController với helpers
+2. Product CRUD API
+3. JWT authentication
+4. Filter bảo vệ routes
+5. Error handling`,
+            type: "code",
+            starterCode: `<?php
+
+namespace App\\Controllers\\Api;
+
+class ProductController extends BaseApiController
+{
+    // Viết code ở đây
+}`,
+            solution: `<?php
+// ============= BaseApiController =============
+namespace App\\Controllers\\Api;
+
+use CodeIgniter\\Controller;
+use CodeIgniter\\HTTP\\ResponseInterface;
+
+abstract class BaseApiController extends Controller
+{
+    protected function success($data = null, string $message = 'OK', int $code = 200): ResponseInterface
+    {
+        return $this->response->setStatusCode($code)->setJSON([
+            'success' => true,
+            'message' => $message,
+            'data' => $data,
+        ]);
+    }
+
+    protected function error(string $message, int $code = 400, array $errors = []): ResponseInterface
+    {
+        return $this->response->setStatusCode($code)->setJSON([
+            'success' => false,
+            'message' => $message,
+            'errors' => $errors,
+        ]);
+    }
+}
+
+// ============= ProductController =============
+namespace App\\Controllers\\Api;
+
+use App\\Models\\ProductModel;
+
+class ProductController extends BaseApiController
+{
+    private ProductModel $model;
+
+    public function __construct()
+    {
+        $this->model = new ProductModel();
+    }
+
+    public function index(): ResponseInterface
+    {
+        $search = $this->request->getGet('q') ?? '';
+        $sort = $this->request->getGet('sort') ?? 'id';
+        $order = strtoupper($this->request->getGet('order') ?? 'ASC');
+        $perPage = (int) ($this->request->getGet('per_page') ?? 20);
+
+        $allowed = ['id', 'name', 'price', 'created_at'];
+        if (!in_array($sort, $allowed)) $sort = 'id';
+        if (!in_array($order, ['ASC', 'DESC'])) $order = 'ASC';
+        if ($perPage < 1 || $perPage > 100) $perPage = 20;
+
+        if ($search) {
+            $this->model
+                ->groupStart()
+                ->like('name', $search)
+                ->orLike('description', $search)
+                ->groupEnd();
+        }
+
+        $products = $this->model->orderBy($sort, $order)->paginate($perPage);
+
+        return $this->success([
+            'items' => $products,
+            'pagination' => [
+                'current_page' => $this->model->pager->getCurrentPage(),
+                'total_pages' => $this->model->pager->getPageCount(),
+                'per_page' => $perPage,
+                'total' => $this->model->pager->getTotal(),
+            ],
+        ]);
+    }
+
+    public function show($id = null): ResponseInterface
+    {
+        $product = $this->model->find((int) $id);
+        if (!$product) return $this->error('Product not found', 404);
+        return $this->success($product);
+    }
+
+    public function create(): ResponseInterface
+    {
+        $data = $this->request->getJSON(true) ?? [];
+
+        if (!$this->model->validate($data)) {
+            return $this->error('Validation failed', 422, $this->model->errors());
+        }
+
+        $id = $this->model->insert($data);
+        return $this->success($this->model->find($id), 'Product created', 201);
+    }
+
+    public function update($id = null): ResponseInterface
+    {
+        $product = $this->model->find((int) $id);
+        if (!$product) return $this->error('Product not found', 404);
+
+        $data = $this->request->getJSON(true) ?? [];
+
+        if (!$this->model->validate($data)) {
+            return $this->error('Validation failed', 422, $this->model->errors());
+        }
+
+        $this->model->update((int) $id, $data);
+        return $this->success($this->model->find($id), 'Product updated');
+    }
+
+    public function delete($id = null): ResponseInterface
+    {
+        $product = $this->model->find((int) $id);
+        if (!$product) return $this->error('Product not found', 404);
+
+        $this->model->delete((int) $id);
+        return $this->success(null, 'Product deleted');
+    }
+}
+
+// ============= JwtService =============
+namespace App\\Libraries;
+
+use Firebase\\JWT\\JWT;
+use Firebase\\JWT\\Key;
+
+class JwtService
+{
+    private string $secret;
+    private int $ttl;
+
+    public function __construct()
+    {
+        $this->secret = env('JWT_SECRET', 'change-me');
+        $this->ttl = (int) env('JWT_TTL', 3600);
+    }
+
+    public function generate(array $payload): string
+    {
+        $now = time();
+        return JWT::encode(
+            array_merge($payload, ['iat' => $now, 'exp' => $now + $this->ttl]),
+            $this->secret,
+            'HS256'
+        );
+    }
+
+    public function decode(string $token): ?array
+    {
+        try {
+            return (array) JWT::decode($token, new Key($this->secret, 'HS256'));
+        } catch (\\Exception) {
+            return null;
+        }
+    }
+
+    public function getBearerToken(): ?string
+    {
+        $header = service('request')->getHeaderLine('Authorization');
+        return preg_match('/Bearer\\s(\\S+)/', $header, $m) ? $m[1] : null;
+    }
+}
+
+// ============= JwtFilter =============
+namespace App\\Filters;
+
+use App\\Libraries\\JwtService;
+use CodeIgniter\\Filters\\FilterInterface;
+use CodeIgniter\\HTTP\\RequestInterface;
+use CodeIgniter\\HTTP\\ResponseInterface;
+
+class JwtFilter implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        $jwt = new JwtService();
+        $token = $jwt->getBearerToken();
+
+        if (!$token) {
+            return service('response')
+                ->setStatusCode(401)
+                ->setJSON(['success' => false, 'message' => 'Token required']);
+        }
+
+        $payload = $jwt->decode($token);
+        if (!$payload) {
+            return service('response')
+                ->setStatusCode(401)
+                ->setJSON(['success' => false, 'message' => 'Invalid or expired token']);
+        }
+
+        $request->user = $payload;
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null) {}
+}
+
+// ============= Routes =============
+// $routes->group('api/v1', ['namespace' => 'App\\Controllers\\Api'], function ($routes) {
+//     $routes->post('auth/login', 'AuthController::login');
+//     $routes->post('auth/register', 'AuthController::register');
+//     $routes->group('', ['filter' => 'jwt'], function ($routes) {
+//         $routes->get('auth/me', 'AuthController::me');
+//         $routes->resource('products', ['controller' => 'ProductController']);
+//     });
+// });`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "ruby-on-rails",
+    slug: "ruby-on-rails",
+    title: "Ruby on Rails Toàn tập",
+    description:
+      "Xây dựng web app nhanh chóng với Rails, ActiveRecord và Hotwire",
+    image: "/images/rails-course.jpg",
+    duration: "10 tuần",
+    level: "intermediate",
+    lessons: [
+      {
+        id: "1",
+        title: "Giới thiệu Rails và Setup",
+        slug: "gioi-thieu-rails",
+        duration: "50 phút",
+        content: `# Giới thiệu Ruby on Rails
+
+## Rails là gì?
+Rails là framework web full-stack viết bằng Ruby, nổi tiếng với triết lý "Convention over Configuration" và "Don't Repeat Yourself".
+
+## Ưu điểm
+- **Convention over Configuration**: Ít config, nhiều convention
+- **ActiveRecord ORM**: ORM mạnh mẽ
+- **Scaffolding**: Tạo CRUD nhanh
+- **Migration**: Quản lý schema
+- **Testing**: Tích hợp sẵn
+- **Hotwire**: Modern frontend không cần nhiều JS
+
+## Cài đặt
+
+### Yêu cầu
+- Ruby 3.2+
+- Rails 7+
+- Node.js (cho asset pipeline)
+- Database (PostgreSQL khuyến nghị)
+
+### Install Ruby
+\`\`\`bash
+# macOS với rbenv
+brew install rbenv ruby-build
+rbenv install 3.3.0
+rbenv global 3.3.0
+
+# Ubuntu
+sudo apt install ruby-full
+\`\`\`
+
+### Install Rails
+\`\`\`bash
+gem install rails
+rails --version
+\`\`\`
+
+### Tạo project
+\`\`\`bash
+rails new myapp --database=postgresql
+cd myapp
+bin/rails db:create
+bin/rails server
+\`\`\`
+
+## Cấu trúc project
+
+\`\`\`
+myapp/
+├── app/
+│   ├── controllers/
+│   ├── models/
+│   ├── views/
+│   ├── helpers/
+│   ├── jobs/
+│   ├── mailers/
+│   └── assets/
+├── config/
+│   ├── routes.rb
+│   ├── database.yml
+│   └── initializers/
+├── db/
+│   ├── migrate/
+│   ├── schema.rb
+│   └── seeds.rb
+├── lib/
+├── public/
+├── test/ (hoặc spec/)
+├── Gemfile
+└── Gemfile.lock
+\`\`\`
+
+## MVC Flow
+
+\`\`\`
+Request → Routes → Controller → Model → View → Response
+                          ↓
+                     Database
+\`\`\`
+
+## Scaffolding
+
+### Tạo full CRUD
+\`\`\`bash
+rails generate scaffold Post title:string body:text published:boolean
+rails db:migrate
+\`\`\`
+
+Điều này tạo ra:
+- Model, Migration
+- Controller với 7 actions
+- Views (index, show, new, edit)
+- Routes
+- Tests
+
+## Controller cơ bản
+
+\`\`\`ruby
+# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @posts = Post.all
+  end
+
+  def show
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(post_params)
+
+    if @post.save
+      redirect_to @post, notice: 'Post was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to posts_url, notice: 'Post was successfully destroyed.'
+  end
+
+  private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, :published)
+  end
+end
+\`\`\`
+
+## Routes
+
+\`\`\`ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  root 'home#index'
+
+  resources :posts
+  resources :users, only: [:index, :show]
+
+  # Nested routes
+  resources :posts do
+    resources :comments, only: [:create, :destroy]
+  end
+
+  # API namespace
+  namespace :api do
+    namespace :v1 do
+      resources :posts
+    end
+  end
+
+  # Custom routes
+  get '/about', to: 'pages#about'
+  post '/contact', to: 'pages#contact'
+end
+\`\`\`
+
+## Rails Console
+
+\`\`\`bash
+bin/rails console
+# hoặc ngắn gọn
+bin/rails c
+\`\`\`
+
+\`\`\`ruby
+# Trong console
+Post.all
+Post.first
+Post.where(published: true)
+post = Post.new(title: 'Hello')
+post.save
+\`\`\`
+
+## Generators
+
+\`\`\`bash
+# Model
+rails g model Product name:string price:decimal stock:integer
+
+# Controller
+rails g controller Products index show
+
+# Migration
+rails g migration AddPublishedToPosts published:boolean
+
+# Scaffold
+rails g scaffold Category name:string
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo ứng dụng blog đơn giản với scaffold!`,
+        exercises: [
+          {
+            id: "1-1",
+            title: "Blog cơ bản",
+            description: "Tạo blog với scaffold",
+            instructions: `Tạo:
+1. Post model với title, body, published
+2. Scaffold full CRUD
+3. Custom index view hiển thị published posts
+4. Routes cho posts`,
+            type: "code",
+            starterCode: `# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  # Viết code ở đây
+end`,
+            solution: `# ============= Terminal commands =============
+# rails generate scaffold Post title:string body:text published:boolean
+# rails db:migrate
+
+# ============= app/models/post.rb =============
+class Post < ApplicationRecord
+  validates :title, presence: true, length: { minimum: 2, maximum: 200 }
+  validates :body, presence: true
+
+  scope :published, -> { where(published: true) }
+  scope :recent, -> { order(created_at: :desc) }
+
+  def to_s
+    title
+  end
+end
+
+# ============= app/controllers/posts_controller.rb =============
+class PostsController < ApplicationController
+  before_action :set_post, only: %i[show edit update destroy]
+
+  def index
+    @posts = Post.recent
+  end
+
+  def show
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def edit
+  end
+
+  def create
+    @post = Post.new(post_params)
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @post.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, :published)
+  end
+end
+
+# ============= app/views/posts/index.html.erb =============
+# <h1>Posts</h1>
+# <% @posts.each do |post| %>
+#   <div>
+#     <h2><%= link_to post.title, post %></h2>
+#     <p><%= truncate(post.body, length: 200) %></p>
+#     <small><%= post.published ? "Published" : "Draft" %></small>
+#   </div>
+# <% end %>
+# <%= link_to "New Post", new_post_path %>
+
+# ============= config/routes.rb =============
+# Rails.application.routes.draw do
+#   resources :posts do
+#     resources :comments, only: [:create, :destroy]
+#   end
+#   root "posts#index"
+# end`,
+          },
+        ],
+      },
+      {
+        id: "2",
+        title: "ActiveRecord và Migrations",
+        slug: "activerecord-migrations",
+        duration: "80 phút",
+        prerequisites: ["1"],
+        content: `# ActiveRecord và Migrations
+
+## Migrations
+
+### Tạo migration
+\`\`\`bash
+rails g migration CreateProducts name:string price:decimal stock:integer
+\`\`\`
+
+### Migration file
+\`\`\`ruby
+class CreateProducts < ActiveRecord::Migration[7.1]
+  def change
+    create_table :products do |t|
+      t.string :name, null: false
+      t.text :description
+      t.decimal :price, precision: 12, scale: 2, null: false
+      t.integer :stock, default: 0, null: false
+      t.references :category, null: false, foreign_key: true
+      t.timestamps
+    end
+
+    add_index :products, :name
+    add_index :products, [:category_id, :name], unique: true
+  end
+end
+\`\`\`
+
+### Migration commands
+\`\`\`bash
+rails db:migrate
+rails db:rollback
+rails db:migrate:status
+rails db:reset
+rails db:seed
+\`\`\`
+
+### Modify table
+\`\`\`ruby
+class AddPublishedToPosts < ActiveRecord::Migration[7.1]
+  def change
+    add_column :posts, :published_at, :datetime
+    add_index :posts, :published_at
+
+    add_reference :posts, :user, foreign_key: true
+
+    change_column_null :posts, :title, false
+    change_column_default :posts, :views, from: nil, to: 0
+  end
+end
+\`\`\`
+
+## Models
+
+### Basic Model
+\`\`\`ruby
+class User < ApplicationRecord
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  has_secure_password
+
+  validates :name, presence: true, length: { in: 2..100 }
+  validates :email, presence: true, uniqueness: { case_sensitive: false },
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  before_save :downcase_email
+  after_create :send_welcome_email
+
+  scope :active, -> { where(active: true) }
+  scope :recent, -> { order(created_at: :desc) }
+
+  private
+
+  def downcase_email
+    self.email = email.downcase
+  end
+
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_later
+  end
+end
+\`\`\`
+
+## Associations
+
+### has_many / belongs_to
+\`\`\`ruby
+class Author < ApplicationRecord
+  has_many :books, dependent: :destroy
+  has_many :reviews, through: :books
+end
+
+class Book < ApplicationRecord
+  belongs_to :author
+  has_many :reviews, dependent: :destroy
+end
+
+class Review < ApplicationRecord
+  belongs_to :book
+  belongs_to :user
+end
+\`\`\`
+
+### has_one
+\`\`\`ruby
+class User < ApplicationRecord
+  has_one :profile, dependent: :destroy
+end
+
+class Profile < ApplicationRecord
+  belongs_to :user
+end
+\`\`\`
+
+### has_many :through
+\`\`\`ruby
+class Doctor < ApplicationRecord
+  has_many :appointments
+  has_many :patients, through: :appointments
+end
+
+class Patient < ApplicationRecord
+  has_many :appointments
+  has_many :doctors, through: :appointments
+end
+
+class Appointment < ApplicationRecord
+  belongs_to :doctor
+  belongs_to :patient
+end
+\`\`\`
+
+### Polymorphic
+\`\`\`ruby
+class Comment < ApplicationRecord
+  belongs_to :commentable, polymorphic: true
+end
+
+class Post < ApplicationRecord
+  has_many :comments, as: :commentable
+end
+
+class Photo < ApplicationRecord
+  has_many :comments, as: :commentable
+end
+\`\`\`
+
+## Querying
+
+### Basic queries
+\`\`\`ruby
+# Find
+User.all
+User.first
+User.last
+User.find(1)
+User.find([1, 2, 3])
+User.find_by(email: 'user@example.com')
+User.find_by!(email: 'user@example.com')
+
+# Where
+User.where(active: true)
+User.where(age: 18..65)
+User.where.not(role: 'admin')
+User.where(created_at: 1.week.ago..)
+
+# Order
+User.order(:name)
+User.order(created_at: :desc)
+User.order(name: :asc, created_at: :desc)
+
+# Limit và Offset
+User.limit(10).offset(20)
+
+# Select
+User.select(:id, :name)
+
+# Group và Having
+Order.group(:user_id).having('count(*) > 5').count
+Order.group(:status).sum(:total)
+
+# Joins
+User.joins(:posts).where(posts: { published: true })
+User.left_joins(:posts).where(posts: { id: nil })
+
+# Includes (N+1 prevention)
+Post.includes(:comments, :author).all
+\`\`\`
+
+### Find or create
+\`\`\`ruby
+User.find_or_create_by(email: 'user@example.com') do |u|
+  u.name = 'John'
+end
+
+User.find_or_initialize_by(email: 'user@example.com')
+
+User.create_or_find_by(email: 'user@example.com')
+\`\`\`
+
+### Batch processing
+\`\`\`ruby
+User.find_each(batch_size: 100) do |user|
+  # process user
+end
+
+User.find_in_batches(batch_size: 100) do |users|
+  # process batch
+end
+\`\`\`
+
+### Scopes
+\`\`\`ruby
+class Post < ApplicationRecord
+  scope :published, -> { where(published: true) }
+  scope :recent, -> { order(created_at: :desc) }
+  scope :by_author, ->(author_id) { where(author_id: author_id) }
+  scope :popular, -> { where('views > ?', 1000) }
+
+  # Default scope (dùng cẩn thận)
+  # default_scope { where(deleted_at: nil) }
+end
+
+Post.published.recent.by_author(1)
+Post.published.where('views > ?', 100)
+\`\`\`
+
+## Callbacks
+
+\`\`\`ruby
+class Post < ApplicationRecord
+  before_validation :normalize_title
+  before_save :calculate_word_count
+  after_save :update_search_index
+  before_destroy :check_can_delete
+  after_commit :send_notification, on: :create
+
+  private
+
+  def normalize_title
+    self.title = title.strip if title.present?
+  end
+
+  def calculate_word_count
+    self.word_count = body.split.size
+  end
+
+  def update_search_index
+    SearchIndexJob.perform_later(self)
+  end
+
+  def check_can_delete
+    throw :abort if locked?
+  end
+
+  def send_notification
+    NotificationJob.perform_later(id)
+  end
+end
+\`\`\`
+
+## Seeds
+
+\`\`\`ruby
+# db/seeds.rb
+10.times do |i|
+  User.create!(
+    name: "User #{i}",
+    email: "user#{i}@example.com",
+    password: "password123"
+  )
+end
+
+User.find_each do |user|
+  5.times do |i|
+    user.posts.create!(
+      title: "Post #{i} by #{user.name}",
+      body: Faker::Lorem.paragraphs(number: 3).join("\\n\\n"),
+      published: [true, false].sample
+    )
+  end
+end
+\`\`\`
+
+\`\`\`bash
+rails db:seed
+rails db:reset  # drop + create + migrate + seed
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo model với associations và queries!`,
+        exercises: [
+          {
+            id: "2-1",
+            title: "Blog với comments",
+            description: "Tạo models với associations",
+            instructions: `Tạo:
+1. User model (name, email, password)
+2. Post model (title, body, published, user_id)
+3. Comment model (body, user_id, post_id)
+4. Associations và validations
+5. Scopes và queries`,
+            type: "code",
+            starterCode: `# app/models/user.rb
+class User < ApplicationRecord
+  # Viết code ở đây
+end`,
+            solution: `# ============= Migrations =============
+# rails g model User name:string email:string password_digest:string
+# rails g model Post title:string body:text published:boolean user:references
+# rails g model Comment body:text user:references post:references
+# rails db:migrate
+
+# ============= app/models/user.rb =============
+class User < ApplicationRecord
+  has_secure_password
+
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  validates :name, presence: true, length: { in: 2..100 }
+  validates :email, presence: true,
+                    uniqueness: { case_sensitive: false },
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, length: { minimum: 8 }, if: -> { password.present? }
+
+  before_save :downcase_email
+
+  scope :active, -> { where(active: true) }
+  scope :recent, -> { order(created_at: :desc) }
+
+  def display_name
+    name.presence || email.split('@').first
+  end
+
+  private
+
+  def downcase_email
+    self.email = email.downcase.strip
+  end
+end
+
+# ============= app/models/post.rb =============
+class Post < ApplicationRecord
+  belongs_to :user
+  has_many :comments, dependent: :destroy
+
+  validates :title, presence: true, length: { in: 2..200 }
+  validates :body, presence: true, length: { minimum: 10 }
+
+  scope :published, -> { where(published: true) }
+  scope :drafts, -> { where(published: false) }
+  scope :recent, -> { order(created_at: :desc) }
+  scope :by_author, ->(user_id) { where(user_id: user_id) }
+
+  before_save :calculate_word_count
+
+  def self.search(term)
+    return all if term.blank?
+    where('title ILIKE :q OR body ILIKE :q', q: "%#{term}%")
+  end
+
+  def author
+    user
+  end
+
+  private
+
+  def calculate_word_count
+    self.word_count = body.to_s.split.size
+  end
+end
+
+# ============= app/models/comment.rb =============
+class Comment < ApplicationRecord
+  belongs_to :user
+  belongs_to :post, counter_cache: true
+
+  validates :body, presence: true, length: { in: 1..1000 }
+
+  scope :recent, -> { order(created_at: :desc) }
+end
+
+# ============= Example queries =============
+# User.active.recent.limit(10)
+# Post.published.recent.includes(:user, :comments)
+# Post.search("rails")
+# User.find_by(email: 'john@example.com').posts.published
+# Post.joins(:comments).group(:id).having('COUNT(comments.id) > 5')
+# Post.includes(:comments).where(comments: { user_id: 1 })`,
+          },
+        ],
+      },
+      {
+        id: "3",
+        title: "Views, Helpers và Hotwire",
+        slug: "views-helpers-hotwire",
+        duration: "75 phút",
+        prerequisites: ["2"],
+        content: `# Views, Helpers và Hotwire
+
+## ERB Templates
+
+### Layout
+\`\`\`erb
+<!-- app/views/layouts/application.html.erb -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "My App" %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <nav>
+      <%= link_to "Home", root_path %>
+      <%= link_to "Posts", posts_path %>
+      <% if current_user %>
+        <%= link_to "Logout", logout_path, method: :delete %>
+      <% end %>
+    </nav>
+
+    <% flash.each do |type, msg| %>
+      <div class="flash flash-<%= type %>"><%= msg %></div>
+    <% end %>
+
+    <main>
+      <%= yield %>
+    </main>
+  </body>
+</html>
+\`\`\`
+
+### Partials
+\`\`\`erb
+<!-- app/views/posts/_post.html.erb -->
+<div class="post" id="<%= dom_id(post) %>">
+  <h2><%= link_to post.title, post %></h2>
+  <p><%= truncate(post.body, length: 200) %></p>
+  <p>By <%= post.user.display_name %></p>
+  <p>
+    <%= link_to "Edit", edit_post_path(post) %> |
+    <%= link_to "Delete", post, data: { turbo_method: :delete, turbo_confirm: "Sure?" } %>
+  </p>
+</div>
+
+<!-- app/views/posts/index.html.erb -->
+<h1>Posts</h1>
+<div id="posts">
+  <%= render @posts %>
+</div>
+
+<!-- Collection rendering -->
+<%= render partial: "post", collection: @posts %>
+\`\`\`
+
+## View Helpers
+
+### Common helpers
+\`\`\`erb
+<%= link_to "Edit", edit_post_path(@post) %>
+<%= link_to "Delete", @post, method: :delete, data: { confirm: "Sure?" } %>
+
+<%= image_tag "logo.png", alt: "Logo", class: "logo" %>
+<%= image_tag @user.avatar.variant(resize_to_limit: [100, 100]) %>
+
+<%= form_with(model: @post) do |form| %>
+  <% if form.object.errors.any? %>
+    <div class="errors">
+      <h3><%= pluralize(form.object.errors.count, "error") %> prohibited saving:</h3>
+      <ul>
+        <% form.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.label :published %>
+    <%= form.check_box :published %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
+
+<%= truncate(post.body, length: 100, separator: ' ') %>
+<%= pluralize(@posts.count, "post") %>
+<%= number_to_currency(1000) %>
+<%= time_ago_in_words(post.created_at) %>
+\`\`\`
+
+## Custom Helpers
+
+\`\`\`ruby
+# app/helpers/posts_helper.rb
+module PostsHelper
+  def published_badge(post)
+    if post.published?
+      content_tag(:span, "Published", class: "badge badge-success")
+    else
+      content_tag(:span, "Draft", class: "badge badge-warning")
+    end
+  end
+
+  def post_excerpt(post, length: 200)
+    truncate(strip_tags(post.body), length: length)
+  end
+
+  def author_avatar(user, size: 40)
+    if user.avatar.attached?
+      image_tag user.avatar.variant(resize_to_fill: [size, size]), class: "avatar"
+    else
+      content_tag(:div, user.name[0].upcase, class: "avatar avatar-initial")
+    end
+  end
+end
+\`\`\`
+
+## Hotwire - Turbo
+
+### Turbo Frames
+\`\`\`erb
+<!-- app/views/posts/index.html.erb -->
+<h1>Posts</h1>
+
+<!-- Search form inside frame -->
+<%= turbo_frame_tag "posts_search" do %>
+  <%= form_with url: posts_path, method: :get, data: { turbo_frame: "posts_search" } do |f| %>
+    <%= f.search_field :q, value: params[:q], placeholder: "Search..." %>
+  <% end %>
+
+  <div id="posts">
+    <%= render @posts %>
+  </div>
+<% end %>
+\`\`\`
+
+### Turbo Streams
+\`\`\`ruby
+# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  def create
+    @post = Post.new(post_params)
+
+    if @post.save
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @post, notice: "Post created" }
+      end
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@post) }
+      format.html { redirect_to posts_url }
+    end
+  end
+end
+\`\`\`
+
+\`\`\`erb
+<!-- app/views/posts/create.turbo_stream.erb -->
+<%= turbo_stream.prepend "posts", @post %>
+<%= turbo_stream.update "new_post_form", "" %>
+<%= turbo_stream.replace "flash", partial: "shared/flash" %>
+\`\`\`
+
+### Turbo Broadcasts
+\`\`\`ruby
+class Post < ApplicationRecord
+  after_create_commit -> { broadcast_prepend_to "posts", target: "posts" }
+  after_update_commit -> { broadcast_replace_to "posts" }
+  after_destroy_commit -> { broadcast_remove_to "posts" }
+end
+\`\`\`
+
+## Stimulus Controllers
+
+\`\`\`javascript
+// app/javascript/controllers/dropdown_controller.js
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  static targets = ["menu"]
+  static values = { open: Boolean }
+
+  toggle() {
+    this.menuTarget.classList.toggle("hidden")
+    this.openValue = !this.openValue
+  }
+
+  hide(event) {
+    if (!this.element.contains(event.target)) {
+      this.menuTarget.classList.add("hidden")
+      this.openValue = false
+    }
+  }
+}
+\`\`\`
+
+\`\`\`erb
+<div data-controller="dropdown" data-action="click@window->dropdown#hide">
+  <button data-action="click->dropdown#toggle">Menu</button>
+  <div data-dropdown-target="menu" class="hidden">
+    <a href="#">Option 1</a>
+    <a href="#">Option 2</a>
+  </div>
+</div>
+\`\`\`
+
+## Forms với FormBuilder
+
+\`\`\`ruby
+# app/views/posts/_form.html.erb
+<%= form_with(model: post, class: "post-form") do |form| %>
+  <%= render "shared/errors", object: post %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body, rows: 10, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.collection_select :category_id, Category.all, :id, :name,
+                                { prompt: "Select category" },
+                                { class: "form-select" } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo views với Turbo Frames và Stimulus!`,
+        exercises: [
+          {
+            id: "3-1",
+            title: "Interactive Posts với Hotwire",
+            description: "Tạo UI tương tác với Turbo và Stimulus",
+            instructions: `Tạo:
+1. Turbo Frame search cho posts
+2. Inline edit form
+3. Real-time comments với Turbo Streams
+4. Stimulus controller cho like button`,
+            type: "code",
+            starterCode: `# app/views/posts/index.html.erb
+<h1>Posts</h1>
+# Viết views ở đây`,
+            solution: `# ============= Turbo Frame Search =============
+# app/views/posts/index.html.erb
+<%= turbo_frame_tag "posts_frame" do %>
+  <h1>Posts</h1>
+
+  <%= form_with url: posts_path, method: :get,
+                data: { turbo_frame: "posts_frame", turbo_action: "advance" } do |f| %>
+    <%= f.search_field :q, value: params[:q],
+                       placeholder: "Search posts...",
+                       data: { action: "input->form#submit" } %>
+  <% end %>
+
+  <div id="posts">
+    <%= render @posts %>
+  </div>
+<% end %>
+
+<%= link_to "New Post", new_post_path,
+            data: { turbo_frame: "modal" },
+            class: "btn btn-primary" %>
+
+<%= turbo_frame_tag "modal" %>
+
+# ============= Inline Edit =============
+# app/views/posts/_post.html.erb
+<div id="<%= dom_id(post) %>">
+  <%= turbo_frame_tag dom_id(post) do %>
+    <h2><%= post.title %></h2>
+    <p><%= post.body %></p>
+    <%= link_to "Edit", edit_post_path(post) %>
+  <% end %>
+</div>
+
+# app/views/posts/edit.html.erb
+<%= turbo_frame_tag dom_id(@post) do %>
+  <h1>Editing post</h1>
+  <%= render "form", post: @post %>
+  <%= link_to "Cancel", @post %>
+<% end %>
+
+# ============= Real-time Comments =============
+# app/controllers/comments_controller.rb
+class CommentsController < ApplicationController
+  before_action :set_post
+
+  def create
+    @comment = @post.comments.build(comment_params.merge(user: current_user))
+
+    if @comment.save
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @post }
+      end
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @comment = @post.comments.find(params[:id])
+    @comment.destroy
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@comment) }
+      format.html { redirect_to @post }
+    end
+  end
+
+  private
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:body)
+  end
+end
+
+# app/views/comments/create.turbo_stream.erb
+<%= turbo_stream.prepend "comments", @comment %>
+<%= turbo_stream.update "comment_form", "" %>
+<%= turbo_stream.replace "flash", partial: "shared/flash" %>
+
+# app/views/posts/show.html.erb
+<h1><%= @post.title %></h1>
+<p><%= @post.body %></p>
+
+<h2>Comments (<%= @post.comments.count %>)</h2>
+
+<div id="comments">
+  <%= render @post.comments %>
+</div>
+
+<%= turbo_frame_tag "comment_form" do %>
+  <%= form_with(model: [@post, Comment.new]) do |f| %>
+    <%= f.text_area :body, placeholder: "Your comment..." %>
+    <%= f.submit "Post Comment" %>
+  <% end %>
+<% end %>
+
+# ============= Like Button (Stimulus) =============
+# app/javascript/controllers/like_controller.js
+# import { Controller } from "@hotwired/stimulus"
+#
+# export default class extends Controller {
+#   static targets = ["button", "count"]
+#   static values = { postId: Number, liked: Boolean }
+#
+#   async toggle() {
+#     const response = await fetch(\`/posts/\${this.postIdValue}/like\`, {
+#       method: "POST",
+#       headers: {
+#         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+#         "Accept": "application/json"
+#       }
+#     })
+#
+#     if (response.ok) {
+#       const data = await response.json()
+#       this.likedValue = data.liked
+#       this.countTarget.textContent = data.count
+#       this.buttonTarget.classList.toggle("liked", data.liked)
+#     }
+#   }
+# }
+
+# app/views/posts/_like.html.erb
+# <div data-controller="like"
+#      data-like-post-id-value="<%= post.id %>"
+#      data-like-liked-value="<%= current_user&.liked?(post) %>">
+#   <button data-action="click->like#toggle"
+#           data-like-target="button"
+#           class="like-btn <%= 'liked' if current_user&.liked?(post) %>">
+#     ❤
+#   </button>
+#   <span data-like-target="count"><%= post.likes.count %></span>
+# </div>`,
+          },
+        ],
+      },
+      {
+        id: "4",
+        title: "Authentication và Authorization",
+        slug: "authentication-authorization-rails",
+        duration: "70 phút",
+        prerequisites: ["3"],
+        content: `# Authentication và Authorization trong Rails
+
+## Authentication
+
+### Setup với bcrypt
+\`\`\`ruby
+# Gemfile
+gem 'bcrypt', '~> 3.1.7'
+\`\`\`
+
+\`\`\`bash
+bundle install
+rails g model User name:string email:string password_digest:string
+rails db:migrate
+\`\`\`
+
+### User Model
+\`\`\`ruby
+class User < ApplicationRecord
+  has_secure_password
+
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :password, length: { minimum: 8 }, if: -> { password.present? }
+
+  before_save { self.email = email.downcase }
+
+  def self.from_omniauth(auth)
+    # OAuth integration
+  end
+end
+\`\`\`
+
+### Sessions Controller
+\`\`\`ruby
+class SessionsController < ApplicationController
+  def new
+  end
+
+  def create
+    user = User.find_by(email: params[:email].downcase)
+
+    if user&.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to root_path, notice: "Logged in successfully"
+    else
+      flash.now[:alert] = "Invalid email or password"
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path, notice: "Logged out"
+  end
+end
+\`\`\`
+
+### Current User Helper
+\`\`\`ruby
+class ApplicationController < ActionController::Base
+  helper_method :current_user, :user_signed_in?
+
+  private
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def user_signed_in?
+    current_user.present?
+  end
+
+  def require_login
+    unless user_signed_in?
+      redirect_to login_path, alert: "You must be logged in"
+    end
+  end
+
+  def require_admin
+    unless current_user&.admin?
+      redirect_to root_path, alert: "Access denied"
+    end
+  end
+end
+\`\`\`
+
+### Routes
+\`\`\`ruby
+Rails.application.routes.draw do
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+
+  resources :users, only: [:new, :create]
+  resources :posts
+end
+\`\`\`
+
+## Devise (Alternative)
+
+\`\`\`ruby
+# Gemfile
+gem 'devise'
+\`\`\`
+
+\`\`\`bash
+bundle install
+rails g devise:install
+rails g devise User
+rails db:migrate
+\`\`\`
+
+### Devise Views
+\`\`\`bash
+rails g devise:views
+\`\`\`
+
+### Devise Configuration
+\`\`\`ruby
+# config/initializers/devise.rb
+config.password_length = 8..128
+config.timeout_in = 30.minutes
+config.confirm_within = 3.days
+\`\`\`
+
+### Protected routes
+\`\`\`ruby
+class PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @posts = current_user.posts
+  end
+end
+\`\`\`
+
+## Authorization với Pundit
+
+\`\`\`ruby
+# Gemfile
+gem 'pundit'
+\`\`\`
+
+\`\`\`bash
+bundle install
+rails g pundit:install
+\`\`\`
+
+### Application Policy
+\`\`\`ruby
+class ApplicationPolicy
+  attr_reader :user, :record
+
+  def initialize(user, record)
+    @user = user
+    @record = record
+  end
+
+  def index?; false; end
+  def show?; false; end
+  def create?; false; end
+  def new?; create?; end
+  def update?; false; end
+  def edit?; update?; end
+  def destroy?; false; end
+
+  private
+
+  def admin?
+    user&.admin?
+  end
+
+  def owner?
+    user && record.respond_to?(:user_id) && record.user_id == user.id
+  end
+
+  class Scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      raise NotImplementedError
+    end
+
+    private
+    attr_reader :user, :scope
+  end
+end
+\`\`\`
+
+### Post Policy
+\`\`\`ruby
+class PostPolicy < ApplicationPolicy
+  def index?; true; end
+  def show?; record.published? || owner? || admin?; end
+  def create?; user.present?; end
+  def update?; owner? || admin?; end
+  def destroy?; owner? || admin?; end
+
+  class Scope < ApplicationPolicy::Scope
+    def resolve
+      if user&.admin?
+        scope.all
+      elsif user
+        scope.where(published: true).or(scope.where(user_id: user.id))
+      else
+        scope.where(published: true)
+      end
+    end
+  end
+end
+\`\`\`
+
+### Sử dụng trong Controller
+\`\`\`ruby
+class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
+  def index
+    @posts = policy_scope(Post)
+  end
+
+  def show
+    @post = Post.find(params[:id])
+    authorize @post
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+    authorize @post
+  end
+
+  def create
+    @post = current_user.posts.build(post_params)
+    authorize @post
+
+    if @post.save
+      redirect_to @post
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :body, :published)
+  end
+end
+\`\`\`
+
+## Roles
+
+### Simple enum-based roles
+\`\`\`ruby
+# Migration
+add_column :users, :role, :string, default: 'user'
+add_index :users, :role
+
+# Model
+class User < ApplicationRecord
+  ROLES = %w[user moderator admin].freeze
+
+  validates :role, inclusion: { in: ROLES }
+
+  ROLES.each do |r|
+    define_method "#{r}?" do
+      role == r
+    end
+  end
+end
+\`\`\`
+
+### Sử dụng trong views
+\`\`\`erb
+<% if current_user&.admin? %>
+  <%= link_to "Admin", admin_path %>
+<% end %>
+
+<% if policy(@post).edit? %>
+  <%= link_to "Edit", edit_post_path(@post) %>
+<% end %>
+\`\`\`
+
+## JWT cho API
+
+\`\`\`ruby
+# Gemfile
+gem 'jwt'
+\`\`\`
+
+\`\`\`ruby
+# app/services/json_web_token.rb
+class JsonWebToken
+  SECRET_KEY = Rails.application.secret_key_base
+
+  def self.encode(payload, exp = 24.hours.from_now)
+    payload[:exp] = exp.to_i
+    JWT.encode(payload, SECRET_KEY)
+  end
+
+  def self.decode(token)
+    decoded = JWT.decode(token, SECRET_KEY).first
+    HashWithIndifferentAccess.new(decoded)
+  rescue JWT::ExpiredSignature, JWT::DecodeError
+    nil
+  end
+end
+
+# app/controllers/api/v1/auth_controller.rb
+module Api
+  module V1
+    class AuthController < ApplicationController
+      skip_before_action :verify_authenticity_token
+
+      def login
+        user = User.find_by(email: params[:email]&.downcase)
+
+        if user&.authenticate(params[:password])
+          token = JsonWebToken.encode(user_id: user.id)
+          render json: { token: token, user: user.as_json(except: :password_digest) }
+        else
+          render json: { error: "Invalid credentials" }, status: :unauthorized
+        end
+      end
+
+      def register
+        user = User.new(user_params)
+
+        if user.save
+          token = JsonWebToken.encode(user_id: user.id)
+          render json: { token: token, user: user.as_json(except: :password_digest) },
+                 status: :created
+        else
+          render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
+      private
+
+      def user_params
+        params.require(:user).permit(:name, :email, :password)
+      end
+    end
+  end
+end
+
+# app/controllers/api/v1/base_controller.rb
+module Api
+  module V1
+    class BaseController < ApplicationController
+      before_action :authenticate_request
+      attr_reader :current_user
+
+      private
+
+      def authenticate_request
+        header = request.headers['Authorization']
+        token = header.split(' ').last if header
+
+        decoded = JsonWebToken.decode(token)
+        @current_user = User.find(decoded[:user_id]) if decoded
+
+        unless @current_user
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+        end
+      end
+    end
+  end
+end
+\`\`\`
+
+## Bài tập thực hành
+Hãy implement authentication + authorization!`,
+        exercises: [
+          {
+            id: "4-1",
+            title: "Auth System với Pundit",
+            description: "Build auth với roles và policies",
+            instructions: `Tạo:
+1. Session-based authentication
+2. Roles (user, admin)
+3. Pundit policies cho Post
+4. Protected routes
+5. JWT API auth`,
+            type: "code",
+            starterCode: `# app/controllers/application_controller.rb
+class ApplicationController < ActionController::Base
+  # Viết code ở đây
+end`,
+            solution: `# ============= ApplicationController =============
+class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  helper_method :current_user, :user_signed_in?
+
+  private
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def user_signed_in?
+    current_user.present?
+  end
+
+  def require_login
+    unless user_signed_in?
+      session[:return_to] = request.fullpath
+      redirect_to login_path, alert: "Bạn cần đăng nhập"
+    end
+  end
+
+  def require_admin
+    unless current_user&.admin?
+      redirect_to root_path, alert: "Bạn không có quyền truy cập"
+    end
+  end
+
+  def user_not_authorized
+    flash[:alert] = "Bạn không có quyền thực hiện hành động này"
+    redirect_to(request.referrer || root_path)
+  end
+end
+
+# ============= SessionsController =============
+class SessionsController < ApplicationController
+  def new; end
+
+  def create
+    user = User.find_by(email: params[:email].to_s.downcase)
+
+    if user&.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to session.delete(:return_to) || root_path,
+                  notice: "Đăng nhập thành công"
+    else
+      flash.now[:alert] = "Email hoặc mật khẩu không đúng"
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path, notice: "Đã đăng xuất"
+  end
+end
+
+# ============= User model =============
+class User < ApplicationRecord
+  has_secure_password
+  has_many :posts, dependent: :destroy
+
+  ROLES = %w[user moderator admin].freeze
+
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false },
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :role, inclusion: { in: ROLES }
+  validates :password, length: { minimum: 8 }, if: -> { password.present? }
+
+  before_save { self.email = email.downcase }
+
+  ROLES.each do |r|
+    define_method "#{r}?" do
+      role == r
+    end
+  end
+
+  def admin?
+    role == 'admin'
+  end
+end
+
+# ============= PostPolicy =============
+class PostPolicy < ApplicationPolicy
+  def index?; true; end
+  def show?; record.published? || owner? || user&.admin?; end
+  def create?; user.present?; end
+  def update?; owner? || user&.admin?; end
+  def destroy?; owner? || user&.admin?; end
+
+  class Scope < ApplicationPolicy::Scope
+    def resolve
+      if user&.admin?
+        scope.all
+      elsif user
+        scope.where(published: true).or(scope.where(user_id: user.id))
+      else
+        scope.where(published: true)
+      end
+    end
+  end
+end
+
+# ============= PostsController =============
+class PostsController < ApplicationController
+  before_action :require_login, except: [:index, :show]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @posts = policy_scope(Post).recent
+  end
+
+  def show
+    authorize @post
+  end
+
+  def new
+    @post = Post.new
+    authorize @post
+  end
+
+  def create
+    @post = current_user.posts.build(post_params)
+    authorize @post
+
+    if @post.save
+      redirect_to @post, notice: "Tạo bài viết thành công"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    authorize @post
+
+    if @post.update(post_params)
+      redirect_to @post, notice: "Cập nhật thành công"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    authorize @post
+    @post.destroy
+    redirect_to posts_path, notice: "Đã xóa"
+  end
+
+  private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, :published)
+  end
+end
+
+# ============= Routes =============
+# Rails.application.routes.draw do
+#   get 'login', to: 'sessions#new'
+#   post 'login', to: 'sessions#create'
+#   delete 'logout', to: 'sessions#destroy'
+#   get 'signup', to: 'users#new'
+#   resources :users, only: [:new, :create]
+#   resources :posts
+#
+#   namespace :admin do
+#     resources :users
+#   end
+#
+#   namespace :api do
+#     namespace :v1 do
+#       post 'auth/login', to: 'auth#login'
+#       post 'auth/register', to: 'auth#register'
+#       resources :posts
+#     end
+#   end
+# end`,
+          },
+        ],
+      },
+      {
+        id: "5",
+        title: "Testing với RSpec",
+        slug: "testing-rspec",
+        duration: "70 phút",
+        prerequisites: ["4"],
+        content: `# Testing với RSpec
+
+## Setup
+
+\`\`\`ruby
+# Gemfile
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'shoulda-matchers'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner-active_record'
+end
+\`\`\`
+
+\`\`\`bash
+bundle install
+rails generate rspec:install
+\`\`\`
+
+## Model Specs
+
+\`\`\`ruby
+# spec/models/user_spec.rb
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:email) }
+    it { should validate_uniqueness_of(:email).case_insensitive }
+    it { should have_secure_password }
+  end
+
+  describe 'associations' do
+    it { should have_many(:posts).dependent(:destroy) }
+  end
+
+  describe '#admin?' do
+    it 'returns true for admin users' do
+      user = build(:user, role: 'admin')
+      expect(user.admin?).to be true
+    end
+
+    it 'returns false for regular users' do
+      user = build(:user, role: 'user')
+      expect(user.admin?).to be false
+    end
+  end
+
+  describe '#email' do
+    it 'downcases email before save' do
+      user = create(:user, email: 'JOHN@EXAMPLE.COM')
+      expect(user.email).to eq('john@example.com')
+    end
+  end
+end
+\`\`\`
+
+## Factories
+
+\`\`\`ruby
+# spec/factories/users.rb
+FactoryBot.define do
+  factory :user do
+    name { Faker::Name.name }
+    email { Faker::Internet.unique.email }
+    password { 'password123' }
+    role { 'user' }
+
+    trait :admin do
+      role { 'admin' }
+    end
+
+    trait :with_posts do
+      transient do
+        posts_count { 3 }
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:post, evaluator.posts_count, user: user)
+      end
+    end
+  end
+end
+
+# spec/factories/posts.rb
+FactoryBot.define do
+  factory :post do
+    title { Faker::Lorem.sentence }
+    body { Faker::Lorem.paragraphs(number: 3).join("\\n\\n") }
+    published { true }
+    association :user
+
+    trait :draft do
+      published { false }
+    end
+  end
+end
+\`\`\`
+
+## Controller/Request Specs
+
+\`\`\`ruby
+# spec/requests/posts_spec.rb
+require 'rails_helper'
+
+RSpec.describe 'Posts', type: :request do
+  let(:user) { create(:user) }
+  let(:post_record) { create(:post, user: user) }
+
+  describe 'GET /posts' do
+    it 'returns success' do
+      get posts_path
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'GET /posts/:id' do
+    it 'shows the post' do
+      get post_path(post_record)
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include(post_record.title)
+    end
+  end
+
+  describe 'POST /posts' do
+    context 'when signed in' do
+      before { sign_in(user) }
+
+      it 'creates a new post' do
+        expect {
+          post posts_path, params: {
+            post: { title: 'New', body: 'Body', published: true }
+          }
+        }.to change(Post, :count).by(1)
+
+        expect(response).to redirect_to(post_path(Post.last))
+      end
+
+      it 'fails with invalid params' do
+        expect {
+          post posts_path, params: { post: { title: '' } }
+        }.not_to change(Post, :count)
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+
+    context 'when not signed in' do
+      it 'redirects to login' do
+        post posts_path, params: { post: { title: 'New', body: 'Body' } }
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
+end
+\`\`\`
+
+### Authentication helper
+\`\`\`ruby
+# spec/support/request_helpers.rb
+module RequestHelpers
+  def sign_in(user)
+    post login_path, params: { email: user.email, password: 'password123' }
+  end
+end
+
+RSpec.configure do |config|
+  config.include RequestHelpers, type: :request
+end
+\`\`\`
+
+## Feature Specs (System Tests)
+
+\`\`\`ruby
+# spec/system/user_registration_spec.rb
+require 'rails_helper'
+
+RSpec.describe 'User registration', type: :system do
+  before { driven_by(:rack_test) }
+
+  it 'allows a user to register' do
+    visit signup_path
+
+    fill_in 'Name', with: 'John Doe'
+    fill_in 'Email', with: 'john@example.com'
+    fill_in 'Password', with: 'password123'
+    fill_in 'Password confirmation', with: 'password123'
+
+    click_button 'Sign up'
+
+    expect(page).to have_content 'Welcome'
+    expect(User.last.email).to eq('john@example.com')
+  end
+
+  it 'shows validation errors' do
+    visit signup_path
+    click_button 'Sign up'
+
+    expect(page).to have_content "Name can't be blank"
+  end
+end
+
+# spec/system/post_management_spec.rb
+RSpec.describe 'Post management', type: :system do
+  let(:user) { create(:user) }
+
+  before do
+    driven_by(:rack_test)
+    visit login_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'password123'
+    click_button 'Log in'
+  end
+
+  it 'creates a new post' do
+    visit new_post_path
+    fill_in 'Title', with: 'My First Post'
+    fill_in 'Body', with: 'This is the content'
+    check 'Published'
+    click_button 'Create Post'
+
+    expect(page).to have_content 'Post was successfully created'
+    expect(page).to have_content 'My First Post'
+  end
+end
+\`\`\`
+
+## Policy Specs
+
+\`\`\`ruby
+# spec/policies/post_policy_spec.rb
+require 'rails_helper'
+
+RSpec.describe PostPolicy do
+  subject { described_class }
+
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
+  let(:post) { create(:post, user: user) }
+
+  permissions :show? do
+    it 'allows owner' do
+      expect(subject).to permit(user, post)
+    end
+
+    it 'allows admin' do
+      expect(subject).to permit(admin, post)
+    end
+
+    it 'denies other users for unpublished' do
+      draft = create(:post, :draft, user: user)
+      expect(subject).not_to permit(other_user, draft)
+    end
+  end
+
+  permissions :update?, :destroy? do
+    it 'allows owner' do
+      expect(subject).to permit(user, post)
+    end
+
+    it 'allows admin' do
+      expect(subject).to permit(admin, post)
+    end
+
+    it 'denies other users' do
+      expect(subject).not_to permit(other_user, post)
+    end
+  end
+end
+\`\`\`
+
+## Job Specs
+
+\`\`\`ruby
+# spec/jobs/send_welcome_email_job_spec.rb
+require 'rails_helper'
+
+RSpec.describe SendWelcomeEmailJob, type: :job do
+  include ActiveJob::TestHelper
+
+  let(:user) { create(:user) }
+
+  it 'queues the job' do
+    expect {
+      described_class.perform_later(user.id)
+    }.to have_enqueued_job(described_class).with(user.id)
+  end
+
+  it 'sends an email' do
+    expect {
+      described_class.perform_now(user.id)
+    }.to change { ActionMailer::Base.deliveries.count }.by(1)
+  end
+end
+\`\`\`
+
+## Test Configuration
+
+\`\`\`ruby
+# spec/rails_helper.rb
+require 'spec_helper'
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+
+abort("The Rails environment is running in production mode!") if Rails.env.production?
+require 'rspec/rails'
+
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  abort e.to_s.strip
+end
+
+RSpec.configure do |config|
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
+  config.use_transactional_fixtures = true
+  config.infer_spec_type_from_file_location!
+  config.filter_rails_from_backtrace!
+
+  # FactoryBot
+  config.include FactoryBot::Syntax::Methods
+
+  # Devise test helpers
+  # config.include Devise::Test::IntegrationHelpers, type: :request
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+\`\`\`
+
+## Running Tests
+
+\`\`\`bash
+bundle exec rspec
+bundle exec rspec spec/models
+bundle exec rspec spec/models/user_spec.rb
+bundle exec rspec spec/models/user_spec.rb:15  # specific line
+
+# Coverage
+COVERAGE=true bundle exec rspec
+\`\`\`
+
+## Bài tập thực hành
+Hãy viết tests cho blog app!`,
+        exercises: [
+          {
+            id: "5-1",
+            title: "Test Suite cho Blog",
+            description: "Viết tests với RSpec",
+            instructions: `Viết:
+1. Factory cho User và Post
+2. Model specs với validations
+3. Request specs cho controller
+4. Feature spec cho CRUD flow
+5. Policy specs`,
+            type: "code",
+            starterCode: `# spec/factories/users.rb
+FactoryBot.define do
+  # Viết factory ở đây
+end`,
+            solution: `# ============= spec/factories/users.rb =============
+FactoryBot.define do
+  factory :user do
+    name { Faker::Name.name }
+    email { Faker::Internet.unique.email }
+    password { 'password123' }
+    role { 'user' }
+
+    trait :admin do
+      role { 'admin' }
+    end
+
+    trait :with_posts do
+      transient do
+        posts_count { 3 }
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:post, evaluator.posts_count, user: user)
+      end
+    end
+  end
+end
+
+# ============= spec/factories/posts.rb =============
+FactoryBot.define do
+  factory :post do
+    title { Faker::Lorem.sentence(word_count: 5) }
+    body { Faker::Lorem.paragraphs(number: 3).join("\\n\\n") }
+    published { true }
+    association :user
+
+    trait :draft do
+      published { false }
+    end
+
+    trait :old do
+      created_at { 1.month.ago }
+    end
+  end
+end
+
+# ============= spec/models/user_spec.rb =============
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  describe 'validations' do
+    subject { build(:user) }
+
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:email) }
+    it { should validate_uniqueness_of(:email).case_insensitive }
+    it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
+  end
+
+  describe 'associations' do
+    it { should have_many(:posts).dependent(:destroy) }
+  end
+
+  describe 'callbacks' do
+    it 'downcases email before save' do
+      user = create(:user, email: 'TEST@EXAMPLE.COM')
+      expect(user.reload.email).to eq('test@example.com')
+    end
+  end
+
+  describe 'roles' do
+    it 'defaults to user role' do
+      expect(create(:user).role).to eq('user')
+    end
+
+    it 'returns true for admin?' do
+      expect(build(:user, :admin).admin?).to be true
+    end
+
+    it 'returns false for regular user' do
+      expect(build(:user).admin?).to be false
+    end
+  end
+end
+
+# ============= spec/models/post_spec.rb =============
+require 'rails_helper'
+
+RSpec.describe Post, type: :model do
+  describe 'validations' do
+    subject { build(:post) }
+
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:body) }
+    it { should validate_length_of(:title).is_at_least(2).is_at_most(200) }
+  end
+
+  describe 'associations' do
+    it { should belong_to(:user) }
+    it { should have_many(:comments).dependent(:destroy) }
+  end
+
+  describe 'scopes' do
+    let!(:published) { create(:post, published: true) }
+    let!(:draft) { create(:post, :draft) }
+
+    it 'returns only published posts' do
+      expect(Post.published).to include(published)
+      expect(Post.published).not_to include(draft)
+    end
+
+    it 'returns drafts' do
+      expect(Post.drafts).to include(draft)
+      expect(Post.drafts).not_to include(published)
+    end
+
+    it 'orders by recent first' do
+      old = create(:post, created_at: 1.week.ago)
+      expect(Post.recent.first).not_to eq(old)
+    end
+  end
+
+  describe '.search' do
+    let!(:rails_post) { create(:post, title: 'Learning Rails') }
+    let!(:python_post) { create(:post, title: 'Python Guide') }
+
+    it 'finds posts matching title' do
+      expect(Post.search('rails')).to include(rails_post)
+      expect(Post.search('rails')).not_to include(python_post)
+    end
+
+    it 'returns all when term blank' do
+      expect(Post.search('').count).to eq(Post.count)
+    end
+  end
+end
+
+# ============= spec/requests/posts_spec.rb =============
+require 'rails_helper'
+
+RSpec.describe 'Posts API', type: :request do
+  let(:user) { create(:user) }
+  let(:valid_attributes) { attributes_for(:post) }
+
+  describe 'GET /posts' do
+    it 'returns success' do
+      create_list(:post, 3)
+      get posts_path
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'POST /posts' do
+    context 'when authenticated' do
+      before { sign_in(user) }
+
+      it 'creates a post' do
+        expect {
+          post posts_path, params: { post: valid_attributes }
+        }.to change(Post, :count).by(1)
+      end
+
+      it 'with invalid data returns 422' do
+        expect {
+          post posts_path, params: { post: { title: '' } }
+        }.not_to change(Post, :count)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+
+    context 'when not authenticated' do
+      it 'redirects to login' do
+        post posts_path, params: { post: valid_attributes }
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
+
+  describe 'PUT /posts/:id' do
+    let(:post_record) { create(:post, user: user) }
+    before { sign_in(user) }
+
+    it 'updates own post' do
+      put post_path(post_record), params: { post: { title: 'Updated' } }
+      expect(post_record.reload.title).to eq('Updated')
+    end
+  end
+
+  describe 'DELETE /posts/:id' do
+    let!(:post_record) { create(:post, user: user) }
+    before { sign_in(user) }
+
+    it 'deletes own post' do
+      expect {
+        delete post_path(post_record)
+      }.to change(Post, :count).by(-1)
+    end
+  end
+end
+
+# ============= spec/system/post_flow_spec.rb =============
+require 'rails_helper'
+
+RSpec.describe 'Post workflow', type: :system do
+  let(:user) { create(:user) }
+
+  before do
+    driven_by(:rack_test)
+    sign_in_as(user)
+  end
+
+  it 'creates a post end-to-end' do
+    visit new_post_path
+    fill_in 'Title', with: 'My Post'
+    fill_in 'Body', with: 'Post body content'
+    check 'Published'
+    click_button 'Create Post'
+
+    expect(page).to have_content('Post was successfully created')
+    expect(page).to have_content('My Post')
+  end
+
+  it 'shows validation errors' do
+    visit new_post_path
+    click_button 'Create Post'
+
+    expect(page).to have_content("Title can't be blank")
+  end
+
+  def sign_in_as(user)
+    visit login_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'password123'
+    click_button 'Log in'
+  end
+end
+
+# ============= spec/policies/post_policy_spec.rb =============
+require 'rails_helper'
+
+RSpec.describe PostPolicy do
+  subject { described_class }
+
+  let(:owner) { create(:user) }
+  let(:stranger) { create(:user) }
+  let(:admin) { create(:user, :admin) }
+  let(:post_record) { create(:post, user: owner) }
+
+  permissions :update?, :destroy? do
+    it 'permits owner' do
+      expect(subject).to permit(owner, post_record)
+    end
+
+    it 'permits admin' do
+      expect(subject).to permit(admin, post_record)
+    end
+
+    it 'denies stranger' do
+      expect(subject).not_to permit(stranger, post_record)
+    end
+  end
+
+  permissions :show? do
+    it 'permits everyone for published posts' do
+      expect(subject).to permit(nil, post_record)
+    end
+
+    it 'denies stranger for drafts' do
+      draft = create(:post, :draft, user: owner)
+      expect(subject).not_to permit(stranger, draft)
+    end
+  end
+end`,
+          },
+        ],
+      },
+      {
+        id: "6",
+        title: "Background Jobs và Action Mailer",
+        slug: "background-jobs-mailer",
+        duration: "60 phút",
+        prerequisites: ["5"],
+        content: `# Background Jobs và Action Mailer
+
+## Active Job
+
+### Tạo Job
+\`\`\`bash
+rails g job SendWelcomeEmail
+\`\`\`
+
+\`\`\`ruby
+# app/jobs/send_welcome_email_job.rb
+class SendWelcomeEmailJob < ApplicationJob
+  queue_as :default
+
+  retry_on StandardError, wait: :exponentially_longer, attempts: 3
+
+  def perform(user_id)
+    user = User.find(user_id)
+    UserMailer.welcome(user).deliver_now
+  end
+end
+\`\`\`
+
+### Enqueue Job
+\`\`\`ruby
+SendWelcomeEmailJob.perform_later(user.id)
+SendWelcomeEmailJob.set(wait: 1.hour).perform_later(user.id)
+SendWelcomeEmailJob.set(wait_until: Date.tomorrow.noon).perform_later(user.id)
+SendWelcomeEmailJob.set(queue: :high_priority).perform_later(user.id)
+\`\`\`
+
+### Job với arguments
+\`\`\`ruby
+class ProcessOrderJob < ApplicationJob
+  queue_as :orders
+
+  discard_on ActiveRecord::RecordNotFound
+
+  def perform(order)
+    # ActiveRecord objects được serialize tự động
+    order.process!
+  end
+end
+
+ProcessOrderJob.perform_later(order)
+\`\`\`
+
+## Action Mailer
+
+### Generate Mailer
+\`\`\`bash
+rails g mailer UserMailer welcome password_reset
+\`\`\`
+
+### Mailer Class
+\`\`\`ruby
+# app/mailers/user_mailer.rb
+class UserMailer < ApplicationMailer
+  default from: 'noreply@myapp.com'
+
+  def welcome(user)
+    @user = user
+    @login_url = login_url
+
+    mail(
+      to: @user.email,
+      subject: "Welcome to MyApp!"
+    )
+  end
+
+  def password_reset(user)
+    @user = user
+    @reset_url = edit_password_reset_url(user.reset_token)
+
+    mail(to: @user.email, subject: "Reset your password")
+  end
+end
+\`\`\`
+
+### Views
+\`\`\`erb
+<!-- app/views/user_mailer/welcome.html.erb -->
+<h1>Welcome, <%= @user.name %>!</h1>
+
+<p>Thanks for signing up. We're excited to have you.</p>
+
+<p><%= link_to "Log in here", @login_url %></p>
+
+<p>Best regards,<br>The MyApp Team</p>
+
+<!-- app/views/user_mailer/welcome.text.erb -->
+Welcome, <%= @user.name %>!
+
+Thanks for signing up. Log in here: <%= @login_url %>
+
+Best regards,
+The MyApp Team
+\`\`\`
+
+### Application Mailer Layout
+\`\`\`erb
+<!-- app/views/layouts/mailer.html.erb -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body { font-family: Arial, sans-serif; }
+      .header { background: #333; color: white; padding: 20px; }
+      .content { padding: 20px; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>MyApp</h1>
+    </div>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </body>
+</html>
+\`\`\`
+
+## Configuration
+
+### SMTP cho development (Mailcatcher/Mailhog)
+\`\`\`ruby
+# config/environments/development.rb
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address: 'localhost',
+  port: 1025
+}
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+\`\`\`
+
+### Production (Postmark, SendGrid, SES)
+\`\`\`ruby
+# config/environments/production.rb
+config.action_mailer.delivery_method = :postmark
+config.action_mailer.postmark_settings = {
+  api_token: Rails.application.credentials.postmark_api_token
+}
+config.action_mailer.default_url_options = { host: 'myapp.com' }
+\`\`\`
+
+## Job Backends
+
+### Sidekiq (Redis)
+\`\`\`ruby
+# Gemfile
+gem 'sidekiq'
+gem 'sidekiq-cron'
+
+# config/application.rb
+config.active_job.queue_adapter = :sidekiq
+\`\`\`
+
+\`\`\`yaml
+# config/sidekiq.yml
+:concurrency: 5
+:queues:
+  - [critical, 3]
+  - [default, 2]
+  - [low, 1]
+\`\`\`
+
+### Solid Queue (Rails 8 default)
+\`\`\`ruby
+config.active_job.queue_adapter = :solid_queue
+\`\`\`
+
+\`\`\`bash
+bin/rails solid_queue:start
+\`\`\`
+
+## Recurring Jobs
+
+### sidekiq-cron
+\`\`\`ruby
+# config/initializers/sidekiq.rb
+schedule = {
+  'daily_digest' => {
+    'cron' => '0 8 * * *',
+    'class' => 'DailyDigestJob',
+    'queue' => 'default'
+  },
+  'cleanup_job' => {
+    'cron' => '0 2 * * 0',
+    'class' => 'CleanupJob',
+    'queue' => 'low'
+  }
+}
+
+Sidekiq::Cron::Job.load_from_hash(schedule)
+\`\`\`
+
+### Solid Queue recurring
+\`\`\`yaml
+# config/recurring.yml
+production:
+  daily_digest:
+    class: DailyDigestJob
+    schedule: every day at 8am
+
+  cleanup:
+    class: CleanupJob
+    schedule: every sunday at 2am
+\`\`\`
+
+## Job Patterns
+
+### Batch processing
+\`\`\`ruby
+class ProcessBatchJob < ApplicationJob
+  def perform(user_ids)
+    User.where(id: user_ids).find_each do |user|
+      ProcessUserJob.perform_later(user.id)
+    end
+  end
+end
+
+# Enqueue
+user_ids = User.pluck(:id)
+ProcessBatchJob.perform_later(user_ids)
+\`\`\`
+
+### Job chaining
+\`\`\`ruby
+class ImportDataJob < ApplicationJob
+  def perform(file_path)
+    result = import_file(file_path)
+    NotifyImportCompleteJob.perform_later(result.id)
+  end
+end
+\`\`\`
+
+### Idempotent jobs
+\`\`\`ruby
+class ChargeCustomerJob < ApplicationJob
+  def perform(order_id)
+    order = Order.find(order_id)
+    return if order.paid?  # idempotency
+
+    PaymentGateway.charge(order)
+    order.mark_as_paid!
+  end
+end
+\`\`\`
+
+## Monitoring
+
+### Sidekiq Web UI
+\`\`\`ruby
+# config/routes.rb
+require 'sidekiq/web'
+mount Sidekiq::Web => '/sidekiq'
+
+# Với basic auth
+authenticate :user, ->(u) { u.admin? } do
+  mount Sidekiq::Web => '/sidekiq'
+end
+\`\`\`
+
+## Mailer Preview
+
+\`\`\`ruby
+# test/mailers/previews/user_mailer_preview.rb
+class UserMailerPreview < ActionMailer::Preview
+  def welcome
+    UserMailer.welcome(User.first)
+  end
+
+  def password_reset
+    UserMailer.password_reset(User.first)
+  end
+end
+\`\`\`
+
+Truy cập \`/rails/mailers\` trong development.
+
+## Test Jobs và Mailers
+
+\`\`\`ruby
+# spec/jobs/send_welcome_email_job_spec.rb
+require 'rails_helper'
+
+RSpec.describe SendWelcomeEmailJob, type: :job do
+  let(:user) { create(:user) }
+
+  it 'queues the job' do
+    expect {
+      described_class.perform_later(user.id)
+    }.to have_enqueued_job(described_class).with(user.id)
+  end
+
+  it 'sends welcome email' do
+    expect {
+      described_class.perform_now(user.id)
+    }.to change { ActionMailer::Base.deliveries.count }.by(1)
+  end
+
+  it 'retries on error' do
+    allow(UserMailer).to receive(:welcome).and_raise(StandardError)
+    expect {
+      described_class.perform_now(user.id)
+    }.to have_enqueued_job(described_class)
+  end
+end
+
+# spec/mailers/user_mailer_spec.rb
+require 'rails_helper'
+
+RSpec.describe UserMailer, type: :mailer do
+  let(:user) { create(:user) }
+
+  describe '#welcome' do
+    let(:mail) { described_class.welcome(user) }
+
+    it 'renders the subject' do
+      expect(mail.subject).to eq('Welcome to MyApp!')
+    end
+
+    it 'sends to user email' do
+      expect(mail.to).to eq([user.email])
+    end
+
+    it 'sends from noreply' do
+      expect(mail.from).to eq(['noreply@myapp.com'])
+    end
+
+    it 'includes user name in body' do
+      expect(mail.body.encoded).to include(user.name)
+    end
+  end
+end
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo welcome email job và mailer!`,
+        exercises: [
+          {
+            id: "6-1",
+            title: "Welcome Email Flow",
+            description: "Implement email workflow với jobs",
+            instructions: `Tạo:
+1. UserMailer với welcome email
+2. SendWelcomeEmailJob
+3. Trigger từ User model
+4. Tests cho cả job và mailer
+5. Mailer preview`,
+            type: "code",
+            starterCode: `# app/mailers/user_mailer.rb
+class UserMailer < ApplicationMailer
+  # Viết code ở đây
+end`,
+            solution: `# ============= UserMailer =============
+class UserMailer < ApplicationMailer
+  default from: 'noreply@myapp.com'
+
+  def welcome(user)
+    @user = user
+    @login_url = login_url
+    @support_email = 'support@myapp.com'
+
+    mail(
+      to: @user.email,
+      subject: "Chào mừng #{@user.name} đến với MyApp!"
+    )
+  end
+
+  def password_reset(user)
+    @user = user
+    @reset_token = user.signed_id(purpose: :password_reset, expires_in: 15.minutes)
+    @reset_url = edit_password_reset_url(@reset_token)
+
+    mail(to: @user.email, subject: 'Reset mật khẩu của bạn')
+  end
+end
+
+# ============= SendWelcomeEmailJob =============
+class SendWelcomeEmailJob < ApplicationJob
+  queue_as :mailers
+
+  retry_on StandardError, wait: :polynomially_longer, attempts: 3
+  discard_on ActiveJob::DeserializationError
+
+  def perform(user_id)
+    user = User.find_by(id: user_id)
+    return unless user
+
+    UserMailer.welcome(user).deliver_now
+  end
+end
+
+# ============= User model callback =============
+class User < ApplicationRecord
+  has_secure_password
+
+  after_create_commit :enqueue_welcome_email
+
+  private
+
+  def enqueue_welcome_email
+    SendWelcomeEmailJob.perform_later(id)
+  end
+end
+
+# ============= Views =============
+# app/views/user_mailer/welcome.html.erb
+# <h1>Chào mừng <%= @user.name %>!</h1>
+# <p>Cảm ơn bạn đã đăng ký tài khoản tại MyApp.</p>
+# <p><%= link_to "Đăng nhập ngay", @login_url %></p>
+# <p>Cần hỗ trợ? Liên hệ <%= @support_email %></p>
+
+# app/views/user_mailer/welcome.text.erb
+# Chào mừng <%= @user.name %>!
+#
+# Cảm ơn bạn đã đăng ký tài khoản tại MyApp.
+# Đăng nhập tại: <%= @login_url %>
+#
+# Cần hỗ trợ? Liên hệ <%= @support_email %>
+
+# ============= Preview =============
+# test/mailers/previews/user_mailer_preview.rb
+class UserMailerPreview < ActionMailer::Preview
+  def welcome
+    user = User.first || User.new(name: 'Preview User', email: 'preview@example.com')
+    UserMailer.welcome(user)
+  end
+end
+
+# ============= Tests =============
+# spec/mailers/user_mailer_spec.rb
+require 'rails_helper'
+
+RSpec.describe UserMailer, type: :mailer do
+  let(:user) { create(:user) }
+
+  describe '#welcome' do
+    let(:mail) { described_class.welcome(user) }
+
+    it 'sends to the user email' do
+      expect(mail.to).to eq([user.email])
+    end
+
+    it 'has correct subject' do
+      expect(mail.subject).to include('Chào mừng')
+    end
+
+    it 'includes user name' do
+      expect(mail.body.encoded).to include(user.name)
+    end
+
+    it 'includes login URL' do
+      expect(mail.body.encoded).to include(login_url)
+    end
+  end
+end
+
+# spec/jobs/send_welcome_email_job_spec.rb
+require 'rails_helper'
+
+RSpec.describe SendWelcomeEmailJob, type: :job do
+  let(:user) { create(:user) }
+
+  it 'enqueues the job' do
+    expect {
+      described_class.perform_later(user.id)
+    }.to have_enqueued_job(described_class).with(user.id)
+  end
+
+  it 'sends welcome email' do
+    expect {
+      described_class.perform_now(user.id)
+    }.to change { ActionMailer::Base.deliveries.count }.by(1)
+
+    mail = ActionMailer::Base.deliveries.last
+    expect(mail.to).to eq([user.email])
+  end
+
+  it 'discards gracefully when user missing' do
+    expect {
+      described_class.perform_now(999_999)
+    }.not_to raise_error
+  end
+end
+
+# spec/models/user_spec.rb (bonus)
+# describe 'callbacks' do
+#   it 'enqueues welcome email after create' do
+#     expect {
+#       create(:user)
+#     }.to have_enqueued_job(SendWelcomeEmailJob)
+#   end
+# end`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "wordpress-development",
+    slug: "wordpress",
+    title: "WordPress Development",
+    description: "Phát triển theme và plugin WordPress chuyên nghiệp",
+    image: "/images/wordpress-course.jpg",
+    duration: "8 tuần",
+    level: "beginner",
+    lessons: [
+      {
+        id: "1",
+        title: "Giới thiệu WordPress và Setup",
+        slug: "gioi-thieu-wordpress",
+        duration: "45 phút",
+        content: `# Giới thiệu WordPress
+
+## WordPress là gì?
+WordPress là CMS (Content Management System) phổ biến nhất, chiếm hơn 40% website toàn cầu. Được viết bằng PHP và MySQL.
+
+## Hai loại WordPress
+- **WordPress.org (Self-hosted)**: Bạn tự host, có thể chỉnh sửa code, cài plugin/theme tùy ý
+- **WordPress.com**: Hosting managed, giới hạn tính năng
+
+## Cài đặt WordPress
+
+### Yêu cầu
+- PHP 7.4+
+- MySQL 5.7+ hoặc MariaDB 10.3+
+- Apache/Nginx
+
+### Cài đặt nhanh với wp-env (Docker)
+\`\`\`bash
+npm install -g @wordpress/env
+mkdir my-wp && cd my-wp
+wp-env start
+# Admin: http://localhost:8888/wp-admin (admin/password)
+# Site:  http://localhost:8888
+\`\`\`
+
+### Local by Flywheel / LocalWP
+\`\`\`bash
+# Download từ localwp.com
+# Tạo site mới với giao diện trực quan
+\`\`\`
+
+### Cài đặt thủ công
+\`\`\`bash
+# Download WordPress
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+mv wordpress mysite
+cd mysite
+
+# Configure wp-config.php
+cp wp-config-sample.php wp-config.php
+
+# Sau đó mở http://localhost/mysite để chạy installer
+\`\`\`
+
+## WP-CLI
+
+\`\`\`bash
+# Install WP-CLI
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
+
+# Common commands
+wp core download
+wp core install --url=example.com --title="My Site" --admin_user=admin --admin_password=pass --admin_email=admin@example.com
+wp plugin list
+wp theme list
+wp post list
+wp user list
+\`\`\`
+
+## Cấu trúc thư mục
+
+\`\`\`
+wordpress/
+├── wp-admin/          # Admin dashboard
+├── wp-content/        # Custom code
+│   ├── themes/        # Themes
+│   ├── plugins/       # Plugins
+│   ├── uploads/       # Uploaded files
+│   └── mu-plugins/    # Must-use plugins
+├── wp-includes/       # Core code
+├── wp-config.php      # Configuration
+└── .htaccess          # Apache rules
+\`\`\`
+
+## wp-config.php
+
+\`\`\`php
+<?php
+// Database
+define('DB_NAME', 'wordpress');
+define('DB_USER', 'root');
+define('DB_PASSWORD', 'password');
+define('DB_HOST', 'localhost');
+define('DB_CHARSET', 'utf8mb4');
+define('DB_COLLATE', '');
+
+// Authentication keys
+define('AUTH_KEY',         'put-your-unique-phrase-here');
+define('SECURE_AUTH_KEY',  'put-your-unique-phrase-here');
+define('LOGGED_IN_KEY',    'put-your-unique-phrase-here');
+define('NONCE_KEY',        'put-your-unique-phrase-here');
+define('AUTH_SALT',        'put-your-unique-phrase-here');
+define('SECURE_AUTH_SALT', 'put-your-unique-phrase-here');
+define('LOGGED_IN_SALT',   'put-your-unique-phrase-here');
+define('NONCE_SALT',       'put-your-unique-phrase-here');
+
+$table_prefix = 'wp_';
+
+// Debug
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);
+
+// Memory
+define('WP_MEMORY_LIMIT', '256M');
+
+// Disable file edit from admin
+define('DISALLOW_FILE_EDIT', true);
+
+// Auto-updates
+define('WP_AUTO_UPDATE_CORE', 'minor');
+
+if (!defined('ABSPATH')) {
+    define('ABSPATH', __DIR__ . '/');
+}
+require_once ABSPATH . 'wp-settings.php';
+\`\`\`
+
+## Hooks cơ bản
+
+### Actions
+\`\`\`php
+// Thêm code khi theme setup
+add_action('after_setup_theme', function () {
+    add_theme_support('post-thumbnails');
+});
+
+// Thêm vào footer
+add_action('wp_footer', function () {
+    echo '<p>Custom footer content</p>';
+});
+\`\`\`
+
+### Filters
+\`\`\`php
+// Sửa title
+add_filter('the_title', function ($title) {
+    return strtoupper($title);
+});
+
+// Sửa content
+add_filter('the_content', function ($content) {
+    return $content . '<p>Thanks for reading!</p>';
+});
+\`\`\`
+
+## Bài tập thực hành
+Hãy cài đặt WordPress và tạo child theme đầu tiên!`,
+        exercises: [
+          {
+            id: "1-1",
+            title: "Cài đặt và cấu hình WordPress",
+            description: "Setup WordPress development environment",
+            instructions: `1. Cài đặt WordPress local
+2. Tạo database và cấu hình wp-config.php
+3. Tạo child theme với style.css và functions.php
+4. Thêm một custom hook đơn giản`,
+            type: "code",
+            starterCode: `<?php
+// wp-content/themes/my-theme/functions.php
+
+// Viết code ở đây`,
+            solution: `<?php
+// wp-content/themes/my-theme/style.css
+/*
+Theme Name: My Custom Theme
+Theme URI: https://example.com/my-theme
+Author: Your Name
+Author URI: https://example.com
+Description: Custom WordPress theme
+Version: 1.0.0
+License: GPL v2 or later
+Text Domain: my-theme
+*/
+
+// wp-content/themes/my-theme/functions.php
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+/**
+ * Theme setup
+ */
+function my_theme_setup() {
+    // Add theme support
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('automatic-feed-links');
+    add_theme_support('html5', [
+        'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
+    ]);
+    add_theme_support('custom-logo', [
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
+
+    // Register navigation menus
+    register_nav_menus([
+        'primary' => __('Primary Menu', 'my-theme'),
+        'footer'  => __('Footer Menu', 'my-theme'),
+    ]);
+
+    // Set content width
+    $GLOBALS['content_width'] = 1200;
+}
+add_action('after_setup_theme', 'my_theme_setup');
+
+/**
+ * Enqueue assets
+ */
+function my_theme_assets() {
+    $version = wp_get_theme()->get('Version');
+
+    wp_enqueue_style(
+        'my-theme-style',
+        get_stylesheet_uri(),
+        [],
+        $version
+    );
+
+    wp_enqueue_script(
+        'my-theme-script',
+        get_template_directory_uri() . '/assets/js/main.js',
+        [],
+        $version,
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'my_theme_assets');
+
+/**
+ * Register widget areas
+ */
+function my_theme_widgets_init() {
+    register_sidebar([
+        'name'          => __('Sidebar', 'my-theme'),
+        'id'            => 'sidebar-1',
+        'description'   => __('Add widgets here.', 'my-theme'),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ]);
+}
+add_action('widgets_init', 'my_theme_widgets_init');
+
+/**
+ * Custom hook example
+ */
+add_action('wp_footer', function () {
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        echo '<!-- My Theme v' . wp_get_theme()->get('Version') . ' -->';
+    }
+});
+
+/**
+ * Custom filter example
+ */
+add_filter('excerpt_length', function ($length) {
+    return 25;
+});
+
+add_filter('excerpt_more', function ($more) {
+    return '...';
+});`,
+          },
+        ],
+      },
+      {
+        id: "2",
+        title: "Theme Development",
+        slug: "theme-development",
+        duration: "80 phút",
+        prerequisites: ["1"],
+        content: `# Theme Development
+
+## Template Hierarchy
+
+\`\`\`
+Front Page:
+  front-page.php → home.php → index.php
+
+Single Post:
+  single-post.php → single.php → singular.php → index.php
+
+Page:
+  page-{slug}.php → page-{id}.php → page.php → singular.php → index.php
+
+Category:
+  category-{slug}.php → category-{id}.php → category.php → archive.php → index.php
+
+Tag, Author, Date, Custom Post Type
+  Similar hierarchy to category
+\`\`\`
+
+## Cấu trúc theme cơ bản
+
+\`\`\`
+my-theme/
+├── style.css              # Required
+├── functions.php
+├── index.php              # Required
+├── header.php
+├── footer.php
+├── sidebar.php
+├── single.php
+├── page.php
+├── archive.php
+├── search.php
+├── 404.php
+├── screenshot.png
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── template-parts/
+│   ├── content.php
+│   ├── content-single.php
+│   └── content-page.php
+└── inc/
+    ├── customizer.php
+    ├── template-tags.php
+    └── custom-functions.php
+\`\`\`
+
+## header.php
+
+\`\`\`php
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+
+<header class="site-header">
+    <div class="container">
+        <div class="site-branding">
+            <?php if (has_custom_logo()): ?>
+                <?php the_custom_logo(); ?>
+            <?php else: ?>
+                <a href="<?php echo esc_url(home_url('/')); ?>">
+                    <?php bloginfo('name'); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <nav class="site-nav">
+            <?php
+            wp_nav_menu([
+                'theme_location' => 'primary',
+                'container'      => false,
+                'menu_class'     => 'menu',
+                'fallback_cb'    => false,
+            ]);
+            ?>
+        </nav>
+    </div>
+</header>
+\`\`\`
+
+## footer.php
+
+\`\`\`php
+<footer class="site-footer">
+    <div class="container">
+        <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. 
+           <?php esc_html_e('All rights reserved.', 'my-theme'); ?>
+        </p>
+
+        <?php
+        wp_nav_menu([
+            'theme_location' => 'footer',
+            'container'      => false,
+            'menu_class'     => 'footer-menu',
+            'depth'          => 1,
+        ]);
+        ?>
+    </div>
+</footer>
+
+<?php wp_footer(); ?>
+</body>
+</html>
+\`\`\`
+
+## index.php
+
+\`\`\`php
+<?php get_header(); ?>
+
+<main class="site-main container">
+    <?php if (have_posts()): ?>
+        <div class="posts-grid">
+            <?php while (have_posts()): the_post(); ?>
+                <?php get_template_part('template-parts/content', get_post_type()); ?>
+            <?php endwhile; ?>
+        </div>
+
+        <?php
+        the_posts_pagination([
+            'mid_size'  => 2,
+            'prev_text' => __('&laquo; Previous', 'my-theme'),
+            'next_text' => __('Next &raquo;', 'my-theme'),
+        ]);
+        ?>
+    <?php else: ?>
+        <p><?php esc_html_e('No posts found.', 'my-theme'); ?></p>
+    <?php endif; ?>
+</main>
+
+<?php get_footer(); ?>
+\`\`\`
+
+## template-parts/content.php
+
+\`\`\`php
+<article id="post-<?php the_ID(); ?>" <?php post_class('post-card'); ?>>
+    <?php if (has_post_thumbnail()): ?>
+        <a href="<?php the_permalink(); ?>" class="post-thumbnail">
+            <?php the_post_thumbnail('medium_large'); ?>
+        </a>
+    <?php endif; ?>
+
+    <div class="post-content">
+        <header class="entry-header">
+            <?php the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '">', '</a></h2>'); ?>
+
+            <div class="entry-meta">
+                <time datetime="<?php echo esc_attr(get_the_date('c')); ?>">
+                    <?php echo esc_html(get_the_date()); ?>
+                </time>
+                <span class="author">by <?php the_author_posts_link(); ?></span>
+            </div>
+        </header>
+
+        <div class="entry-summary">
+            <?php the_excerpt(); ?>
+        </div>
+
+        <a href="<?php the_permalink(); ?>" class="read-more">
+            <?php esc_html_e('Read more', 'my-theme'); ?> &rarr;
+        </a>
+    </div>
+</article>
+\`\`\`
+
+## single.php
+
+\`\`\`php
+<?php get_header(); ?>
+
+<main class="site-main container">
+    <?php while (have_posts()): the_post(); ?>
+        <article id="post-<?php the_ID(); ?>" <?php post_class('single-post'); ?>>
+            <header class="entry-header">
+                <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+                
+                <div class="entry-meta">
+                    <time datetime="<?php echo esc_attr(get_the_date('c')); ?>">
+                        <?php echo esc_html(get_the_date()); ?>
+                    </time>
+                    <span>by <?php the_author_posts_link(); ?></span>
+                    
+                    <?php if (has_category()): ?>
+                        <span class="categories">
+                            <?php the_category(', '); ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            </header>
+
+            <?php if (has_post_thumbnail()): ?>
+                <div class="post-thumbnail">
+                    <?php the_post_thumbnail('large'); ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="entry-content">
+                <?php the_content(); ?>
+                
+                <?php
+                wp_link_pages([
+                    'before' => '<nav class="page-links">' . __('Pages:', 'my-theme'),
+                    'after'  => '</nav>',
+                ]);
+                ?>
+            </div>
+
+            <footer class="entry-footer">
+                <?php the_tags('<div class="tags">', ', ', '</div>'); ?>
+            </footer>
+        </article>
+
+        <?php
+        the_post_navigation([
+            'prev_text' => '<span class="nav-label">Previous</span><span class="nav-title">%title</span>',
+            'next_text' => '<span class="nav-label">Next</span><span class="nav-title">%title</span>',
+        ]);
+
+        if (comments_open() || get_comments_number()) {
+            comments_template();
+        }
+        ?>
+    <?php endwhile; ?>
+</main>
+
+<?php get_footer(); ?>
+\`\`\`
+
+## Functions.php essentials
+
+\`\`\`php
+<?php
+
+// Prevent direct access
+if (!defined('ABSPATH')) exit;
+
+// Theme constants
+define('MY_THEME_VERSION', '1.0.0');
+define('MY_THEME_DIR', get_template_directory());
+define('MY_THEME_URI', get_template_directory_uri());
+
+// Include files
+require_once MY_THEME_DIR . '/inc/template-tags.php';
+require_once MY_THEME_DIR . '/inc/customizer.php';
+
+/**
+ * Theme setup
+ */
+function my_theme_setup() {
+    load_theme_textdomain('my-theme', MY_THEME_DIR . '/languages');
+
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('custom-logo', [
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
+    add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script']);
+    add_theme_support('responsive-embeds');
+    add_theme_support('align-wide');
+    add_theme_support('editor-styles');
+
+    // Image sizes
+    add_image_size('my-theme-featured', 1200, 600, true);
+    add_image_size('my-theme-thumbnail', 600, 400, true);
+
+    register_nav_menus([
+        'primary' => __('Primary Menu', 'my-theme'),
+        'footer'  => __('Footer Menu', 'my-theme'),
+    ]);
+}
+add_action('after_setup_theme', 'my_theme_setup');
+
+/**
+ * Enqueue scripts and styles
+ */
+function my_theme_scripts() {
+    wp_enqueue_style(
+        'my-theme-style',
+        get_stylesheet_uri(),
+        [],
+        MY_THEME_VERSION
+    );
+
+    wp_enqueue_style(
+        'my-theme-main',
+        MY_THEME_URI . '/assets/css/main.css',
+        ['my-theme-style'],
+        MY_THEME_VERSION
+    );
+
+    wp_enqueue_script(
+        'my-theme-script',
+        MY_THEME_URI . '/assets/js/main.js',
+        [],
+        MY_THEME_VERSION,
+        true
+    );
+
+    if (is_singular() && comments_open() && get_option('thread_comments')) {
+        wp_enqueue_script('comment-reply');
+    }
+}
+add_action('wp_enqueue_scripts', 'my_theme_scripts');
+
+/**
+ * Register widget areas
+ */
+function my_theme_widgets_init() {
+    register_sidebar([
+        'name'          => __('Sidebar', 'my-theme'),
+        'id'            => 'sidebar-1',
+        'description'   => __('Add widgets here.', 'my-theme'),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ]);
+
+    register_sidebar([
+        'name'          => __('Footer Column 1', 'my-theme'),
+        'id'            => 'footer-1',
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ]);
+}
+add_action('widgets_init', 'my_theme_widgets_init');
+\`\`\`
+
+## Template tags
+
+\`\`\`php
+<?php // app/inc/template-tags.php ?>
+
+/**
+ * Display post meta
+ */
+function my_theme_post_meta() {
+    printf(
+        '<div class="entry-meta">
+            <time datetime="%1$s">%2$s</time>
+            <span class="author">%3$s</span>
+        </div>',
+        esc_attr(get_the_date('c')),
+        esc_html(get_the_date()),
+        sprintf(
+            '<a href="%1$s">%2$s</a>',
+            esc_url(get_author_posts_url(get_the_author_meta('ID'))),
+            esc_html(get_the_author())
+        )
+    );
+}
+
+/**
+ * Get the post thumbnail URL
+ */
+function my_theme_get_thumbnail_url($size = 'full') {
+    if (!has_post_thumbnail()) {
+        return get_theme_file_uri('/assets/images/placeholder.jpg');
+    }
+    return get_the_post_thumbnail_url(get_the_ID(), $size);
+}
+
+/**
+ * Breadcrumbs
+ */
+function my_theme_breadcrumbs() {
+    if (is_front_page()) return;
+
+    echo '<nav class="breadcrumbs" aria-label="Breadcrumb"><ol>';
+    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
+
+    if (is_single()) {
+        $categories = get_the_category();
+        if (!empty($categories)) {
+            echo '<li><a href="' . esc_url(get_category_link($categories[0]->term_id)) . '">'
+                . esc_html($categories[0]->name) . '</a></li>';
+        }
+        echo '<li aria-current="page">' . esc_html(get_the_title()) . '</li>';
+    } elseif (is_page()) {
+        echo '<li aria-current="page">' . esc_html(get_the_title()) . '</li>';
+    } elseif (is_category()) {
+        echo '<li aria-current="page">' . esc_html(single_cat_title('', false)) . '</li>';
+    }
+
+    echo '</ol></nav>';
+}
+\`\`\`
+
+## Custom Post Types và Taxonomies
+
+\`\`\`php
+/**
+ * Register custom post type: Portfolio
+ */
+function my_theme_register_cpt() {
+    register_post_type('portfolio', [
+        'labels' => [
+            'name'          => __('Portfolio', 'my-theme'),
+            'singular_name' => __('Project', 'my-theme'),
+            'add_new'       => __('Add New', 'my-theme'),
+            'add_new_item'  => __('Add New Project', 'my-theme'),
+            'edit_item'     => __('Edit Project', 'my-theme'),
+            'view_item'     => __('View Project', 'my-theme'),
+            'search_items'  => __('Search Projects', 'my-theme'),
+            'not_found'     => __('No projects found', 'my-theme'),
+        ],
+        'public'        => true,
+        'has_archive'   => true,
+        'menu_icon'     => 'dashicons-portfolio',
+        'menu_position' => 20,
+        'supports'      => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
+        'rewrite'       => ['slug' => 'projects'],
+        'show_in_rest'  => true, // Gutenberg support
+    ]);
+
+    register_taxonomy('portfolio_category', 'portfolio', [
+        'labels' => [
+            'name'          => __('Project Categories', 'my-theme'),
+            'singular_name' => __('Project Category', 'my-theme'),
+        ],
+        'hierarchical' => true,
+        'show_in_rest' => true,
+        'rewrite'      => ['slug' => 'project-category'],
+    ]);
+
+    register_taxonomy('portfolio_tag', 'portfolio', [
+        'labels' => [
+            'name'          => __('Project Tags', 'my-theme'),
+            'singular_name' => __('Project Tag', 'my-theme'),
+        ],
+        'hierarchical' => false,
+        'show_in_rest' => true,
+    ]);
+}
+add_action('init', 'my_theme_register_cpt');
+\`\`\`
+
+## Customizer
+
+\`\`\`php
+<?php // app/inc/customizer.php ?>
+
+function my_theme_customize_register($wp_customize) {
+    // Add section
+    $wp_customize->add_section('my_theme_options', [
+        'title'    => __('Theme Options', 'my-theme'),
+        'priority' => 30,
+    ]);
+
+    // Footer text setting
+    $wp_customize->add_setting('footer_text', [
+        'default'           => '© ' . date('Y') . ' ' . get_bloginfo('name'),
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ]);
+
+    $wp_customize->add_control('footer_text', [
+        'label'   => __('Footer Text', 'my-theme'),
+        'section' => 'my_theme_options',
+        'type'    => 'text',
+    ]);
+
+    // Primary color
+    $wp_customize->add_setting('primary_color', [
+        'default'           => '#0073aa',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ]);
+
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control($wp_customize, 'primary_color', [
+            'label'   => __('Primary Color', 'my-theme'),
+            'section' => 'colors',
+        ])
+    );
+}
+add_action('customize_register', 'my_theme_customize_register');
+
+/**
+ * Output customizer CSS
+ */
+function my_theme_customizer_css() {
+    $primary = get_theme_mod('primary_color', '#0073aa');
+    ?>
+    <style>
+        :root {
+            --primary-color: <?php echo esc_attr($primary); ?>;
+        }
+        a, button, .button {
+            color: var(--primary-color);
+        }
+    </style>
+    <?php
+}
+add_action('wp_head', 'my_theme_customizer_css');
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo complete theme với custom post type!`,
+        exercises: [
+          {
+            id: "2-1",
+            title: "Portfolio Theme",
+            description: "Tạo theme với custom post type",
+            instructions: `Tạo:
+1. Custom post type "Portfolio"
+2. Templates cho single/archive portfolio
+3. Template tags
+4. Customizer options
+5. Widget areas`,
+            type: "code",
+            starterCode: `<?php
+// functions.php
+// Viết code ở đây`,
+            solution: `<?php
+// ============= functions.php =============
+if (!defined('ABSPATH')) exit;
+
+function portfolio_theme_setup() {
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('html5', ['search-form', 'gallery', 'caption']);
+    add_theme_support('custom-logo', [
+        'height' => 100,
+        'width'  => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
+
+    register_nav_menus([
+        'primary' => __('Primary Menu', 'portfolio-theme'),
+        'footer'  => __('Footer Menu', 'portfolio-theme'),
+    ]);
+
+    add_image_size('portfolio-hero', 1600, 800, true);
+    add_image_size('portfolio-card', 600, 400, true);
+}
+add_action('after_setup_theme', 'portfolio_theme_setup');
+
+function portfolio_theme_assets() {
+    wp_enqueue_style('portfolio-style', get_stylesheet_uri(), [], '1.0.0');
+}
+add_action('wp_enqueue_scripts', 'portfolio_theme_assets');
+
+/**
+ * Register Portfolio Custom Post Type
+ */
+function portfolio_register_cpt() {
+    register_post_type('portfolio', [
+        'labels' => [
+            'name'          => __('Portfolios', 'portfolio-theme'),
+            'singular_name' => __('Project', 'portfolio-theme'),
+            'add_new_item'  => __('Add New Project', 'portfolio-theme'),
+            'edit_item'     => __('Edit Project', 'portfolio-theme'),
+            'all_items'     => __('All Projects', 'portfolio-theme'),
+            'not_found'     => __('No projects found', 'portfolio-theme'),
+        ],
+        'public'        => true,
+        'has_archive'   => true,
+        'menu_icon'     => 'dashicons-portfolio',
+        'menu_position' => 5,
+        'supports'      => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
+        'rewrite'       => ['slug' => 'projects'],
+        'show_in_rest'  => true,
+    ]);
+
+    register_taxonomy('portfolio_type', 'portfolio', [
+        'labels' => [
+            'name'          => __('Project Types', 'portfolio-theme'),
+            'singular_name' => __('Project Type', 'portfolio-theme'),
+        ],
+        'hierarchical' => true,
+        'show_in_rest' => true,
+        'rewrite'      => ['slug' => 'project-type'],
+    ]);
+}
+add_action('init', 'portfolio_register_cpt');
+
+/**
+ * Add meta boxes for portfolio details
+ */
+function portfolio_add_meta_boxes() {
+    add_meta_box(
+        'portfolio_details',
+        __('Project Details', 'portfolio-theme'),
+        'portfolio_meta_box_render',
+        'portfolio',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'portfolio_add_meta_boxes');
+
+function portfolio_meta_box_render($post) {
+    wp_nonce_field('portfolio_meta', 'portfolio_meta_nonce');
+
+    $client_url = get_post_meta($post->ID, '_portfolio_client_url', true);
+    $project_date = get_post_meta($post->ID, '_portfolio_date', true);
+    ?>
+    <p>
+        <label for="portfolio_client_url">
+            <?php esc_html_e('Client URL:', 'portfolio-theme'); ?>
+        </label>
+        <input type="url"
+               id="portfolio_client_url"
+               name="portfolio_client_url"
+               value="<?php echo esc_attr($client_url); ?>"
+               style="width: 100%;">
+    </p>
+    <p>
+        <label for="portfolio_date">
+            <?php esc_html_e('Project Date:', 'portfolio-theme'); ?>
+        </label>
+        <input type="date"
+               id="portfolio_date"
+               name="portfolio_date"
+               value="<?php echo esc_attr($project_date); ?>"
+               style="width: 100%;">
+    </p>
+    <?php
+}
+
+function portfolio_save_meta($post_id) {
+    if (!isset($_POST['portfolio_meta_nonce']) ||
+        !wp_verify_nonce($_POST['portfolio_meta_nonce'], 'portfolio_meta')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['portfolio_client_url'])) {
+        update_post_meta(
+            $post_id,
+            '_portfolio_client_url',
+            esc_url_raw($_POST['portfolio_client_url'])
+        );
+    }
+
+    if (isset($_POST['portfolio_date'])) {
+        update_post_meta(
+            $post_id,
+            '_portfolio_date',
+            sanitize_text_field($_POST['portfolio_date'])
+        );
+    }
+}
+add_action('save_post_portfolio', 'portfolio_save_meta');
+
+/**
+ * Template tags
+ */
+function portfolio_get_client_url($post_id = null) {
+    return get_post_meta($post_id ?: get_the_ID(), '_portfolio_client_url', true);
+}
+
+function portfolio_get_date($post_id = null) {
+    return get_post_meta($post_id ?: get_the_ID(), '_portfolio_date', true);
+}
+
+// ============= archive-portfolio.php =============
+<?php get_header(); ?>
+
+<main class="portfolio-archive container">
+    <header class="page-header">
+        <h1><?php post_type_archive_title(); ?></h1>
+        <?php the_archive_description('<div class="archive-description">', '</div>'); ?>
+    </header>
+
+    <?php if (have_posts()): ?>
+        <div class="portfolio-grid">
+            <?php while (have_posts()): the_post(); ?>
+                <article <?php post_class('portfolio-card'); ?>>
+                    <a href="<?php the_permalink(); ?>">
+                        <?php if (has_post_thumbnail()): ?>
+                            <?php the_post_thumbnail('portfolio-card'); ?>
+                        <?php endif; ?>
+                        <h2 class="portfolio-title"><?php the_title(); ?></h2>
+                        <?php the_excerpt(); ?>
+                    </a>
+                </article>
+            <?php endwhile; ?>
+        </div>
+
+        <?php the_posts_pagination(); ?>
+    <?php else: ?>
+        <p><?php esc_html_e('No projects yet.', 'portfolio-theme'); ?></p>
+    <?php endif; ?>
+</main>
+
+<?php get_footer(); ?>
+
+// ============= single-portfolio.php =============
+<?php get_header(); ?>
+
+<main class="portfolio-single container">
+    <?php while (have_posts()): the_post(); ?>
+        <article <?php post_class(); ?>>
+            <header class="entry-header">
+                <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+            </header>
+
+            <?php if (has_post_thumbnail()): ?>
+                <div class="portfolio-hero">
+                    <?php the_post_thumbnail('portfolio-hero'); ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="portfolio-details">
+                <?php $url = portfolio_get_client_url(); ?>
+                <?php if ($url): ?>
+                    <p><strong>Client:</strong>
+                        <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener">
+                            <?php echo esc_html($url); ?>
+                        </a>
+                    </p>
+                <?php endif; ?>
+
+                <?php $date = portfolio_get_date(); ?>
+                <?php if ($date): ?>
+                    <p><strong>Date:</strong>
+                        <?php echo esc_html(date_i18n(get_option('date_format'), strtotime($date))); ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+
+            <div class="entry-content">
+                <?php the_content(); ?>
+            </div>
+        </article>
+    <?php endwhile; ?>
+</main>
+
+<?php get_footer(); ?>
+
+// ============= Customizer =============
+add_action('customize_register', function ($wp_customize) {
+    $wp_customize->add_section('portfolio_options', [
+        'title'    => __('Portfolio Options', 'portfolio-theme'),
+        'priority' => 30,
+    ]);
+
+    $wp_customize->add_setting('portfolio_items_per_page', [
+        'default'           => 9,
+        'sanitize_callback' => 'absint',
+    ]);
+
+    $wp_customize->add_control('portfolio_items_per_page', [
+        'label'   => __('Items per page', 'portfolio-theme'),
+        'section' => 'portfolio_options',
+        'type'    => 'number',
+        'input_attrs' => ['min' => 3, 'max' => 30],
+    ]);
+});`,
+          },
+        ],
+      },
+      {
+        id: "3",
+        title: "Plugin Development",
+        slug: "plugin-development",
+        duration: "90 phút",
+        prerequisites: ["2"],
+        content: `# Plugin Development
+
+## Cấu trúc plugin
+
+\`\`\`
+my-plugin/
+├── my-plugin.php          # Main file với plugin header
+├── readme.txt
+├── uninstall.php
+├── includes/
+│   ├── class-my-plugin.php
+│   ├── class-admin.php
+│   └── class-shortcodes.php
+├── admin/
+│   ├── css/
+│   ├── js/
+│   └── views/
+├── public/
+│   ├── css/
+│   ├── js/
+│   └── views/
+└── languages/
+\`\`\`
+
+## Plugin header
+
+\`\`\`php
+<?php
+/**
+ * Plugin Name:       My Plugin
+ * Plugin URI:        https://example.com/my-plugin
+ * Description:       A custom WordPress plugin
+ * Version:           1.0.0
+ * Requires at least: 6.0
+ * Requires PHP:      7.4
+ * Author:            Your Name
+ * Author URI:        https://example.com
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       my-plugin
+ * Domain Path:       /languages
+ */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// Constants
+define('MY_PLUGIN_VERSION', '1.0.0');
+define('MY_PLUGIN_FILE', __FILE__);
+define('MY_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('MY_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('MY_PLUGIN_BASENAME', plugin_basename(__FILE__));
+
+// Autoloader hoặc includes
+require_once MY_PLUGIN_DIR . 'includes/class-my-plugin.php';
+
+// Activation/Deactivation hooks
+register_activation_hook(__FILE__, ['My_Plugin', 'activate']);
+register_deactivation_hook(__FILE__, ['My_Plugin', 'deactivate']);
+
+// Initialize
+function my_plugin_init() {
+    My_Plugin::instance();
+}
+add_action('plugins_loaded', 'my_plugin_init');
+\`\`\`
+
+## Main Plugin Class
+
+\`\`\`php
+<?php
+// includes/class-my-plugin.php
+
+class My_Plugin {
+    private static $instance = null;
+
+    public static function instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    private function __construct() {
+        $this->define_hooks();
+        $this->load_dependencies();
+    }
+
+    private function define_hooks() {
+        add_action('init', [$this, 'register_post_types']);
+        add_action('admin_menu', [$this, 'add_admin_menu']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_public_assets']);
+        add_shortcode('my_plugin', [$this, 'render_shortcode']);
+        add_action('wp_ajax_my_plugin_action', [$this, 'handle_ajax']);
+    }
+
+    private function load_dependencies() {
+        require_once MY_PLUGIN_DIR . 'includes/class-admin.php';
+        require_once MY_PLUGIN_DIR . 'includes/class-shortcodes.php';
+    }
+
+    public function enqueue_admin_assets($hook) {
+        if (strpos($hook, 'my-plugin') === false) {
+            return;
+        }
+
+        wp_enqueue_style(
+            'my-plugin-admin',
+            MY_PLUGIN_URL . 'admin/css/admin.css',
+            [],
+            MY_PLUGIN_VERSION
+        );
+
+        wp_enqueue_script(
+            'my-plugin-admin',
+            MY_PLUGIN_URL . 'admin/js/admin.js',
+            ['jquery'],
+            MY_PLUGIN_VERSION,
+            true
+        );
+
+        wp_localize_script('my-plugin-admin', 'myPlugin', [
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('my_plugin_nonce'),
+        ]);
+    }
+
+    public function enqueue_public_assets() {
+        wp_enqueue_style(
+            'my-plugin-public',
+            MY_PLUGIN_URL . 'public/css/public.css',
+            [],
+            MY_PLUGIN_VERSION
+        );
+
+        wp_enqueue_script(
+            'my-plugin-public',
+            MY_PLUGIN_URL . 'public/js/public.js',
+            [],
+            MY_PLUGIN_VERSION,
+            true
+        );
+    }
+
+    public function add_admin_menu() {
+        add_menu_page(
+            __('My Plugin', 'my-plugin'),
+            __('My Plugin', 'my-plugin'),
+            'manage_options',
+            'my-plugin',
+            [$this, 'render_admin_page'],
+            'dashicons-admin-generic',
+            30
+        );
+
+        add_submenu_page(
+            'my-plugin',
+            __('Settings', 'my-plugin'),
+            __('Settings', 'my-plugin'),
+            'manage_options',
+            'my-plugin-settings',
+            [$this, 'render_settings_page']
+        );
+    }
+
+    public function render_admin_page() {
+        if (!current_user_can('manage_options')) {
+            wp_die(__('Access denied', 'my-plugin'));
+        }
+        include MY_PLUGIN_DIR . 'admin/views/dashboard.php';
+    }
+
+    public function render_settings_page() {
+        include MY_PLUGIN_DIR . 'admin/views/settings.php';
+    }
+
+    public function render_shortcode($atts) {
+        $atts = shortcode_atts([
+            'title' => 'Default Title',
+            'limit' => 5,
+        ], $atts, 'my_plugin');
+
+        ob_start();
+        include MY_PLUGIN_DIR . 'public/views/shortcode.php';
+        return ob_get_clean();
+    }
+
+    public function handle_ajax() {
+        check_ajax_referer('my_plugin_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => 'Unauthorized']);
+        }
+
+        $action = sanitize_text_field($_POST['action_type'] ?? '');
+
+        switch ($action) {
+            case 'save_settings':
+                update_option('my_plugin_option', sanitize_text_field($_POST['value']));
+                wp_send_json_success(['message' => 'Saved']);
+                break;
+            default:
+                wp_send_json_error(['message' => 'Invalid action']);
+        }
+    }
+
+    public static function activate() {
+        // Create database table
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'my_plugin_data';
+        $charset_collate = $wpdb->get_charset_collate();
+
+        $sql = "CREATE TABLE $table_name (
+            id bigint(20) NOT NULL AUTO_INCREMENT,
+            user_id bigint(20) NOT NULL,
+            data longtext NOT NULL,
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            KEY user_id (user_id)
+        ) $charset_collate;";
+
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        dbDelta($sql);
+
+        // Set default options
+        add_option('my_plugin_version', MY_PLUGIN_VERSION);
+
+        // Flush rewrite rules
+        flush_rewrite_rules();
+    }
+
+    public static function deactivate() {
+        flush_rewrite_rules();
+        // Không xóa data khi deactivate
+    }
+}
+\`\`\`
+
+## Admin Page
+
+\`\`\`php
+<!-- admin/views/dashboard.php -->
+<div class="wrap my-plugin-admin">
+    <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+
+    <div class="my-plugin-stats">
+        <div class="stat-card">
+            <h3><?php esc_html_e('Total Items', 'my-plugin'); ?></h3>
+            <p class="stat-value"><?php echo esc_html($total_items ?? 0); ?></p>
+        </div>
+    </div>
+
+    <form id="my-plugin-form" method="post">
+        <?php wp_nonce_field('my_plugin_save', 'my_plugin_nonce'); ?>
+
+        <table class="form-table">
+            <tr>
+                <th scope="row">
+                    <label for="my_plugin_setting"><?php esc_html_e('Setting', 'my-plugin'); ?></label>
+                </th>
+                <td>
+                    <input type="text"
+                           id="my_plugin_setting"
+                           name="my_plugin_setting"
+                           value="<?php echo esc_attr(get_option('my_plugin_setting', '')); ?>"
+                           class="regular-text">
+                </td>
+            </tr>
+        </table>
+
+        <?php submit_button(); ?>
+    </form>
+
+    <button id="my-plugin-ajax-btn" class="button button-primary">
+        <?php esc_html_e('Test AJAX', 'my-plugin'); ?>
+    </button>
+</div>
+\`\`\`
+
+## Admin JavaScript
+
+\`\`\`javascript
+// admin/js/admin.js
+jQuery(function ($) {
+    $('#my-plugin-ajax-btn').on('click', function () {
+        const $btn = $(this);
+
+        $btn.prop('disabled', true).text('Loading...');
+
+        $.ajax({
+            url: myPlugin.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: 'my_plugin_action',
+                nonce: myPlugin.nonce,
+                action_type: 'save_settings',
+                value: 'test value'
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert(response.data.message);
+                } else {
+                    alert('Error: ' + response.data.message);
+                }
+            },
+            error: function () {
+                alert('AJAX error');
+            },
+            complete: function () {
+                $btn.prop('disabled', false).text('Test AJAX');
+            }
+        });
+    });
+});
+\`\`\`
+
+## Settings API
+
+\`\`\`php
+class My_Plugin_Admin {
+    public function __construct() {
+        add_action('admin_init', [$this, 'register_settings']);
+    }
+
+    public function register_settings() {
+        register_setting('my_plugin_settings', 'my_plugin_options', [
+            'type'              => 'array',
+            'sanitize_callback' => [$this, 'sanitize_options'],
+            'default'           => [
+                'enabled' => true,
+                'text'    => '',
+                'color'   => '#0073aa',
+            ],
+        ]);
+
+        add_settings_section(
+            'my_plugin_general',
+            __('General Settings', 'my-plugin'),
+            [$this, 'section_callback'],
+            'my_plugin_settings'
+        );
+
+        add_settings_field(
+            'enabled',
+            __('Enable feature', 'my-plugin'),
+            [$this, 'render_checkbox'],
+            'my_plugin_settings',
+            'my_plugin_general',
+            ['label_for' => 'enabled', 'field' => 'enabled']
+        );
+
+        add_settings_field(
+            'text',
+            __('Text', 'my-plugin'),
+            [$this, 'render_text_input'],
+            'my_plugin_settings',
+            'my_plugin_general',
+            ['label_for' => 'text', 'field' => 'text']
+        );
+    }
+
+    public function sanitize_options($input) {
+        return [
+            'enabled' => !empty($input['enabled']),
+            'text'    => sanitize_text_field($input['text'] ?? ''),
+            'color'   => sanitize_hex_color($input['color'] ?? '#0073aa'),
+        ];
+    }
+
+    public function section_callback() {
+        echo '<p>' . esc_html__('Configure the plugin behavior.', 'my-plugin') . '</p>';
+    }
+
+    public function render_checkbox($args) {
+        $options = get_option('my_plugin_options', []);
+        $field = $args['field'];
+        ?>
+        <input type="checkbox"
+               id="<?php echo esc_attr($field); ?>"
+               name="my_plugin_options[<?php echo esc_attr($field); ?>]"
+               value="1"
+               <?php checked(!empty($options[$field])); ?>>
+        <?php
+    }
+
+    public function render_text_input($args) {
+        $options = get_option('my_plugin_options', []);
+        $field = $args['field'];
+        ?>
+        <input type="text"
+               id="<?php echo esc_attr($field); ?>"
+               name="my_plugin_options[<?php echo esc_attr($field); ?>]"
+               value="<?php echo esc_attr($options[$field] ?? ''); ?>"
+               class="regular-text">
+        <?php
+    }
+}
+\`\`\`
+
+## Custom Database Table
+
+\`\`\`php
+class My_Plugin_DB {
+    public static function get_table() {
+        global $wpdb;
+        return $wpdb->prefix . 'my_plugin_data';
+    }
+
+    public static function create(array $data): int|false {
+        global $wpdb;
+        $result = $wpdb->insert(
+            self::get_table(),
+            [
+                'user_id'    => $data['user_id'],
+                'data'       => maybe_serialize($data['data']),
+                'created_at' => current_time('mysql'),
+            ],
+            ['%d', '%s', '%s']
+        );
+        return $result ? $wpdb->insert_id : false;
+    }
+
+    public static function get(int $id): ?object {
+        global $wpdb;
+        $table = self::get_table();
+        return $wpdb->get_row(
+            $wpdb->prepare("SELECT * FROM $table WHERE id = %d", $id)
+        );
+    }
+
+    public static function get_by_user(int $user_id): array {
+        global $wpdb;
+        $table = self::get_table();
+        return $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM $table WHERE user_id = %d ORDER BY created_at DESC",
+                $user_id
+            )
+        );
+    }
+
+    public static function delete(int $id): bool {
+        global $wpdb;
+        return (bool) $wpdb->delete(
+            self::get_table(),
+            ['id' => $id],
+            ['%d']
+        );
+    }
+}
+\`\`\`
+
+## Shortcode
+
+\`\`\`php
+class My_Plugin_Shortcodes {
+    public function __construct() {
+        add_shortcode('my_plugin', [$this, 'render']);
+        add_shortcode('my_plugin_form', [$this, 'render_form']);
+    }
+
+    public function render($atts): string {
+        $atts = shortcode_atts([
+            'title' => __('My Plugin', 'my-plugin'),
+            'limit' => 5,
+        ], $atts, 'my_plugin');
+
+        $items = My_Plugin_DB::get_by_user(get_current_user_id());
+        $items = array_slice($items, 0, (int) $atts['limit']);
+
+        ob_start();
+        ?>
+        <div class="my-plugin-shortcode">
+            <h3><?php echo esc_html($atts['title']); ?></h3>
+            <?php if ($items): ?>
+                <ul>
+                    <?php foreach ($items as $item): ?>
+                        <li><?php echo esc_html($item->id); ?> - 
+                            <?php echo esc_html($item->created_at); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p><?php esc_html_e('No items found.', 'my-plugin'); ?></p>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
+    public function render_form(): string {
+        ob_start();
+        ?>
+        <form class="my-plugin-form" method="post">
+            <?php wp_nonce_field('my_plugin_submit', 'my_plugin_nonce'); ?>
+            <input type="text" name="my_data" required>
+            <button type="submit"><?php esc_html_e('Submit', 'my-plugin'); ?></button>
+        </form>
+        <?php
+        return ob_get_clean();
+    }
+}
+\`\`\`
+
+## REST API Endpoints
+
+\`\`\`php
+add_action('rest_api_init', function () {
+    register_rest_route('my-plugin/v1', '/items', [
+        [
+            'methods'             => WP_REST_Server::READABLE,
+            'callback'            => 'my_plugin_get_items',
+            'permission_callback' => function () {
+                return is_user_logged_in();
+            },
+        ],
+        [
+            'methods'             => WP_REST_Server::CREATABLE,
+            'callback'            => 'my_plugin_create_item',
+            'permission_callback' => function () {
+                return current_user_can('edit_posts');
+            },
+            'args' => [
+                'title' => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'sanitize_callback' => 'sanitize_text_field',
+                    'validate_callback' => function ($value) {
+                        return strlen($value) >= 2;
+                    },
+                ],
+            ],
+        ],
+    ]);
+});
+
+function my_plugin_get_items(WP_REST_Request $request): WP_REST_Response {
+    $items = My_Plugin_DB::get_by_user(get_current_user_id());
+    return new WP_REST_Response($items, 200);
+}
+
+function my_plugin_create_item(WP_REST_Request $request): WP_REST_Response {
+    $id = My_Plugin_DB::create([
+        'user_id' => get_current_user_id(),
+        'data'    => ['title' => $request->get_param('title')],
+    ]);
+
+    if (!$id) {
+        return new WP_REST_Response(['error' => 'Failed to create'], 500);
+    }
+
+    return new WP_REST_Response(['id' => $id], 201);
+}
+\`\`\`
+
+## Uninstall
+
+\`\`\`php
+<?php
+// uninstall.php
+if (!defined('WP_UNINSTALL_PLUGIN')) {
+    exit;
+}
+
+global $wpdb;
+
+// Drop custom tables
+$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}my_plugin_data");
+
+// Delete options
+delete_option('my_plugin_version');
+delete_option('my_plugin_settings');
+delete_option('my_plugin_options');
+
+// Delete user meta
+delete_metadata('user', 0, 'my_plugin_user_setting', '', true);
+
+// Delete posts (nếu plugin tạo CPT)
+$posts = get_posts([
+    'post_type'   => 'my_cpt',
+    'numberposts' => -1,
+    'post_status' => 'any',
+]);
+foreach ($posts as $post) {
+    wp_delete_post($post->ID, true);
+}
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo plugin đầy đủ với admin page, shortcode và REST API!`,
+        exercises: [
+          {
+            id: "3-1",
+            title: "Custom Plugin: Book Manager",
+            description: "Tạo plugin quản lý sách",
+            instructions: `Tạo plugin Book Manager với:
+1. Plugin header và main class
+2. Custom database table
+3. Admin page để CRUD books
+4. Shortcode hiển thị books
+5. REST API endpoints
+6. AJAX for delete`,
+            type: "code",
+            starterCode: `<?php
+/**
+ * Plugin Name: Book Manager
+ * Description: Quản lý sách
+ * Version: 1.0.0
+ * Author: Your Name
+ * Text Domain: book-manager
+ */
+
+// Viết code ở đây`,
+            solution: `<?php
+/**
+ * Plugin Name: Book Manager
+ * Plugin URI:  https://example.com/book-manager
+ * Description: Quản lý sách với admin UI và REST API
+ * Version:     1.0.0
+ * Author:      Your Name
+ * Text Domain: book-manager
+ * Requires at least: 6.0
+ * Requires PHP: 7.4
+ */
+
+if (!defined('ABSPATH')) exit;
+
+define('BM_VERSION', '1.0.0');
+define('BM_FILE', __FILE__);
+define('BM_DIR', plugin_dir_path(__FILE__));
+define('BM_URL', plugin_dir_url(__FILE__));
+
+// ============= Main Plugin Class =============
+class Book_Manager {
+    private static ?self $instance = null;
+
+    public static function instance(): self {
+        return self::$instance ??= new self();
+    }
+
+    private function __construct() {
+        register_activation_hook(BM_FILE, [$this, 'activate']);
+        register_deactivation_hook(BM_FILE, [$this, 'deactivate']);
+
+        add_action('plugins_loaded', [$this, 'init']);
+    }
+
+    public function init(): void {
+        add_action('admin_menu', [$this, 'add_admin_menu']);
+        add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
+        add_action('wp_enqueue_scripts', [$this, 'public_assets']);
+        add_action('wp_ajax_bm_delete_book', [$this, 'ajax_delete_book']);
+        add_action('wp_ajax_bm_save_book', [$this, 'ajax_save_book']);
+        add_action('rest_api_init', [$this, 'register_rest_routes']);
+        add_shortcode('book_list', [$this, 'render_shortcode']);
+    }
+
+    public function activate(): void {
+        global $wpdb;
+        $table = $wpdb->prefix . 'books';
+        $charset = $wpdb->get_charset_collate();
+
+        $sql = "CREATE TABLE $table (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            title varchar(255) NOT NULL,
+            author varchar(255) NOT NULL,
+            isbn varchar(20) DEFAULT NULL,
+            year int(4) DEFAULT NULL,
+            description text,
+            cover_url varchar(500) DEFAULT NULL,
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            KEY author (author),
+            KEY year (year)
+        ) $charset;";
+
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        dbDelta($sql);
+
+        add_option('bm_version', BM_VERSION);
+    }
+
+    public function deactivate(): void {
+        // Không xóa data
+    }
+
+    public function add_admin_menu(): void {
+        add_menu_page(
+            __('Books', 'book-manager'),
+            __('Book Manager', 'book-manager'),
+            'manage_options',
+            'book-manager',
+            [$this, 'render_admin_page'],
+            'dashicons-book',
+            25
+        );
+
+        add_submenu_page(
+            'book-manager',
+            __('Add New Book', 'book-manager'),
+            __('Add New', 'book-manager'),
+            'manage_options',
+            'book-manager-new',
+            [$this, 'render_edit_page']
+        );
+
+        add_submenu_page(
+            'book-manager',
+            __('Settings', 'book-manager'),
+            __('Settings', 'book-manager'),
+            'manage_options',
+            'book-manager-settings',
+            [$this, 'render_settings_page']
+        );
+    }
+
+    public function admin_assets(string $hook): void {
+        if (strpos($hook, 'book-manager') === false) return;
+
+        wp_enqueue_style('bm-admin', BM_URL . 'admin.css', [], BM_VERSION);
+        wp_enqueue_script('bm-admin', BM_URL . 'admin.js', ['jquery'], BM_VERSION, true);
+
+        wp_localize_script('bm-admin', 'bmData', [
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('bm_nonce'),
+            'restUrl' => rest_url('book-manager/v1'),
+            'restNonce' => wp_create_nonce('wp_rest'),
+        ]);
+    }
+
+    public function public_assets(): void {
+        wp_enqueue_style('bm-public', BM_URL . 'public.css', [], BM_VERSION);
+    }
+
+    public function render_admin_page(): void {
+        $books = self::get_all_books();
+        ?>
+        <div class="wrap bm-wrap">
+            <h1 class="wp-heading-inline"><?php esc_html_e('Books', 'book-manager'); ?></h1>
+            <a href="<?php echo esc_url(admin_url('admin.php?page=book-manager-new')); ?>"
+               class="page-title-action">
+                <?php esc_html_e('Add New', 'book-manager'); ?>
+            </a>
+
+            <?php if (isset($_GET['saved'])): ?>
+                <div class="notice notice-success is-dismissible">
+                    <p><?php esc_html_e('Book saved successfully.', 'book-manager'); ?></p>
+                </div>
+            <?php endif; ?>
+
+            <table class="wp-list-table widefat fixed striped">
+                <thead>
+                    <tr>
+                        <th><?php esc_html_e('ID', 'book-manager'); ?></th>
+                        <th><?php esc_html_e('Title', 'book-manager'); ?></th>
+                        <th><?php esc_html_e('Author', 'book-manager'); ?></th>
+                        <th><?php esc_html_e('Year', 'book-manager'); ?></th>
+                        <th><?php esc_html_e('Actions', 'book-manager'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($books)): ?>
+                        <tr><td colspan="5"><?php esc_html_e('No books yet.', 'book-manager'); ?></td></tr>
+                    <?php else: foreach ($books as $book): ?>
+                        <tr data-id="<?php echo esc_attr($book->id); ?>">
+                            <td><?php echo esc_html($book->id); ?></td>
+                            <td><strong><?php echo esc_html($book->title); ?></strong></td>
+                            <td><?php echo esc_html($book->author); ?></td>
+                            <td><?php echo esc_html($book->year); ?></td>
+                            <td>
+                                <a href="<?php echo esc_url(add_query_arg([
+                                    'page' => 'book-manager-new',
+                                    'id'   => $book->id
+                                ], admin_url('admin.php'))); ?>" class="button button-small">
+                                    <?php esc_html_e('Edit', 'book-manager'); ?>
+                                </a>
+                                <button type="button"
+                                        class="button button-small bm-delete"
+                                        data-id="<?php echo esc_attr($book->id); ?>">
+                                    <?php esc_html_e('Delete', 'book-manager'); ?>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; endif; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php
+    }
+
+    public function render_edit_page(): void {
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        $book = $id ? self::get_book($id) : null;
+
+        if (isset($_POST['bm_save']) && check_admin_referer('bm_save_book')) {
+            $data = [
+                'title'       => sanitize_text_field($_POST['title']),
+                'author'      => sanitize_text_field($_POST['author']),
+                'isbn'        => sanitize_text_field($_POST['isbn']),
+                'year'        => (int) $_POST['year'],
+                'description' => sanitize_textarea_field($_POST['description']),
+                'cover_url'   => esc_url_raw($_POST['cover_url']),
+            ];
+
+            if ($id) {
+                self::update_book($id, $data);
+            } else {
+                self::create_book($data);
+            }
+
+            wp_safe_redirect(add_query_arg('saved', '1', admin_url('admin.php?page=book-manager')));
+            exit;
+        }
+        ?>
+        <div class="wrap bm-wrap">
+            <h1><?php echo $id ? esc_html__('Edit Book', 'book-manager') : esc_html__('Add New Book', 'book-manager'); ?></h1>
+
+            <form method="post">
+                <?php wp_nonce_field('bm_save_book'); ?>
+
+                <table class="form-table">
+                    <tr>
+                        <th><label for="title"><?php esc_html_e('Title', 'book-manager'); ?> *</label></th>
+                        <td><input type="text" id="title" name="title" class="regular-text"
+                                   value="<?php echo esc_attr($book->title ?? ''); ?>" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="author"><?php esc_html_e('Author', 'book-manager'); ?> *</label></th>
+                        <td><input type="text" id="author" name="author" class="regular-text"
+                                   value="<?php echo esc_attr($book->author ?? ''); ?>" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="isbn"><?php esc_html_e('ISBN', 'book-manager'); ?></label></th>
+                        <td><input type="text" id="isbn" name="isbn" class="regular-text"
+                                   value="<?php echo esc_attr($book->isbn ?? ''); ?>"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="year"><?php esc_html_e('Year', 'book-manager'); ?></label></th>
+                        <td><input type="number" id="year" name="year" min="1000" max="<?php echo date('Y'); ?>"
+                                   value="<?php echo esc_attr($book->year ?? date('Y')); ?>"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="description"><?php esc_html_e('Description', 'book-manager'); ?></label></th>
+                        <td><textarea id="description" name="description" rows="5" class="large-text"><?php
+                            echo esc_textarea($book->description ?? '');
+                        ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="cover_url"><?php esc_html_e('Cover URL', 'book-manager'); ?></label></th>
+                        <td><input type="url" id="cover_url" name="cover_url" class="regular-text"
+                                   value="<?php echo esc_attr($book->cover_url ?? ''); ?>"></td>
+                    </tr>
+                </table>
+
+                <?php submit_button(
+                    $id ? __('Update Book', 'book-manager') : __('Create Book', 'book-manager'),
+                    'primary',
+                    'bm_save'
+                ); ?>
+            </form>
+        </div>
+        <?php
+    }
+
+    public function render_settings_page(): void {
+        if (isset($_POST['bm_settings']) && check_admin_referer('bm_settings_nonce')) {
+            update_option('bm_settings', [
+                'items_per_page' => absint($_POST['items_per_page']),
+                'show_covers'    => !empty($_POST['show_covers']),
+            ]);
+            echo '<div class="notice notice-success"><p>Settings saved.</p></div>';
+        }
+
+        $settings = wp_parse_args(get_option('bm_settings', []), [
+            'items_per_page' => 10,
+            'show_covers'    => true,
+        ]);
+        ?>
+        <div class="wrap">
+            <h1><?php esc_html_e('Book Manager Settings', 'book-manager'); ?></h1>
+            <form method="post">
+                <?php wp_nonce_field('bm_settings_nonce'); ?>
+                <table class="form-table">
+                    <tr>
+                        <th><label for="items_per_page"><?php esc_html_e('Items per page', 'book-manager'); ?></label></th>
+                        <td><input type="number" id="items_per_page" name="items_per_page"
+                                   value="<?php echo esc_attr($settings['items_per_page']); ?>" min="1" max="100"></td>
+                    </tr>
+                    <tr>
+                        <th><?php esc_html_e('Show covers', 'book-manager'); ?></th>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="show_covers" value="1"
+                                    <?php checked($settings['show_covers']); ?>>
+                                <?php esc_html_e('Display book covers', 'book-manager'); ?>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <?php submit_button(__('Save Settings', 'book-manager'), 'primary', 'bm_settings'); ?>
+            </form>
+        </div>
+        <?php
+    }
+
+    public function render_shortcode(array $atts): string {
+        $atts = shortcode_atts([
+            'limit'   => 10,
+            'author'  => '',
+            'orderby' => 'title',
+        ], $atts, 'book_list');
+
+        $books = self::get_all_books([
+            'limit'   => (int) $atts['limit'],
+            'author'  => sanitize_text_field($atts['author']),
+            'orderby' => sanitize_key($atts['orderby']),
+        ]);
+
+        ob_start();
+        ?>
+        <div class="bm-shortcode">
+            <?php if (empty($books)): ?>
+                <p><?php esc_html_e('No books found.', 'book-manager'); ?></p>
+            <?php else: ?>
+                <ul class="bm-book-list">
+                    <?php foreach ($books as $book): ?>
+                        <li class="bm-book-item">
+                            <strong><?php echo esc_html($book->title); ?></strong>
+                            <?php if ($book->author): ?>
+                                <span class="bm-author"><?php echo esc_html($book->author); ?></span>
+                            <?php endif; ?>
+                            <?php if ($book->year): ?>
+                                <span class="bm-year">(<?php echo esc_html($book->year); ?>)</span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
+    public function ajax_delete_book(): void {
+        check_ajax_referer('bm_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => 'Unauthorized'], 403);
+        }
+
+        $id = (int) ($_POST['id'] ?? 0);
+        if (!$id) {
+            wp_send_json_error(['message' => 'Invalid ID'], 400);
+        }
+
+        if (self::delete_book($id)) {
+            wp_send_json_success(['message' => 'Book deleted']);
+        } else {
+            wp_send_json_error(['message' => 'Delete failed'], 500);
+        }
+    }
+
+    public function register_rest_routes(): void {
+        register_rest_route('book-manager/v1', '/books', [
+            [
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => [$this, 'rest_get_books'],
+                'permission_callback' => '__return_true',
+            ],
+            [
+                'methods'             => WP_REST_Server::CREATABLE,
+                'callback'            => [$this, 'rest_create_book'],
+                'permission_callback' => function () {
+                    return current_user_can('manage_options');
+                },
+                'args' => [
+                    'title'  => ['required' => true, 'type' => 'string'],
+                    'author' => ['required' => true, 'type' => 'string'],
+                ],
+            ],
+        ]);
+
+        register_rest_route('book-manager/v1', '/books/(?P<id>\\d+)', [
+            'methods'             => WP_REST_Server::DELETABLE,
+            'callback'            => [$this, 'rest_delete_book'],
+            'permission_callback' => function () {
+                return current_user_can('manage_options');
+            },
+        ]);
+    }
+
+    public function rest_get_books(WP_REST_Request $request): WP_REST_Response {
+        $books = self::get_all_books(['limit' => (int) ($request->get_param('limit') ?: 20)]);
+        return new WP_REST_Response($books, 200);
+    }
+
+    public function rest_create_book(WP_REST_Request $request): WP_REST_Response {
+        $id = self::create_book([
+            'title'  => sanitize_text_field($request->get_param('title')),
+            'author' => sanitize_text_field($request->get_param('author')),
+            'isbn'   => sanitize_text_field($request->get_param('isbn') ?? ''),
+            'year'   => (int) ($request->get_param('year') ?? 0),
+        ]);
+
+        if (!$id) {
+            return new WP_REST_Response(['error' => 'Failed'], 500);
+        }
+
+        return new WP_REST_Response(self::get_book($id), 201);
+    }
+
+    public function rest_delete_book(WP_REST_Request $request): WP_REST_Response {
+        $id = (int) $request['id'];
+        if (!self::delete_book($id)) {
+            return new WP_REST_Response(['error' => 'Not found'], 404);
+        }
+        return new WP_REST_Response(['deleted' => true], 200);
+    }
+
+    // ============= CRUD =============
+    private static function table(): string {
+        global $wpdb;
+        return $wpdb->prefix . 'books';
+    }
+
+    public static function get_all_books(array $args = []): array {
+        global $wpdb;
+        $args = wp_parse_args($args, [
+            'limit'   => 100,
+            'author'  => '',
+            'orderby' => 'created_at',
+            'order'   => 'DESC',
+        ]);
+
+        $orderby = in_array($args['orderby'], ['title', 'author', 'year', 'created_at'], true)
+            ? $args['orderby'] : 'created_at';
+        $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
+        $limit = (int) $args['limit'];
+        $table = self::table();
+
+        if ($args['author']) {
+            return $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM $table WHERE author = %s ORDER BY $orderby $order LIMIT %d",
+                $args['author'], $limit
+            ));
+        }
+
+        return $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM $table ORDER BY $orderby $order LIMIT %d",
+            $limit
+        ));
+    }
+
+    public static function get_book(int $id): ?object {
+        global $wpdb;
+        $table = self::table();
+        return $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %d", $id));
+    }
+
+    public static function create_book(array $data): int|false {
+        global $wpdb;
+        $result = $wpdb->insert(
+            self::table(),
+            [
+                'title'       => $data['title'],
+                'author'      => $data['author'],
+                'isbn'        => $data['isbn'] ?? '',
+                'year'        => $data['year'] ?? null,
+                'description' => $data['description'] ?? '',
+                'cover_url'   => $data['cover_url'] ?? '',
+                'created_at'  => current_time('mysql'),
+            ],
+            ['%s', '%s', '%s', '%d', '%s', '%s', '%s']
+        );
+
+        return $result ? $wpdb->insert_id : false;
+    }
+
+    public static function update_book(int $id, array $data): bool {
+        global $wpdb;
+        return (bool) $wpdb->update(
+            self::table(),
+            [
+                'title'       => $data['title'],
+                'author'      => $data['author'],
+                'isbn'        => $data['isbn'] ?? '',
+                'year'        => $data['year'] ?? null,
+                'description' => $data['description'] ?? '',
+                'cover_url'   => $data['cover_url'] ?? '',
+            ],
+            ['id' => $id],
+            ['%s', '%s', '%s', '%d', '%s', '%s'],
+            ['%d']
+        );
+    }
+
+    public static function delete_book(int $id): bool {
+        global $wpdb;
+        return (bool) $wpdb->delete(self::table(), ['id' => $id], ['%d']);
+    }
+}
+
+Book_Manager::instance();
+
+// ============= uninstall.php =============
+/*
+if (!defined('WP_UNINSTALL_PLUGIN')) exit;
+global $wpdb;
+$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}books");
+delete_option('bm_version');
+delete_option('bm_settings');
+*/`,
+          },
+        ],
+      },
+      {
+        id: "4",
+        title: "Gutenberg Blocks và REST API",
+        slug: "gutenberg-blocks-rest-api",
+        duration: "85 phút",
+        prerequisites: ["3"],
+        content: `# Gutenberg Blocks và REST API
+
+## Block Editor Basics
+
+### Setup plugin cho blocks
+\`\`\`bash
+npx @wordpress/create-block my-blocks
+cd my-blocks
+npm start
+\`\`\`
+
+### Block registration
+\`\`\`javascript
+// src/block.json
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "my-plugin/hero",
+    "version": "1.0.0",
+    "title": "Hero Section",
+    "category": "design",
+    "icon": "cover-image",
+    "description": "A hero section with title, subtitle, and button",
+    "keywords": ["hero", "banner", "header"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"],
+        "color": {
+            "background": true,
+            "text": true
+        },
+        "spacing": {
+            "padding": true
+        }
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Welcome"
+        },
+        "subtitle": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonText": {
+            "type": "string",
+            "default": "Learn More"
+        },
+        "buttonUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "backgroundImage": {
+            "type": "object",
+            "default": null
+        }
+    },
+    "textdomain": "my-plugin",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css"
+}
+\`\`\`
+
+### Edit component
+\`\`\`jsx
+// src/edit.js
+import { __ } from '@wordpress/i18n';
+import {
+    useBlockProps,
+    RichText,
+    MediaUpload,
+    MediaUploadCheck,
+    InspectorControls,
+} from '@wordpress/block-editor';
+import {
+    PanelBody,
+    TextControl,
+    Button,
+} from '@wordpress/components';
+
+export default function Edit({ attributes, setAttributes }) {
+    const {
+        title,
+        subtitle,
+        buttonText,
+        buttonUrl,
+        backgroundImage,
+    } = attributes;
+
+    const blockProps = useBlockProps();
+
+    return (
+        <>
+            <InspectorControls>
+                <PanelBody title={__('Button Settings', 'my-plugin')}>
+                    <TextControl
+                        label={__('Button URL', 'my-plugin')}
+                        value={buttonUrl}
+                        onChange={(value) => setAttributes({ buttonUrl: value })}
+                    />
+                </PanelBody>
+
+                <PanelBody title={__('Background', 'my-plugin')}>
+                    <MediaUploadCheck>
+                        <MediaUpload
+                            onSelect={(media) => setAttributes({
+                                backgroundImage: { id: media.id, url: media.url }
+                            })}
+                            allowedTypes={['image']}
+                            value={backgroundImage?.id}
+                            render={({ open }) => (
+                                <Button onClick={open} variant="secondary">
+                                    {backgroundImage
+                                        ? __('Replace Image', 'my-plugin')
+                                        : __('Choose Image', 'my-plugin')}
+                                </Button>
+                            )}
+                        />
+                    </MediaUploadCheck>
+
+                    {backgroundImage && (
+                        <Button
+                            onClick={() => setAttributes({ backgroundImage: null })}
+                            variant="link"
+                            isDestructive
+                        >
+                            {__('Remove Image', 'my-plugin')}
+                        </Button>
+                    )}
+                </PanelBody>
+            </InspectorControls>
+
+            <div
+                {...blockProps}
+                style={{
+                    backgroundImage: backgroundImage
+                        ? \`url(\${backgroundImage.url})\`
+                        : 'none',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                <div className="hero-overlay">
+                    <RichText
+                        tagName="h1"
+                        value={title}
+                        onChange={(value) => setAttributes({ title: value })}
+                        placeholder={__('Enter title...', 'my-plugin')}
+                        className="hero-title"
+                    />
+
+                    <RichText
+                        tagName="p"
+                        value={subtitle}
+                        onChange={(value) => setAttributes({ subtitle: value })}
+                        placeholder={__('Enter subtitle...', 'my-plugin')}
+                        className="hero-subtitle"
+                    />
+
+                    <div className="hero-button">
+                        <RichText
+                            tagName="span"
+                            value={buttonText}
+                            onChange={(value) => setAttributes({ buttonText: value })}
+                            className="button-text"
+                        />
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
+\`\`\`
+
+### Save component
+\`\`\`jsx
+// src/save.js
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+
+export default function Save({ attributes }) {
+    const {
+        title,
+        subtitle,
+        buttonText,
+        buttonUrl,
+        backgroundImage,
+    } = attributes;
+
+    const blockProps = useBlockProps.save({
+        style: {
+            backgroundImage: backgroundImage
+                ? \`url(\${backgroundImage.url})\`
+                : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        },
+    });
+
+    return (
+        <div {...blockProps}>
+            <div className="hero-overlay">
+                <RichText.Content tagName="h1" value={title} className="hero-title" />
+                <RichText.Content tagName="p" value={subtitle} className="hero-subtitle" />
+                {buttonText && (
+                    <a href={buttonUrl || '#'} className="hero-button">
+                        <RichText.Content tagName="span" value={buttonText} />
+                    </a>
+                )}
+            </div>
+        </div>
+    );
+}
+\`\`\`
+
+### Block registration trong PHP
+\`\`\`php
+<?php
+// my-plugin.php
+
+function my_plugin_register_blocks() {
+    register_block_type(__DIR__ . '/build/hero');
+    register_block_type(__DIR__ . '/build/pricing-table');
+}
+add_action('init', 'my_plugin_register_blocks');
+
+function my_plugin_enqueue_editor_assets() {
+    wp_enqueue_script(
+        'my-plugin-blocks',
+        plugins_url('build/index.js', __FILE__),
+        ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'],
+        filemtime(plugin_dir_path(__FILE__) . 'build/index.js')
+    );
+}
+add_action('enqueue_block_editor_assets', 'my_plugin_enqueue_editor_assets');
+\`\`\`
+
+## Dynamic Blocks (PHP render)
+
+\`\`\`php
+// blocks/latest-books/block.json
+{
+    "name": "my-plugin/latest-books",
+    "title": "Latest Books",
+    "category": "widgets",
+    "icon": "book",
+    "attributes": {
+        "count": { "type": "number", "default": 5 },
+        "showExcerpt": { "type": "boolean", "default": true }
+    },
+    "render": "file:./render.php"
+}
+
+// blocks/latest-books/render.php
+<?php
+$count = $attributes['count'] ?? 5;
+$show_excerpt = $attributes['showExcerpt'] ?? true;
+
+$books = Book_Manager::get_all_books(['limit' => $count]);
+
+$wrapper_attributes = get_block_wrapper_attributes([
+    'class' => 'latest-books-block',
+]);
+?>
+<div <?php echo $wrapper_attributes; ?>>
+    <h2><?php esc_html_e('Latest Books', 'my-plugin'); ?></h2>
+    <ul>
+        <?php foreach ($books as $book): ?>
+            <li>
+                <strong><?php echo esc_html($book->title); ?></strong>
+                <span>by <?php echo esc_html($book->author); ?></span>
+                <?php if ($show_excerpt && $book->description): ?>
+                    <p><?php echo esc_html(wp_trim_words($book->description, 20)); ?></p>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+\`\`\`
+
+## Custom Block Variations
+
+\`\`\`jsx
+// src/variations.js
+import { registerBlockVariation } from '@wordpress/blocks';
+
+registerBlockVariation('my-plugin/hero', {
+    name: 'hero-dark',
+    title: 'Dark Hero',
+    description: 'Hero with dark background',
+    attributes: {
+        backgroundColor: '#000000',
+        textColor: '#ffffff',
+    },
+    isDefault: false,
+});
+\`\`\`
+
+## Block Patterns
+
+\`\`\`php
+// register-patterns.php
+add_action('init', function () {
+    register_block_pattern_category('my-plugin', [
+        'label' => __('My Plugin Patterns', 'my-plugin'),
+    ]);
+
+    register_block_pattern('my-plugin/hero-cta', [
+        'title'       => __('Hero with CTA', 'my-plugin'),
+        'description' => __('A hero section with call to action button', 'my-plugin'),
+        'categories'  => ['my-plugin', 'call-to-action'],
+        'content'     => '
+            <!-- wp:my-plugin/hero -->
+            <div class="wp-block-my-plugin-hero">
+                <div class="hero-overlay">
+                    <h1 class="hero-title">Build Amazing Things</h1>
+                    <p class="hero-subtitle">Get started with our platform today</p>
+                    <a href="#" class="hero-button"><span>Get Started</span></a>
+                </div>
+            </div>
+            <!-- /wp:my-plugin/hero -->
+        ',
+    ]);
+});
+\`\`\`
+
+## REST API Integration
+
+\`\`\`javascript
+// Trong block editor
+import apiFetch from '@wordpress/api-fetch';
+
+export default function Edit({ attributes, setAttributes }) {
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        apiFetch({ path: '/wp/v2/posts?per_page=5' })
+            .then(posts => {
+                setBooks(posts);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
+    }, []);
+
+    // ...
+}
+\`\`\`
+
+## Block Transforms
+
+\`\`\`javascript
+// Từ paragraph sang hero
+transforms: {
+    from: [
+        {
+            type: 'block',
+            blocks: ['core/paragraph'],
+            transform: ({ content }) => {
+                return createBlock('my-plugin/hero', {
+                    title: content.replace(/<[^>]+>/g, ''),
+                });
+            },
+        },
+    ],
+    to: [
+        {
+            type: 'block',
+            blocks: ['core/paragraph'],
+            transform: ({ title, subtitle }) => {
+                return createBlock('core/paragraph', {
+                    content: \`<h1>\${title}</h1><p>\${subtitle}</p>\`,
+                });
+            },
+        },
+    ],
+}
+\`\`\`
+
+## Block Toolbar và Contextual Controls
+
+\`\`\`jsx
+import { BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { formatBold } from '@wordpress/icons';
+
+export default function Edit({ attributes, setAttributes }) {
+    return (
+        <>
+            <BlockControls>
+                <AlignmentToolbar
+                    value={attributes.textAlign}
+                    onChange={(value) => setAttributes({ textAlign: value })}
+                />
+                <ToolbarGroup>
+                    <ToolbarButton
+                        icon={formatBold}
+                        label="Toggle bold"
+                        onClick={() => setAttributes({ bold: !attributes.bold })}
+                    />
+                </ToolbarGroup>
+            </BlockControls>
+
+            {/* block content */}
+        </>
+    );
+}
+\`\`\`
+
+## Inner Blocks
+
+\`\`\`jsx
+import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
+
+const TEMPLATE = [
+    ['core/heading', { level: 2, placeholder: 'Section title' }],
+    ['core/paragraph', { placeholder: 'Section content' }],
+];
+
+export default function Edit() {
+    const blockProps = useBlockProps();
+    const innerBlocksProps = useInnerBlocksProps(blockProps, {
+        template: TEMPLATE,
+        allowedBlocks: ['core/heading', 'core/paragraph', 'core/image'],
+    });
+
+    return <div {...innerBlocksProps} />;
+}
+\`\`\`
+
+## WP REST API
+
+### Đăng ký custom endpoint
+
+\`\`\`php
+add_action('rest_api_init', function () {
+    register_rest_route('my-plugin/v1', '/books', [
+        [
+            'methods'             => 'GET',
+            'callback'            => 'my_plugin_rest_get_books',
+            'permission_callback' => '__return_true',
+            'args' => [
+                'per_page' => [
+                    'default'           => 10,
+                    'sanitize_callback' => 'absint',
+                ],
+                'author' => [
+                    'sanitize_callback' => 'sanitize_text_field',
+                ],
+            ],
+        ],
+        [
+            'methods'             => 'POST',
+            'callback'            => 'my_plugin_rest_create_book',
+            'permission_callback' => function () {
+                return current_user_can('edit_posts');
+            },
+        ],
+    ]);
+
+    register_rest_route('my-plugin/v1', '/books/(?P<id>\\d+)', [
+        'methods'             => 'DELETE',
+        'callback'            => 'my_plugin_rest_delete_book',
+        'permission_callback' => function () {
+            return current_user_can('delete_posts');
+        },
+    ]);
+});
+
+function my_plugin_rest_get_books(WP_REST_Request $request): WP_REST_Response {
+    $books = Book_Manager::get_all_books([
+        'limit'  => $request->get_param('per_page'),
+        'author' => $request->get_param('author') ?? '',
+    ]);
+
+    $response = new WP_REST_Response($books, 200);
+    $response->header('X-Total-Count', count($books));
+    return $response;
+}
+
+function my_plugin_rest_create_book(WP_REST_Request $request): WP_REST_Response|WP_Error {
+    $title = $request->get_param('title');
+    $author = $request->get_param('author');
+
+    if (empty($title) || empty($author)) {
+        return new WP_Error(
+            'missing_data',
+            __('Title and author are required.', 'my-plugin'),
+            ['status' => 400]
+        );
+    }
+
+    $id = Book_Manager::create_book([
+        'title'  => sanitize_text_field($title),
+        'author' => sanitize_text_field($author),
+        'isbn'   => sanitize_text_field($request->get_param('isbn') ?? ''),
+        'year'   => (int) ($request->get_param('year') ?? 0),
+    ]);
+
+    if (!$id) {
+        return new WP_Error(
+            'create_failed',
+            __('Failed to create book.', 'my-plugin'),
+            ['status' => 500]
+        );
+    }
+
+    return new WP_REST_Response(Book_Manager::get_book($id), 201);
+}
+
+function my_plugin_rest_delete_book(WP_REST_Request $request): WP_REST_Response|WP_Error {
+    $id = (int) $request['id'];
+
+    if (!Book_Manager::get_book($id)) {
+        return new WP_Error(
+            'book_not_found',
+            __('Book not found.', 'my-plugin'),
+            ['status' => 404]
+        );
+    }
+
+    Book_Manager::delete_book($id);
+    return new WP_REST_Response(['deleted' => true], 200);
+}
+\`\`\`
+
+### Custom post type REST support
+
+\`\`\`php
+register_post_type('book', [
+    'public'       => true,
+    'show_in_rest' => true,   // Enable REST API
+    'rest_base'    => 'books',
+    'rest_controller_class' => 'WP_REST_Posts_Controller',
+    'supports'     => ['title', 'editor', 'thumbnail', 'custom-fields'],
+    'taxonomies'   => ['genre', 'author'],
+]);
+
+// Custom REST field
+add_action('rest_api_init', function () {
+    register_rest_field('book', 'rating', [
+        'get_callback' => function ($post_array) {
+            return (float) get_post_meta($post_array['id'], 'rating', true);
+        },
+        'update_callback' => function ($value, $post) {
+            update_post_meta($post->ID, 'rating', (float) $value);
+        },
+        'schema' => [
+            'type'    => 'number',
+            'minimum' => 0,
+            'maximum' => 5,
+        ],
+    ]);
+});
+\`\`\`
+
+## Bài tập thực hành
+Hãy tạo custom Gutenberg block và REST API!`,
+        exercises: [
+          {
+            id: "4-1",
+            title: "Custom Gutenberg Block",
+            description: "Tạo block để hiển thị sách mới nhất",
+            instructions: `Tạo:
+1. Dynamic block "Latest Books"
+2. Attributes cho count và layout
+3. Server-side rendering
+4. REST API integration
+5. Block patterns`,
+            type: "code",
+            starterCode: `// src/index.js
+import { registerBlockType } from '@wordpress/blocks';
+
+// Viết code ở đây`,
+            solution: `// ============= block.json =============
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "my-plugin/latest-books",
+    "version": "1.0.0",
+    "title": "Latest Books",
+    "category": "widgets",
+    "icon": "book-alt",
+    "description": "Display the latest books",
+    "keywords": ["books", "list", "latest"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "padding": true,
+            "margin": true
+        }
+    },
+    "attributes": {
+        "count": {
+            "type": "number",
+            "default": 5
+        },
+        "columns": {
+            "type": "number",
+            "default": 3
+        },
+        "showExcerpt": {
+            "type": "boolean",
+            "default": true
+        },
+        "showAuthor": {
+            "type": "boolean",
+            "default": true
+        },
+        "orderBy": {
+            "type": "string",
+            "default": "created_at"
+        }
+    },
+    "textdomain": "my-plugin",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "render": "file:./render.php"
+}
+
+// ============= src/index.js =============
+import { registerBlockType } from '@wordpress/blocks';
+import metadata from './block.json';
+import Edit from './edit';
+
+registerBlockType(metadata.name, {
+    edit: Edit,
+});
+
+// ============= src/edit.js =============
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+    PanelBody,
+    RangeControl,
+    ToggleControl,
+    SelectControl,
+    Placeholder,
+    Spinner,
+} from '@wordpress/components';
+import { useState, useEffect } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
+
+export default function Edit({ attributes, setAttributes }) {
+    const { count, columns, showExcerpt, showAuthor, orderBy } = attributes;
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(true);
+        apiFetch({
+            path: \`/my-plugin/v1/books?per_page=\${count}&orderby=\${orderBy}\`,
+        })
+            .then(setBooks)
+            .catch(console.error)
+            .finally(() => setLoading(false));
+    }, [count, orderBy]);
+
+    const blockProps = useBlockProps({
+        className: \`latest-books columns-\${columns}\`,
+    });
+
+    return (
+        <>
+            <InspectorControls>
+                <PanelBody title={__('Display Settings', 'my-plugin')}>
+                    <RangeControl
+                        label={__('Number of books', 'my-plugin')}
+                        value={count}
+                        onChange={(value) => setAttributes({ count: value })}
+                        min={1}
+                        max={20}
+                    />
+
+                    <RangeControl
+                        label={__('Columns', 'my-plugin')}
+                        value={columns}
+                        onChange={(value) => setAttributes({ columns: value })}
+                        min={1}
+                        max={4}
+                    />
+
+                    <SelectControl
+                        label={__('Order by', 'my-plugin')}
+                        value={orderBy}
+                        options={[
+                            { label: __('Date', 'my-plugin'), value: 'created_at' },
+                            { label: __('Title', 'my-plugin'), value: 'title' },
+                            { label: __('Author', 'my-plugin'), value: 'author' },
+                        ]}
+                        onChange={(value) => setAttributes({ orderBy: value })}
+                    />
+
+                    <ToggleControl
+                        label={__('Show excerpt', 'my-plugin')}
+                        checked={showExcerpt}
+                        onChange={(value) => setAttributes({ showExcerpt: value })}
+                    />
+
+                    <ToggleControl
+                        label={__('Show author', 'my-plugin')}
+                        checked={showAuthor}
+                        onChange={(value) => setAttributes({ showAuthor: value })}
+                    />
+                </PanelBody>
+            </InspectorControls>
+
+            <div {...blockProps}>
+                {loading ? (
+                    <div className="loading">
+                        <Spinner />
+                        <p>{__('Loading books...', 'my-plugin')}</p>
+                    </div>
+                ) : books.length === 0 ? (
+                    <Placeholder
+                        label={__('Latest Books', 'my-plugin')}
+                        instructions={__('No books found. Add some books first.', 'my-plugin')}
+                    />
+                ) : (
+                    <div className="books-grid">
+                        {books.map((book) => (
+                            <div key={book.id} className="book-card">
+                                <h3 className="book-title">{book.title}</h3>
+                                {showAuthor && (
+                                    <p className="book-author">{book.author}</p>
+                                )}
+                                {showExcerpt && book.description && (
+                                    <p className="book-excerpt">
+                                        {book.description.substring(0, 100)}...
+                                    </p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </>
+    );
+}
+
+// ============= blocks/latest-books/render.php =============
+<?php
+$count = $attributes['count'] ?? 5;
+$columns = $attributes['columns'] ?? 3;
+$show_excerpt = $attributes['showExcerpt'] ?? true;
+$show_author = $attributes['showAuthor'] ?? true;
+$order_by = $attributes['orderBy'] ?? 'created_at';
+
+$books = Book_Manager::get_all_books([
+    'limit'   => $count,
+    'orderby' => $order_by,
+]);
+
+$wrapper_attributes = get_block_wrapper_attributes([
+    'class' => "latest-books columns-{$columns}",
+]);
+?>
+<div <?php echo $wrapper_attributes; ?>>
+    <?php if (empty($books)): ?>
+        <p class="no-books"><?php esc_html_e('No books found.', 'my-plugin'); ?></p>
+    <?php else: ?>
+        <div class="books-grid">
+            <?php foreach ($books as $book): ?>
+                <div class="book-card">
+                    <h3 class="book-title"><?php echo esc_html($book->title); ?></h3>
+                    <?php if ($show_author): ?>
+                        <p class="book-author"><?php echo esc_html($book->author); ?></p>
+                    <?php endif; ?>
+                    <?php if ($show_excerpt && !empty($book->description)): ?>
+                        <p class="book-excerpt">
+                            <?php echo esc_html(wp_trim_words($book->description, 20)); ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+// ============= style.css =============
+// .latest-books .books-grid {
+//     display: grid;
+//     gap: 1.5rem;
+// }
+//
+// .latest-books.columns-1 .books-grid { grid-template-columns: 1fr; }
+// .latest-books.columns-2 .books-grid { grid-template-columns: repeat(2, 1fr); }
+// .latest-books.columns-3 .books-grid { grid-template-columns: repeat(3, 1fr); }
+// .latest-books.columns-4 .books-grid { grid-template-columns: repeat(4, 1fr); }
+//
+// .book-card {
+//     background: #fff;
+//     padding: 1.5rem;
+//     border-radius: 8px;
+//     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+// }
+//
+// .book-title { margin: 0 0 0.5rem; }
+// .book-author { color: #666; font-style: italic; }`,
+          },
+        ],
+      },
+      {
+        id: "5",
+        title: "Security, Performance và Deployment",
+        slug: "security-performance-deployment",
+        duration: "70 phút",
+        prerequisites: ["4"],
+        content: `# Security, Performance và Deployment
+
+## Security Best Practices
+
+### Sanitize inputs
+\`\`\`php
+// Text field
+$text = sanitize_text_field($_POST['text']);
+
+// Email
+$email = sanitize_email($_POST['email']);
+
+// URL
+$url = esc_url_raw($_POST['url']);
+
+// Textarea
+$content = sanitize_textarea_field($_POST['content']);
+
+// HTML content
+$html = wp_kses_post($_POST['html']);
+
+// Custom allowed HTML
+$html = wp_kses($_POST['html'], [
+    'a' => ['href' => [], 'title' => []],
+    'strong' => [],
+    'em' => [],
+]);
+
+// File name
+$filename = sanitize_file_name($_FILES['file']['name']);
+\`\`\`
+
+### Escape outputs
+\`\`\`php
+// HTML text
+echo esc_html($text);
+
+// HTML attribute
+echo esc_attr($attribute);
+
+// URL
+echo esc_url($url);
+
+// JavaScript
+echo esc_js($js_string);
+
+// Textarea
+echo esc_textarea($textarea);
+
+// With translation
+echo esc_html__('Text', 'my-plugin');
+
+// printf patterns
+printf(
+    '<a href="%s" title="%s">%s</a>',
+    esc_url($url),
+    esc_attr($title),
+    esc_html($link_text)
+);
+\`\`\`
+
+### Nonces
+\`\`\`php
+// Form
+<form method="post">
+    <?php wp_nonce_field('my_action', 'my_nonce'); ?>
+    <input type="text" name="data">
+    <button type="submit">Save</button>
+</form>
+
+// Verify
+if (!isset($_POST['my_nonce']) ||
+    !wp_verify_nonce($_POST['my_nonce'], 'my_action')) {
+    wp_die('Security check failed');
+}
+
+// Ajax
+wp_localize_script('my-script', 'myData', [
+    'nonce' => wp_create_nonce('my_ajax_nonce'),
+]);
+
+// Verify trong ajax handler
+check_ajax_referer('my_ajax_nonce', 'nonce');
+\`\`\`
+
+### Capability checks
+\`\`\`php
+if (!current_user_can('manage_options')) {
+    wp_die('Access denied');
+}
+
+if (!current_user_can('edit_post', $post_id)) {
+    wp_die('You cannot edit this post');
+}
+
+// Trong AJAX
+if (!current_user_can('edit_posts')) {
+    wp_send_json_error('Unauthorized', 403);
+}
+\`\`\`
+
+### SQL Injection
+\`\`\`php
+// Không tốt
+$wpdb->query("SELECT * FROM table WHERE id = $id");
+
+// Tốt - dùng prepare
+$wpdb->prepare("SELECT * FROM table WHERE id = %d", $id);
+
+// Với LIKE
+$wpdb->prepare("SELECT * FROM table WHERE name LIKE %s",
+    '%' . $wpdb->esc_like($term) . '%');
+
+// Full query
+$results = $wpdb->get_results($wpdb->prepare(
+    "SELECT * FROM {$wpdb->prefix}books WHERE author = %s AND year > %d",
+    $author, $year
+));
+\`\`\`
+
+### File uploads
+\`\`\`php
+if (!function_exists('wp_handle_upload')) {
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+}
+
+$allowed_types = ['image/jpeg', 'image/png', 'application/pdf'];
+
+$uploaded = wp_handle_upload($_FILES['file'], [
+    'test_form' => false,
+    'mimes'     => [
+        'jpg|jpeg' => 'image/jpeg',
+        'png'      => 'image/png',
+        'pdf'      => 'application/pdf',
+    ],
+]);
+
+if (isset($uploaded['error'])) {
+    wp_die($uploaded['error']);
+}
+
+// Insert to media library
+$attachment = [
+    'post_mime_type' => $uploaded['type'],
+    'post_title'     => sanitize_file_name(basename($uploaded['file'])),
+    'post_content'   => '',
+    'post_status'    => 'inherit',
+];
+
+$attach_id = wp_insert_attachment($attachment, $uploaded['file']);
+require_once ABSPATH . 'wp-admin/includes/image.php';
+$metadata = wp_generate_attachment_metadata($attach_id, $uploaded['file']);
+wp_update_attachment_metadata($attach_id, $metadata);
+\`\`\`
+
+## Performance Optimization
+
+### Caching
+\`\`\`php
+// Transients
+$data = get_transient('my_plugin_expensive_data');
+
+if (false === $data) {
+    $data = expensive_operation();
+    set_transient('my_plugin_expensive_data', $data, HOUR_IN_SECONDS);
+}
+
+// Cache invalidation
+delete_transient('my_plugin_expensive_data');
+
+// Object cache (Redis/Memcached)
+wp_cache_set('my_key', $value, 'my_group', 3600);
+$value = wp_cache_get('my_key', 'my_group');
+
+// Cache WP_Query
+$query = new WP_Query([
+    'post_type'      => 'post',
+    'posts_per_page' => 10,
+    'no_found_rows'  => true,           // Nếu không cần pagination
+    'update_post_meta_cache' => false,   // Nếu không cần meta
+    'update_post_term_cache' => false,   // Nếu không cần terms
+]);
+\`\`\`
+
+### Query optimization
+\`\`\`php
+// Không tốt - N+1 queries
+foreach ($posts as $post) {
+    $author = get_the_author_meta('display_name', $post->post_author);
+}
+
+// Tốt - preload
+$author_ids = wp_list_pluck($posts, 'post_author');
+$authors = get_users(['include' => array_unique($author_ids)]);
+
+// Meta query optimization
+$query = new WP_Query([
+    'post_type'  => 'book',
+    'meta_query' => [
+        'relation' => 'AND',
+        [
+            'key'     => 'price',
+            'value'   => 100,
+            'compare' => '<=',
+            'type'    => 'NUMERIC',
+        ],
+    ],
+    'meta_key'   => 'price',
+    'orderby'    => 'meta_value_num',
+]);
+\`\`\`
+
+### Enqueue assets properly
+\`\`\`php
+// Chỉ load khi cần
+function my_plugin_enqueue() {
+    // Chỉ load trên page cụ thể
+    if (!is_page('contact')) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'my-plugin-contact',
+        plugins_url('js/contact.js', __FILE__),
+        [],
+        '1.0.0',
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'my_plugin_enqueue');
+
+// Async/Defer
+add_filter('script_loader_tag', function ($tag, $handle) {
+    if ('my-plugin-analytics' !== $handle) {
+        return $tag;
+    }
+    return str_replace(' src', ' async src', $tag);
+}, 10, 2);
+\`\`\`
+
+### Database indexes
+\`\`\`php
+// Trong activation
+$sql = "CREATE TABLE {$wpdb->prefix}books (
+    id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    title varchar(255) NOT NULL,
+    author varchar(255) NOT NULL,
+    year int(4) DEFAULT NULL,
+    PRIMARY KEY (id),
+    KEY author (author),
+    KEY year (year),
+    KEY title_author (title(100), author(100))
+) $charset_collate;";
+\`\`\`
+
+## Deployment
+
+### Version control
+\`\`\`bash
+# .gitignore
+wp-config.php
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+*.log
+.env
+node_modules/
+vendor/
+\`\`\`
+
+### WP-CLI deploy
+\`\`\`bash
+# Sync files
+rsync -avz --exclude='.git' --exclude='node_modules' \\
+    ./ user@server:/var/www/html/wp-content/plugins/my-plugin/
+
+# SSH and run commands
+ssh user@server
+cd /var/www/html
+wp plugin activate my-plugin
+wp cache flush
+\`\`\`
+
+### CI/CD với GitHub Actions
+\`\`\`yaml
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Deploy via SSH
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: \${{ secrets.SSH_KEY }}
+          REMOTE_HOST: \${{ secrets.HOST }}
+          REMOTE_USER: \${{ secrets.USER }}
+          SOURCE: "./"
+          TARGET: "/var/www/html/wp-content/plugins/my-plugin/"
+          EXCLUDE: "/node_modules/, /.git/, /src/"
+\`\`\`
+
+### Backup strategies
+\`\`\`bash
+# Backup database
+wp db export backup-$(date +%Y%m%d).sql
+
+# Restore
+wp db import backup-20240101.sql
+
+# Backup files
+tar -czf backup-files-$(date +%Y%m%d).tar.gz wp-content/
+
+# Automated backup script
+#!/bin/bash
+BACKUP_DIR="/backups"
+DATE=$(date +%Y%m%d_%H%M%S)
+
+# Database
+wp db export "$BACKUP_DIR/db_$DATE.sql" --path=/var/www/html
+
+# Files
+tar -czf "$BACKUP_DIR/files_$DATE.tar.gz" -C /var/www/html wp-content
+
+# Cleanup old backups (keep 30 days)
+find "$BACKUP_DIR" -type f -mtime +30 -delete
+\`\`\`
+
+### Security hardening
+\`\`\`php
+// wp-config.php
+define('DISALLOW_FILE_EDIT', true);
+define('DISALLOW_FILE_MODS', true); // Disable plugin/theme installation via admin
+define('FORCE_SSL_ADMIN', true);
+define('WP_AUTO_UPDATE_CORE', 'minor');
+
+// Disable XML-RPC
+add_filter('xmlrpc_enabled', '__return_false');
+
+// Remove WP version
+remove_action('wp_head', 'wp_generator');
+add_filter('the_generator', '__return_empty_string');
+
+// Disable file editing
+add_filter('wp_headers', function ($headers) {
+    unset($headers['X-Pingback']);
+    return $headers;
+});
+
+// Limit login attempts (dùng plugin như Limit Login Attempts)
+
+// Force strong passwords
+add_action('user_profile_update_errors', function ($errors, $update, $user) {
+    if (!empty($_POST['pass1'])) {
+        $strength = 0;
+        if (strlen($_POST['pass1']) >= 12) $strength++;
+        if (preg_match('/[A-Z]/', $_POST['pass1'])) $strength++;
+        if (preg_match('/[0-9]/', $_POST['pass1'])) $strength++;
+        if (preg_match('/[^A-Za-z0-9]/', $_POST['pass1'])) $strength++;
+
+        if ($strength < 3) {
+            $errors->add('weak_password', 'Password must be stronger.');
+        }
+    }
+}, 10, 3);
+\`\`\`
+
+### .htaccess security
+\`\`\`apache
+# Protect wp-config.php
+<files wp-config.php>
+    order allow,deny
+    deny from all
+</files>
+
+# Protect .htaccess
+<files ~ "^.*\\.([Hh][Tt][Aa])">
+    order allow,deny
+    deny from all
+    satisfy all
+</files>
+
+# Disable directory listing
+Options -Indexes
+
+# Protect wp-includes
+<IfModule mod_rewrite.c>
+    RewriteRule ^wp-admin/includes/ - [F,L]
+    RewriteRule !^wp-includes/ - [S=3]
+    RewriteRule ^wp-includes/[^/]+\\.php$ - [F,L]
+    RewriteRule ^wp-includes/js/tinymce/langs/.+\\.php - [F,L]
+    RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+\`\`\`
+
+## Bài tập thực hành
+Hãy bảo mật và optimize plugin!`,
+        exercises: [
+          {
+            id: "5-1",
+            title: "Secure và Optimize Plugin",
+            description: "Bảo mật và tối ưu plugin Book Manager",
+            instructions: `Implement:
+1. Nonce cho tất cả forms và AJAX
+2. Sanitize inputs và escape outputs
+3. Capability checks
+4. Caching với transients
+5. Database indexes
+6. CI/CD workflow`,
+            type: "code",
+            starterCode: `<?php
+// Security và performance improvements
+// Viết code ở đây`,
+            solution: `<?php
+// ============= Security trong Book Manager =============
+
+// 1. ADMIN PAGE với nonces
+public function render_edit_page(): void {
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+    if (!current_user_can('manage_options')) {
+        wp_die(__('Access denied.', 'book-manager'));
+    }
+
+    $book = $id ? self::get_book($id) : null;
+
+    if (isset($_POST['bm_save'])) {
+        // Verify nonce
+        if (!isset($_POST['bm_nonce']) ||
+            !wp_verify_nonce($_POST['bm_nonce'], 'bm_save_book_' . $id)) {
+            wp_die(__('Security check failed.', 'book-manager'));
+        }
+
+        // Sanitize all inputs
+        $data = [
+            'title'       => sanitize_text_field(wp_unslash($_POST['title'] ?? '')),
+            'author'      => sanitize_text_field(wp_unslash($_POST['author'] ?? '')),
+            'isbn'        => sanitize_text_field(wp_unslash($_POST['isbn'] ?? '')),
+            'year'        => (int) ($_POST['year'] ?? 0),
+            'description' => sanitize_textarea_field(wp_unslash($_POST['description'] ?? '')),
+            'cover_url'   => esc_url_raw(wp_unslash($_POST['cover_url'] ?? '')),
+        ];
+
+        // Validate
+        if (empty($data['title']) || empty($data['author'])) {
+            add_settings_error('bm', 'missing', __('Title and author are required.', 'book-manager'));
+        } elseif ($data['year'] && ($data['year'] < 1000 || $data['year'] > (int) date('Y') + 1)) {
+            add_settings_error('bm', 'year', __('Invalid year.', 'book-manager'));
+        } else {
+            if ($id) {
+                self::update_book($id, $data);
+            } else {
+                self::create_book($data);
+            }
+
+            // Invalidate cache
+            self::clear_cache();
+
+            wp_safe_redirect(add_query_arg('saved', '1',
+                admin_url('admin.php?page=book-manager')));
+            exit;
+        }
+    }
+    ?>
+    <div class="wrap">
+        <h1><?php echo esc_html($id ? 'Edit Book' : 'Add New Book'); ?></h1>
+
+        <?php settings_errors('bm'); ?>
+
+        <form method="post">
+            <?php wp_nonce_field('bm_save_book_' . $id, 'bm_nonce'); ?>
+
+            <table class="form-table">
+                <tr>
+                    <th>
+                        <label for="title"><?php esc_html_e('Title', 'book-manager'); ?> <span class="required">*</span></label>
+                    </th>
+                    <td>
+                        <input type="text"
+                               id="title"
+                               name="title"
+                               class="regular-text"
+                               value="<?php echo esc_attr($book->title ?? ''); ?>"
+                               required
+                               maxlength="255">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="author"><?php esc_html_e('Author', 'book-manager'); ?> *</label></th>
+                    <td>
+                        <input type="text" id="author" name="author" class="regular-text"
+                               value="<?php echo esc_attr($book->author ?? ''); ?>"
+                               required maxlength="255">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="isbn"><?php esc_html_e('ISBN', 'book-manager'); ?></label></th>
+                    <td>
+                        <input type="text" id="isbn" name="isbn" class="regular-text"
+                               value="<?php echo esc_attr($book->isbn ?? ''); ?>"
+                               maxlength="20">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="year"><?php esc_html_e('Year', 'book-manager'); ?></label></th>
+                    <td>
+                        <input type="number" id="year" name="year"
+                               min="1000" max="<?php echo esc_attr(date('Y') + 1); ?>"
+                               value="<?php echo esc_attr($book->year ?? date('Y')); ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="description"><?php esc_html_e('Description', 'book-manager'); ?></label></th>
+                    <td>
+                        <textarea id="description" name="description" rows="5" class="large-text"><?php
+                            echo esc_textarea($book->description ?? '');
+                        ?></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="cover_url"><?php esc_html_e('Cover URL', 'book-manager'); ?></label></th>
+                    <td>
+                        <input type="url" id="cover_url" name="cover_url" class="regular-text"
+                               value="<?php echo esc_url($book->cover_url ?? ''); ?>">
+                    </td>
+                </tr>
+            </table>
+
+            <?php submit_button($id ? __('Update Book', 'book-manager') : __('Create Book', 'book-manager'), 'primary', 'bm_save'); ?>
+        </form>
+    </div>
+    <?php
+}
+
+// 2. AJAX DELETE với capability + nonce
+public function ajax_delete_book(): void {
+    // Verify nonce
+    check_ajax_referer('bm_nonce', 'nonce');
+
+    // Check capability
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error(['message' => 'Unauthorized'], 403);
+    }
+
+    $id = isset($_POST['id']) ? absint($_POST['id']) : 0;
+
+    if (!$id) {
+        wp_send_json_error(['message' => 'Invalid ID'], 400);
+    }
+
+    if (!self::get_book($id)) {
+        wp_send_json_error(['message' => 'Book not found'], 404);
+    }
+
+    if (self::delete_book($id)) {
+        self::clear_cache();
+        wp_send_json_success(['message' => 'Book deleted']);
+    }
+
+    wp_send_json_error(['message' => 'Delete failed'], 500);
+}
+
+// 3. CACHING với transients
+class Book_Manager_Cache {
+    const GROUP = 'book_manager';
+    const TTL   = 300; // 5 minutes
+
+    public static function get_books(array $args = []): array {
+        $key = 'bm_books_' . md5(serialize($args));
+        $cached = wp_cache_get($key, self::GROUP);
+
+        if (false !== $cached) {
+            return $cached;
+        }
+
+        $books = Book_Manager::get_all_books($args);
+        wp_cache_set($key, $books, self::GROUP, self::TTL);
+
+        return $books;
+    }
+
+    public static function clear(): void {
+        wp_cache_flush_group(self::GROUP);
+    }
+}
+
+// 4. DATABASE OPTIMIZATION
+public static function activate(): void {
+    global $wpdb;
+    $table = $wpdb->prefix . 'books';
+    $charset = $wpdb->get_charset_collate();
+
+    // Composite indexes for common queries
+    $sql = "CREATE TABLE $table (
+        id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+        title varchar(255) NOT NULL,
+        author varchar(255) NOT NULL,
+        isbn varchar(20) DEFAULT NULL,
+        year smallint(4) unsigned DEFAULT NULL,
+        description text,
+        cover_url varchar(500) DEFAULT NULL,
+        created_at datetime DEFAULT CURRENT_TIMESTAMP,
+        updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id),
+        KEY author_year (author(100), year),
+        KEY year_desc (year DESC),
+        KEY created_at (created_at DESC),
+        UNIQUE KEY isbn_unique (isbn)
+    ) $charset;";
+
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+    dbDelta($sql);
+
+    add_option('bm_version', BM_VERSION);
+    add_option('bm_db_version', '1.0.0');
+
+    // Schedule cleanup
+    if (!wp_next_scheduled('bm_cleanup_cache')) {
+        wp_schedule_event(time(), 'hourly', 'bm_cleanup_cache');
+    }
+}
+
+// 5. ENABLE OBJECT CACHE cho custom tables
+public static function get_all_books(array $args = []): array {
+    $cache_key = 'bm_all_' . md5(serialize($args));
+    $cached = wp_cache_get($cache_key, 'book_manager');
+
+    if (false !== $cached) {
+        return $cached;
+    }
+
+    global $wpdb;
+    $args = wp_parse_args($args, [
+        'limit'   => 100,
+        'author'  => '',
+        'orderby' => 'created_at',
+        'order'   => 'DESC',
+    ]);
+
+    $allowed_orderby = ['title', 'author', 'year', 'created_at'];
+    $orderby = in_array($args['orderby'], $allowed_orderby, true)
+        ? $args['orderby'] : 'created_at';
+    $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
+    $limit = max(1, min(1000, (int) $args['limit']));
+    $table = self::table();
+
+    if (!empty($args['author'])) {
+        $results = $wpdb->get_results($wpdb->prepare(
+            "SELECT id, title, author, year, description, cover_url, created_at
+             FROM $table
+             WHERE author = %s
+             ORDER BY $orderby $order
+             LIMIT %d",
+            sanitize_text_field($args['author']),
+            $limit
+        ));
+    } else {
+        $results = $wpdb->get_results($wpdb->prepare(
+            "SELECT id, title, author, year, description, cover_url, created_at
+             FROM $table
+             ORDER BY $orderby $order
+             LIMIT %d",
+            $limit
+        ));
+    }
+
+    wp_cache_set($cache_key, $results, 'book_manager', 300);
+
+    return $results;
+}
+
+// 6. GitHub Actions CI/CD
+/*
+name: Build and Deploy Book Manager
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer, phpunit
+
+      - name: Validate composer
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHP CodeSniffer
+        run: vendor/bin/phpcs
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse
+
+      - name: Run tests
+        run: vendor/bin/phpunit
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to production
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: \${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./"
+          REMOTE_HOST: \${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: \${{ secrets.REMOTE_USER }}
+          TARGET: \${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/.git/, /node_modules/, /tests/"
+*/
+
+// 7. SECURITY HEADERS cho admin
+add_action('admin_init', function () {
+    if (!headers_sent()) {
+        header('X-Content-Type-Options: nosniff');
+        header('X-Frame-Options: SAMEORIGIN');
+        header('Referrer-Policy: strict-origin-when-cross-origin');
+    }
+});
+
+// 8. SECURITY: Hide version
+add_filter('script_loader_src', 'bm_remove_version_query', 9999);
+add_filter('style_loader_src', 'bm_remove_version_query', 9999);
+
+function bm_remove_version_query(string $src): string {
+    if (strpos($src, 'ver=' . BM_VERSION) !== false) {
+        $src = remove_query_arg('ver', $src);
+    }
+    return $src;
+}
+
+// 9. Disable XML-RPC cho plugin security
+add_filter('xmlrpc_enabled', '__return_false');
+
+// 10. Rate limiting cho AJAX
+function bm_rate_limit(string $action, int $max_requests = 30, int $window = 60): bool {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $user_id = get_current_user_id();
+    $key = "bm_rate_{$action}_{$user_id}_{$ip}";
+
+    $count = (int) get_transient($key);
+
+    if ($count >= $max_requests) {
+        return false;
+    }
+
+    set_transient($key, $count + 1, $window);
+    return true;
+}
+
+add_action('wp_ajax_bm_save_book', function () {
+    if (!bm_rate_limit('save_book', 20, 60)) {
+        wp_send_json_error(['message' => 'Too many requests'], 429);
+    }
+
+    // ... existing logic
+}, 5);`,
+          },
+        ],
+      },
+    ],
+  },
 ];
