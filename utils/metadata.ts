@@ -1,7 +1,25 @@
 import type { Metadata } from "next";
 import { courses } from "@/data";
 
-function build(title: string, description: string): Metadata {
+// placehold.co serves SVG by default; Open Graph needs a raster format, so use .png
+const OG_IMAGE_SIZE = { width: 1200, height: 630 };
+
+function getCourseImage(courseName: string) {
+  const text = encodeURIComponent(courseName);
+  return {
+    url: `https://placehold.co/${OG_IMAGE_SIZE.width}x${OG_IMAGE_SIZE.height}/2D235B/FFFFFF.png?font=roboto&text=${text}`,
+    ...OG_IMAGE_SIZE,
+    alt: courseName,
+  };
+}
+
+function build(
+  title: string,
+  description: string,
+  courseName: string,
+): Metadata {
+  const image = getCourseImage(courseName);
+
   return {
     title,
     description,
@@ -10,6 +28,13 @@ function build(title: string, description: string): Metadata {
       description, // -> <meta property="og:description">
       type: "article",
       locale: "vi_VN",
+      images: [image], // -> <meta property="og:image">
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image.url],
     },
   };
 }
@@ -23,6 +48,7 @@ export function getCourseMetadata(slug: string): Metadata {
     courseName,
     course?.description ??
       `Tìm hiểu về khóa học "${courseName}" trên nền tảng của chúng tôi.`,
+    courseName,
   );
 }
 
@@ -38,6 +64,7 @@ export function getLessonMetadata(slug: string, lessonSlug: string): Metadata {
       ? `${courseName} - Bài ${lesson.id}`
       : `${courseName} - ${lessonSlug}`,
     `Tìm hiểu bài học "${lessonName}" trong khóa học "${courseName}" trên nền tảng của chúng tôi.`,
+    courseName,
   );
 }
 
@@ -62,5 +89,6 @@ export function getExerciseMetadata(
   return build(
     title,
     `Thực hành bài tập "${exerciseName}" trong bài học "${lessonName}" của khóa học "${courseName}" trên nền tảng của chúng tôi.`,
+    courseName,
   );
 }
