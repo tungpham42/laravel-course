@@ -1,5 +1,5 @@
 import ExercisePage from "@/components/ExercisePage";
-import { courses } from "@/data/courses";
+import { courses } from "@/data";
 
 interface ExercisePageProps {
   params: Promise<{
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: ExercisePageProps) {
   const course = courses.find((c) => c.slug === slug);
 
   const currentLesson = course?.lessons.find(
-    (lesson) => lesson.slug === lessonSlug
+    (lesson) => lesson.slug === lessonSlug,
   );
 
   const exercise = currentLesson?.exercises.find((ex) => ex.id === exerciseId);

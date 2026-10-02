@@ -1,51 +1,60 @@
 "use client";
-import React from "react";
-import { Layout, Typography, Row, Col } from "antd";
+import React, { useState } from "react";
+import { Segmented, Empty } from "antd";
 import CourseCard from "@/components/CourseCard";
-import { courses } from "@/data/courses";
+import SiteHeader from "@/components/SiteHeader";
+import { courses } from "@/data";
 
-const { Header, Content } = Layout;
-const { Title, Paragraph } = Typography;
+const FILTERS = [
+  { label: "Tất cả", value: "all" },
+  { label: "Cơ bản", value: "beginner" },
+  { label: "Trung cấp", value: "intermediate" },
+  { label: "Nâng cao", value: "advanced" },
+];
 
 export default function CoursesPage() {
+  const [level, setLevel] = useState<string>("all");
+  const visible =
+    level === "all" ? courses : courses.filter((c) => c.level === level);
+
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Header
-        style={{
-          background: "linear-gradient(45deg, #667eea 0%, #764ba2 100%)",
-          padding: "0 50px",
-        }}
-      >
-        <div style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>
-          📚 Danh sách khóa học
-        </div>
-      </Header>
+    <>
+      <SiteHeader />
 
-      <Content style={{ padding: "50px" }}>
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <Title level={2}>Các khóa học có sẵn</Title>
-          <Paragraph
-            style={{
-              fontSize: 16,
-              color: "#666",
-              maxWidth: 600,
-              margin: "0 auto",
-            }}
-          >
-            Chọn khóa học phù hợp với mục tiêu học tập của bạn. Từ cơ bản đến
-            nâng cao, chúng tôi có đầy đủ các khóa học để giúp bạn phát triển kỹ
-            năng.
-          </Paragraph>
+      <section className="page-banner">
+        <div className="container page-banner__inner">
+          <h1>Các khóa học có sẵn</h1>
+          <p>
+            Chọn khóa học phù hợp với mục tiêu của bạn, từ cơ bản đến nâng cao.
+          </p>
+        </div>
+      </section>
+
+      <main className="container section" style={{ paddingTop: 36 }}>
+        <div className="section__head">
+          <Segmented
+            size="large"
+            options={FILTERS}
+            value={level}
+            onChange={(v) => setLevel(String(v))}
+          />
+          <span className="section__sub" style={{ margin: 0 }}>
+            {visible.length} khóa học
+          </span>
         </div>
 
-        <Row gutter={[32, 32]} style={{ marginTop: 32 }}>
-          {courses.map((course) => (
-            <Col key={course.id} xs={24} md={12} lg={8}>
-              <CourseCard course={course} />
-            </Col>
-          ))}
-        </Row>
-      </Content>
-    </Layout>
+        {visible.length === 0 ? (
+          <div className="panel">
+            <Empty description="Chưa có khóa học ở cấp độ này" />
+          </div>
+        ) : (
+          <div className="course-grid">
+            {visible.map((course) => (
+              <CourseCard key={course.id} course={course} />
+            ))}
+          </div>
+        )}
+      </main>
+    </>
   );
 }

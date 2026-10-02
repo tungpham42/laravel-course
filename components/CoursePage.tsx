@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
-import { Layout, Row, Col, Breadcrumb } from "antd";
-import { HomeOutlined, BookOutlined } from "@ant-design/icons";
-import Link from "next/link";
+import { ClockCircleOutlined, ReadOutlined } from "@ant-design/icons";
 import LessonContent from "@/components/LessonContent";
+import NotFoundView from "@/components/NotFoundView";
+import PageShell from "@/components/PageShell";
 import ProgressTracker from "@/components/ProgressTracker";
-import { courses } from "@/data/courses";
-
-const { Header, Content } = Layout;
+import { getLevelLabel } from "@/components/courseTheme";
+import { courses } from "@/data";
 
 interface CoursePageProps {
   params: {
@@ -16,78 +15,40 @@ interface CoursePageProps {
 }
 
 export default function CoursePage({ params }: CoursePageProps) {
-  // Find course by slug
   const course = courses.find((c) => c.slug === params.slug);
 
   if (!course) {
     return (
-      <Layout>
-        <Content style={{ padding: 50, textAlign: "center" }}>
-          <h1>Không tìm thấy khóa học</h1>
-          <Link href="/khoa-hoc">
-            <button
-              type="button"
-              style={{
-                background: "#1890ff",
-                color: "white",
-                border: "none",
-                padding: "8px 16px",
-                borderRadius: "6px",
-                cursor: "pointer",
-              }}
-            >
-              Quay lại danh sách khóa học
-            </button>
-          </Link>
-        </Content>
-      </Layout>
+      <NotFoundView
+        message="Không tìm thấy khóa học"
+        backHref="/khoa-hoc"
+        backLabel="Quay lại danh sách khóa học"
+      />
     );
   }
 
   const firstLesson = course.lessons[0];
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Header
-        style={{
-          background: "linear-gradient(45deg, #667eea 0%, #764ba2 100%)",
-          padding: "0 50px",
-        }}
-      >
-        <div style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>
-          📖 {course.title}
-        </div>
-      </Header>
+    <PageShell headerTitle={course.title} trail={[{ title: course.title }]}>
+      <div className="chip-row" style={{ marginBottom: 24 }}>
+        <span className="pill pill--soft">{getLevelLabel(course.level)}</span>
+        <span className="pill pill--soft">
+          <ClockCircleOutlined /> {course.duration}
+        </span>
+        <span className="pill pill--soft">
+          <ReadOutlined /> {course.lessons.length} bài học
+        </span>
+      </div>
 
-      <Content style={{ padding: "24px 50px" }}>
-        <Breadcrumb style={{ marginBottom: 24 }}>
-          <Breadcrumb.Item>
-            <Link href="/">
-              <HomeOutlined /> Trang chủ
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <Link href="/khoa-hoc">
-              <BookOutlined /> Khóa học
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>{course.title}</Breadcrumb.Item>
-        </Breadcrumb>
-
-        <Row gutter={32}>
-          <Col xs={24} lg={16}>
-            <LessonContent lesson={firstLesson} courseSlug={course.slug} />
-          </Col>
-
-          <Col xs={24} lg={8}>
-            <ProgressTracker
-              lessons={course.lessons}
-              currentLessonId={firstLesson.id}
-              courseSlug={course.slug}
-            />
-          </Col>
-        </Row>
-      </Content>
-    </Layout>
+      <div className="layout-grid">
+        <LessonContent lesson={firstLesson} courseSlug={course.slug} />
+        <ProgressTracker
+          lessons={course.lessons}
+          currentLessonId={firstLesson.id}
+          courseSlug={course.slug}
+        />
+      </div>
+    </PageShell>
   );
 }

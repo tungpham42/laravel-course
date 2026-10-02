@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { courses } from "@/data/courses";
+import { courses } from "@/data";
 import { getHostUrl } from "@/utils/getHostUrl";
 
 export async function GET() {
@@ -20,7 +20,7 @@ export async function GET() {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.6,
-    }))
+    })),
   );
 
   // URLs tĩnh quan trọng
@@ -53,7 +53,7 @@ export async function GET() {
       <changefreq>${item.changeFrequency}</changefreq>
       <priority>${item.priority}</priority>
     </url>
-  `
+  `,
     )
     .join("")}
 </urlset>`;

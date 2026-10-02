@@ -141,11 +141,13 @@ export const CourseList: React.FC<CourseListProps> = ({
                   display: "flex",
                   flexDirection: "column",
                 }}
-                bodyStyle={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: 16,
+                styles={{
+                  body: {
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: 16,
+                  },
                 }}
                 cover={
                   <div

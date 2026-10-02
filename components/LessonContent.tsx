@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { Card, Tag, Timeline, Button } from "antd";
-import { CheckCircleOutlined, ClockCircleOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  RightOutlined,
+} from "@ant-design/icons";
 import { Lesson } from "@/types";
 import Link from "next/link";
 
@@ -16,50 +19,50 @@ const LessonContent: React.FC<LessonContentProps> = ({
   lesson,
   courseSlug,
   completed = false,
-}) => {
-  return (
-    <div>
-      <Card>
-        <div style={{ marginBottom: 16 }}>
-          <Tag icon={<ClockCircleOutlined />} color="blue">
-            {lesson.duration}
-          </Tag>
-          {completed && (
-            <Tag icon={<CheckCircleOutlined />} color="green">
-              Đã hoàn thành
-            </Tag>
-          )}
-        </div>
-
-        <ReactMarkdown>{lesson.content}</ReactMarkdown>
-
-        {lesson.exercises.length > 0 && (
-          <div style={{ marginTop: 24 }}>
-            <h3>📝 Bài tập ({lesson.exercises.length})</h3>
-            <Timeline>
-              {lesson.exercises.map((exercise, index) => (
-                <Timeline.Item
-                  key={exercise.id}
-                  dot={<CheckCircleOutlined style={{ fontSize: "16px" }} />}
-                >
-                  <Link
-                    href={`/khoa-hoc/${courseSlug}/bai-hoc/${lesson.slug}/bai-tap/${exercise.id}`}
-                  >
-                    <Button type="link" style={{ padding: 0 }}>
-                      {index + 1}. {exercise.title}
-                    </Button>
-                  </Link>
-                  <p style={{ margin: 0, color: "#666" }}>
-                    {exercise.description}
-                  </p>
-                </Timeline.Item>
-              ))}
-            </Timeline>
-          </div>
-        )}
-      </Card>
+}) => (
+  <article className="panel">
+    <div className="chip-row">
+      <span className="pill pill--soft">
+        <ClockCircleOutlined /> {lesson.duration}
+      </span>
+      {completed && (
+        <span className="pill pill--success">
+          <CheckCircleOutlined /> Đã hoàn thành
+        </span>
+      )}
     </div>
-  );
-};
+
+    <h2 className="lesson-title">{lesson.title}</h2>
+
+    <div className="markdown-content">
+      <ReactMarkdown>{lesson.content}</ReactMarkdown>
+    </div>
+
+    {lesson.exercises.length > 0 && (
+      <section className="exercises">
+        <h3>
+          Bài tập <span className="pill pill--soft">{lesson.exercises.length}</span>
+        </h3>
+        <ul className="exercise-list">
+          {lesson.exercises.map((exercise, index) => (
+            <li key={exercise.id}>
+              <Link
+                className="exercise-link"
+                href={`/khoa-hoc/${courseSlug}/bai-hoc/${lesson.slug}/bai-tap/${exercise.id}`}
+              >
+                <span className="exercise-link__index">{index + 1}</span>
+                <span className="exercise-link__text">
+                  <strong>{exercise.title}</strong>
+                  <span>{exercise.description}</span>
+                </span>
+                <RightOutlined />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+);
 
 export default LessonContent;

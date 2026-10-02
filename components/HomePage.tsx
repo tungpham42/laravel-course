@@ -1,51 +1,71 @@
 "use client";
 import React from "react";
-import { Layout, Typography, Row, Col } from "antd";
+import Link from "next/link";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import CourseCard from "@/components/CourseCard";
-import { courses } from "@/data/courses";
-
-const { Header, Content } = Layout;
-const { Title, Paragraph } = Typography;
+import SiteHeader from "@/components/SiteHeader";
+import { courses } from "@/data";
 
 export default function Home() {
+  const lessonCount = courses.reduce((n, c) => n + c.lessons.length, 0);
+  const exerciseCount = courses.reduce(
+    (n, c) => n + c.lessons.reduce((m, l) => m + l.exercises.length, 0),
+    0,
+  );
+
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Header
-        style={{
-          background: "linear-gradient(45deg, #667eea 0%, #764ba2 100%)",
-          padding: "0 50px",
-        }}
-      >
-        <div style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>
-          📚 Bộ Sưu Tập Khóa Học
-        </div>
-      </Header>
+    <>
+      <SiteHeader />
 
-      <Content style={{ padding: "50px" }}>
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <Title level={1}>Bộ Sưu Tập Các Khóa Học</Title>
-          <Paragraph
-            style={{
-              fontSize: 18,
-              color: "#666",
-              maxWidth: 600,
-              margin: "0 auto",
-            }}
-          >
-            Khám phá bộ sưu tập các khóa học đa dạng từ cơ bản đến nâng cao.
-            Nâng cao kỹ năng và kiến thức của bạn thông qua các bài học thực tế
-            và dự án thực hành chuyên nghiệp.
-          </Paragraph>
+      <section className="hero">
+        <div className="container hero__inner">
+          <h1>Học kỹ năng mới, từng bài một.</h1>
+          <p>
+            Bộ sưu tập khóa học từ cơ bản đến nâng cao, với bài học thực tế và
+            bài tập thực hành giúp bạn tiến bộ mỗi ngày.
+          </p>
+          <div className="hero__actions">
+            <Link href="/khoa-hoc" className="btn btn--primary">
+              Khám phá khóa học <ArrowRightOutlined />
+            </Link>
+          </div>
+
+          <div className="hero__stats">
+            <div className="stat">
+              <strong>{courses.length}</strong>
+              <span>Khóa học</span>
+            </div>
+            <div className="stat">
+              <strong>{lessonCount}</strong>
+              <span>Bài học</span>
+            </div>
+            <div className="stat">
+              <strong>{exerciseCount}</strong>
+              <span>Bài tập thực hành</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main className="container section">
+        <div className="section__head">
+          <div>
+            <h2 className="section__title">Khóa học nổi bật</h2>
+            <p className="section__sub">
+              Chọn một khóa học và bắt đầu ngay hôm nay.
+            </p>
+          </div>
+          <Link href="/khoa-hoc" className="btn btn--outline btn--sm">
+            Xem tất cả <ArrowRightOutlined />
+          </Link>
         </div>
 
-        <Row gutter={[32, 32]} style={{ marginTop: 32 }}>
+        <div className="course-grid">
           {courses.map((course) => (
-            <Col key={course.id} xs={24} md={12} lg={8}>
-              <CourseCard course={course} />
-            </Col>
+            <CourseCard key={course.id} course={course} />
           ))}
-        </Row>
-      </Content>
-    </Layout>
+        </div>
+      </main>
+    </>
   );
 }

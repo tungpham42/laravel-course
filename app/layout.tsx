@@ -1,6 +1,7 @@
 import React from "react";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { ConfigProvider } from "antd";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import ThemeProvider from "@/components/ThemeProvider";
 import { AuthProvider } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -27,29 +28,30 @@ export const metadata: Metadata = {
   },
 };
 
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
 const RootLayout = ({ children }: React.PropsWithChildren) => (
-  <html lang="vi">
-    <head>
+  <html
+    lang="vi"
+    className={`${jakarta.variable} font-sans`}
+    suppressHydrationWarning
+  >
+    <head />
+    <body suppressHydrationWarning>
       <Script
         id="adsense-script"
         async
         strategy="afterInteractive"
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536`}
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536"
         crossOrigin="anonymous"
       />
-    </head>
-    <body>
       <AntdRegistry>
         <AuthProvider>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#667eea",
-              },
-            }}
-          >
-            {children}
-          </ConfigProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </AuthProvider>
       </AntdRegistry>
       <GoogleAnalytics ga_id="G-HHXZSNQ65X" />

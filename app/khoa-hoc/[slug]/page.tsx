@@ -1,5 +1,5 @@
 import CoursePage from "@/components/CoursePage";
-import { courses } from "@/data/courses";
+import { courses } from "@/data";
 
 interface CoursePageProps {
   params: Promise<{

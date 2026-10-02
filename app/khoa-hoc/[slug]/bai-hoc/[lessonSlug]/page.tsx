@@ -1,5 +1,5 @@
 import LessonPage from "@/components/LessonPage";
-import { courses } from "@/data/courses";
+import { courses } from "@/data";
 
 interface LessonPageProps {
   params: Promise<{
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: LessonPageProps) {
   const course = courses.find((c) => c.slug === slug);
 
   const currentLesson = course?.lessons.find(
-    (lesson) => lesson.slug === lessonSlug
+    (lesson) => lesson.slug === lessonSlug,
   );
 
   // Here you can fetch lesson data based on the slug and lessonSlug to get dynamic metadata

@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { Layout, Row, Col, Breadcrumb, Button } from "antd";
-import { HomeOutlined, BookOutlined, LeftOutlined } from "@ant-design/icons";
+import { LeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import ExerciseComponent from "@/components/ExerciseComponent";
-import { courses } from "@/data/courses";
-
-const { Header, Content } = Layout;
+import NotFoundView from "@/components/NotFoundView";
+import PageShell from "@/components/PageShell";
+import { getLevelLabel } from "@/components/courseTheme";
+import { courses } from "@/data";
 
 interface ExercisePageProps {
   params: {
@@ -16,142 +16,98 @@ interface ExercisePageProps {
   };
 }
 
+const EXERCISE_TYPE_LABELS: Record<string, string> = {
+  "multiple-choice": "Trắc nghiệm",
+  code: "Lập trình",
+};
+const DEFAULT_EXERCISE_TYPE_LABEL = "Lý thuyết";
+
 export default function ExercisePage({ params }: ExercisePageProps) {
-  // Find course by slug
   const course = courses.find((c) => c.slug === params.slug);
 
   if (!course) {
     return (
-      <Layout>
-        <Content style={{ padding: 50, textAlign: "center" }}>
-          <h1>Không tìm thấy khóa học</h1>
-          <Link href="/khoa-hoc">
-            <Button type="primary">Quay lại danh sách khóa học</Button>
-          </Link>
-        </Content>
-      </Layout>
+      <NotFoundView
+        message="Không tìm thấy khóa học"
+        backHref="/khoa-hoc"
+        backLabel="Quay lại danh sách khóa học"
+      />
     );
   }
 
-  // Find lesson by lessonSlug
+  const courseHref = `/khoa-hoc/${params.slug}`;
   const lesson = course.lessons.find((les) => les.slug === params.lessonSlug);
 
   if (!lesson) {
     return (
-      <Layout>
-        <Content style={{ padding: 50, textAlign: "center" }}>
-          <h1>Không tìm thấy bài học</h1>
-          <Link href={`/khoa-hoc/${params.slug}`}>
-            <Button type="primary">Quay lại khóa học</Button>
-          </Link>
-        </Content>
-      </Layout>
+      <NotFoundView
+        message="Không tìm thấy bài học"
+        backHref={courseHref}
+        backLabel="Quay lại khóa học"
+      />
     );
   }
 
-  // Find exercise by exerciseId within the lesson
+  const lessonHref = `${courseHref}/bai-hoc/${params.lessonSlug}`;
   const exercise = lesson.exercises.find((ex) => ex.id === params.exerciseId);
 
   if (!exercise) {
     return (
-      <Layout>
-        <Content style={{ padding: 50, textAlign: "center" }}>
-          <h1>Không tìm thấy bài tập</h1>
-          <Link href={`/khoa-hoc/${params.slug}/bai-hoc/${params.lessonSlug}`}>
-            <Button type="primary">Quay lại bài học</Button>
-          </Link>
-        </Content>
-      </Layout>
+      <NotFoundView
+        message="Không tìm thấy bài tập"
+        backHref={lessonHref}
+        backLabel="Quay lại bài học"
+      />
     );
   }
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Header
-        style={{
-          background: "linear-gradient(45deg, #667eea 0%, #764ba2 100%)",
-          padding: "0 50px",
-        }}
-      >
-        <div style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>
-          💻 Bài tập: {exercise.title}
-        </div>
-      </Header>
+    <PageShell
+      headerTitle={exercise.title}
+      trail={[
+        { title: course.title, href: courseHref },
+        { title: lesson.title, href: lessonHref },
+        { title: exercise.title },
+      ]}
+    >
+      <div style={{ marginBottom: 20 }}>
+        <Link href={lessonHref} className="btn btn--outline btn--sm">
+          <LeftOutlined /> Quay lại bài học
+        </Link>
+      </div>
 
-      <Content style={{ padding: "24px 50px" }}>
-        <Breadcrumb style={{ marginBottom: 24 }}>
-          <Breadcrumb.Item>
-            <Link href="/">
-              <HomeOutlined /> Trang chủ
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <Link href="/khoa-hoc">
-              <BookOutlined /> Khóa học
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <Link href={`/khoa-hoc/${params.slug}`}>{course.title}</Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <Link
-              href={`/khoa-hoc/${params.slug}/bai-hoc/${params.lessonSlug}`}
-            >
-              {lesson.title}
-            </Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>{exercise.title}</Breadcrumb.Item>
-        </Breadcrumb>
+      <div className="layout-grid layout-grid--exercise">
+        <ExerciseComponent exercise={exercise} />
 
-        <Row gutter={32}>
-          <Col xs={24} lg={18}>
-            <div style={{ marginBottom: 16 }}>
-              <Link
-                href={`/khoa-hoc/${params.slug}/bai-hoc/${params.lessonSlug}`}
-              >
-                <Button icon={<LeftOutlined />} type="text">
-                  Quay lại bài học
-                </Button>
-              </Link>
+        <aside className="panel sticky">
+          <h2 className="panel__title">Thông tin bài tập</h2>
+          <dl className="info-list">
+            <div>
+              <dt>Khóa học</dt>
+              <dd>{course.title}</dd>
             </div>
-
-            <ExerciseComponent exercise={exercise} />
-          </Col>
-
-          <Col xs={24} lg={6}>
-            <div
-              style={{ background: "#f0f2f5", padding: 16, borderRadius: 6 }}
-            >
-              <h4>Thông tin bài tập</h4>
-              <p>
-                <strong>Khóa học:</strong> {course.title}
-              </p>
-              <p>
-                <strong>Bài học:</strong> {lesson.title}
-              </p>
-              <p>
-                <strong>Loại bài tập:</strong>{" "}
-                {exercise.type === "multiple-choice"
-                  ? "Trắc nghiệm"
-                  : exercise.type === "code"
-                  ? "Lập trình"
-                  : "Lý thuyết"}
-              </p>
-              <p>
-                <strong>Độ khó:</strong>{" "}
-                {course.level === "beginner"
-                  ? "Cơ bản"
-                  : course.level === "intermediate"
-                  ? "Trung cấp"
-                  : "Nâng cao"}
-              </p>
-              <p>
-                <strong>Thời lượng:</strong> {lesson.duration}
-              </p>
+            <div>
+              <dt>Bài học</dt>
+              <dd>{lesson.title}</dd>
             </div>
-          </Col>
-        </Row>
-      </Content>
-    </Layout>
+            <div>
+              <dt>Loại bài tập</dt>
+              <dd>
+                {EXERCISE_TYPE_LABELS[exercise.type] ??
+                  DEFAULT_EXERCISE_TYPE_LABEL}
+              </dd>
+            </div>
+            <div>
+              <dt>Độ khó</dt>
+              <dd>{getLevelLabel(course.level)}</dd>
+            </div>
+            <div>
+              <dt>Thời lượng</dt>
+              <dd>{lesson.duration}</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </PageShell>
   );
 }
